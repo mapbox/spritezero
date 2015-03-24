@@ -3,10 +3,23 @@
 small opinionated sprites
 
 
-### `decodeImage`
+### `decodeImage(image, image.buffer, image.id)`
 
 Decode a single image, returning a node-canvas Image object
 and exposing its width and height programmatically.
+
+
+### Parameters
+
+| parameter      | type   | description |
+| -------------- | ------ | ----------- |
+| `image`        | Object |             |
+| `image.buffer` | Buffer |             |
+| `image.id`     | String |             |
+
+
+
+**Returns** `Object`, parsed image with width, height, and pixelRatio
 
 
 ### `generateLayout(imgs)`

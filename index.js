@@ -6,6 +6,11 @@ var Canvas = require('canvas'),
 /**
  * Decode a single image, returning a node-canvas Image object
  * and exposing its width and height programmatically.
+ *
+ * @param {Object} image
+ * @param {Buffer} image.buffer
+ * @param {String} image.id
+ * @returns {Object} parsed image with width, height, and pixelRatio
  */
 function decodeImage(img) {
     var image = new Canvas.Image();
