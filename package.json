@@ -4,7 +4,8 @@
   "description": "small opinionated sprites",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/test.js"
+    "test": "tape test/test.js",
+    "doc": "dox -r < index.js | doxme --readme > README.md"
   },
   "keywords": [
     "sprite",
@@ -20,7 +21,13 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
+    "dox": "^0.7.0",
+    "doxme": "^1.8.2",
     "glob": "^5.0.3",
     "tape": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mapbox/spritezero.git"
   }
 }
