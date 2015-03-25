@@ -17,8 +17,11 @@ function generateLayout(imgs, removeBuffer) {
     }));
     packing.items.forEach(function(item) {
         item.id = item.item.id;
+        item.pixelRatio = item.item.pixelRatio;
         if (removeBuffer) { delete item.item; }
-        else { item.buffer = item.item.buffer; }
+        else {
+            item.buffer = item.item.buffer;
+        }
     });
     return packing;
 }

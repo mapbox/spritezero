@@ -25,9 +25,11 @@ test('generateLayout', function(t) {
     t.equal(layout.items[0].id, 'fast-food-24');
     t.equal(layout.items[0].x, 0);
     t.equal(layout.items[0].y, 0);
+    t.equal(layout.items[0].pixelRatio, 2);
 
     t.equal(layout.items[1].x, 48);
     t.equal(layout.items[1].y, 0);
+    t.equal(layout.items[1].pixelRatio, 2);
 
     t.equal(layout.items[2].x, 0);
     t.equal(layout.items[2].y, 48);
