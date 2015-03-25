@@ -17,7 +17,6 @@ function decodeImage(img) {
     image.src = img.buffer;
     return xtend(img, {
         image: image,
-        pixelRatio: img.id.indexOf('@2x') > 0 ? 2 : 1,
         width: image.width,
         height: image.height
     });
@@ -50,22 +49,24 @@ function generateImage(packing, callback) {
 
 module.exports.generateImage = generateImage;
 
-function getId(id) {
-    return path.basename(id).replace('.png', '').replace('@2x', '');
-}
-
 /**
  * format layout for output: make it json serializable and all that.
  *
  * @param {Object} packing the output of generateLayout
  * @returns {Object} serializable sprite metadata
+ * @example
+ * var layout = spritezero.generateLayout(images
+ *   .map(spritezero.decodeImage));
+ *
+ * spritezero.generateImage(layout, function(err, res) {
+ *   // res is a buffer of an image
+ * });
  */
 function formatLayout(packing) {
     var obj = {};
 
     packing.items.forEach(function(item) {
-        var id = getId(item.item.id);
-        obj[id] = {
+        obj[item.item.id] = {
             x: item.x,
             y: item.y,
             width: item.width,

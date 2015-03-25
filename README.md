@@ -62,6 +62,17 @@ format layout for output: make it json serializable and all that.
 | `packing` | Object | the output of generateLayout |
 
 
+### Example
+
+```js
+var layout = spritezero.generateLayout(images
+  .map(spritezero.decodeImage));
+
+spritezero.generateImage(layout, function(err, res) {
+  // res is a buffer of an image
+});
+```
+
 
 **Returns** `Object`, serializable sprite metadata
 

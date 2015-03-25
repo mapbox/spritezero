@@ -9,9 +9,11 @@ var update = !!process.env.UPDATE;
 function getFixtures() {
     return glob.sync(path.resolve(path.join(__dirname, '/fixture/maki/*2x.png')))
         .map(function(im) {
+            var isRetina = im.indexOf('@2x') !== -1;
             return {
                 buffer: fs.readFileSync(im),
-                id: path.basename(im)
+                pixelRatio: isRetina ? 2 : 1,
+                id: path.basename(im).replace('.png', '').replace('@2x', '')
             };
         });
 }
