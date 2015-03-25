@@ -29,8 +29,7 @@ function generateLayout(imgs, format) {
                 width: item.width,
                 height: item.height,
                 x: item.x,
-                y: item.y,
-                id: item.id
+                y: item.y
             };
         });
         return obj;
