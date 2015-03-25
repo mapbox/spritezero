@@ -18,19 +18,11 @@ function getFixtures() {
         });
 }
 
-test('decodeImage', function(t) {
-    var res = spritezero.decodeImage(getFixtures()[0]);
-    t.equal(res.width, 24);
-    t.equal(res.height, 24);
-    t.ok(res.image, 'image');
-    t.end();
-});
-
 test('generateLayout', function(t) {
-    var layout = spritezero.generateLayout(getFixtures()
-        .map(spritezero.decodeImage));
+    var layout = spritezero.generateLayout(getFixtures());
     t.equal(layout.items.length, 351);
 
+    t.equal(layout.items[0].id, 'fast-food-24');
     t.equal(layout.items[0].x, 0);
     t.equal(layout.items[0].y, 0);
 
@@ -45,10 +37,8 @@ test('generateLayout', function(t) {
 test('generateImage', function(t) {
     var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite.png'));
     var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite.json'));
-    var layout = spritezero.generateLayout(getFixtures()
-        .map(spritezero.decodeImage));
-
-    var formatted = spritezero.formatLayout(layout);
+    var formatted = spritezero.generateLayout(getFixtures(), true);
+    var layout = spritezero.generateLayout(getFixtures());
     if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
     t.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 

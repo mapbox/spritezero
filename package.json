@@ -17,7 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "bin-pack": "^1.0.1",
-    "canvas": "^1.2.1",
+    "blend": "^1.0.2",
+    "tiletype": "^0.2.1",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
