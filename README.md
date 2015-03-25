@@ -5,76 +5,34 @@
 small opinionated sprites
 
 
-### `decodeImage(image, image.buffer, image.id)`
-
-Decode a single image, returning a node-canvas Image object
-and exposing its width and height programmatically.
-
-
-### Parameters
-
-| parameter      | type   | description |
-| -------------- | ------ | ----------- |
-| `image`        | Object |             |
-| `image.buffer` | Buffer |             |
-| `image.id`     | String |             |
-
-
-
-**Returns** `Object`, parsed image with width, height, and pixelRatio
-
-
-### `generateLayout(imgs)`
+### `generateLayout(imgs, removeBuffer)`
 
 Pack a list of images with width and height into a sprite layout.
 Uses bin-pack.
 
 ### Parameters
 
-| parameter | type              | description                                                            |
-| --------- | ----------------- | ---------------------------------------------------------------------- |
-| `imgs`    | Array\.\<Object\> | array of { buffer: ..., id: ..., pixels: ..., width: ... height: ... } |
+| parameter      | type              | description                                                   |
+| -------------- | ----------------- | ------------------------------------------------------------- |
+| `imgs`         | Array\.\<Object\> | array of `{ buffer: Buffer, id: String, pixelRatio: Number }` |
+| `removeBuffer` | boolean           | produce a JSON-serializable version                           |
 
 
 
-### `generateImage(imgs, callback)`
+**Returns** `Object`, layout
+
+
+### `generateImage(packing, callback)`
 
 Generate a PNG image with positioned icons on a sprite.
 
 ### Parameters
 
-| parameter  | type              | description                                                                          |
-| ---------- | ----------------- | ------------------------------------------------------------------------------------ |
-| `imgs`     | Array\.\<Object\> | array of { buffer: ..., id: ..., pixels: ..., width: ... height: ... x: ... y: ... } |
-| `callback` | Function          |                                                                                      |
+| parameter  | type     | description |
+| ---------- | -------- | ----------- |
+| `packing`  | Object   |             |
+| `callback` | Function |             |
 
-
-
-### `formatLayout(packing)`
-
-format layout for output: make it json serializable and all that.
-
-
-### Parameters
-
-| parameter | type   | description                  |
-| --------- | ------ | ---------------------------- |
-| `packing` | Object | the output of generateLayout |
-
-
-### Example
-
-```js
-var layout = spritezero.generateLayout(images
-  .map(spritezero.decodeImage));
-
-spritezero.generateImage(layout, function(err, res) {
-  // res is a buffer of an image
-});
-```
-
-
-**Returns** `Object`, serializable sprite metadata
 
 ## Installation
 
