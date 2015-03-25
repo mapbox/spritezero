@@ -5,17 +5,17 @@
 small opinionated sprites
 
 
-### `generateLayout(imgs, removeBuffer)`
+### `generateLayout(imgs, format)`
 
 Pack a list of images with width and height into a sprite layout.
 Uses bin-pack.
 
 ### Parameters
 
-| parameter      | type              | description                                                   |
-| -------------- | ----------------- | ------------------------------------------------------------- |
-| `imgs`         | Array\.\<Object\> | array of `{ buffer: Buffer, id: String, pixelRatio: Number }` |
-| `removeBuffer` | boolean           | produce a JSON-serializable version                           |
+| parameter | type              | description                                                   |
+| --------- | ----------------- | ------------------------------------------------------------- |
+| `imgs`    | Array\.\<Object\> | array of `{ buffer: Buffer, id: String, pixelRatio: Number }` |
+| `format`  | boolean           | format this layout for mapbox gl                              |
 
 
 

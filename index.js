@@ -7,25 +7,37 @@ var blend = require('blend'),
  * Pack a list of images with width and height into a sprite layout.
  * Uses bin-pack.
  * @param {Array<Object>} imgs array of `{ buffer: Buffer, id: String, pixelRatio: Number }`
- * @param {boolean} removeBuffer produce a JSON-serializable version
+ * @param {boolean} format format this layout for mapbox gl
  * @return {Object} layout
  */
-function generateLayout(imgs, removeBuffer) {
+function generateLayout(imgs, format) {
     var packing = pack(imgs.map(function(img) {
         var dimensions = tiletype.dimensions(img.buffer);
         return xtend(img, { width: dimensions[0], height: dimensions[1] });
     }));
+    var obj = {};
     packing.items.forEach(function(item) {
         item.id = item.item.id;
         item.pixelRatio = item.item.pixelRatio;
-        if (removeBuffer) { delete item.item; }
-        else {
-            item.buffer = item.item.buffer;
-        }
+        item.buffer = item.item.buffer;
     });
-    return packing;
-}
 
+    if (format) {
+        packing.items.forEach(function(item) {
+            obj[item.id] = {
+                pixelRatio: item.pixelRatio,
+                width: item.width,
+                height: item.height,
+                x: item.x,
+                y: item.y,
+                id: item.id
+            };
+        });
+        return obj;
+    } else {
+        return packing;
+    }
+}
 module.exports.generateLayout = generateLayout;
 
 /**
@@ -39,5 +51,4 @@ function generateImage(packing, callback) {
         height: packing.height
     }, callback);
 }
-
 module.exports.generateImage = generateImage;
