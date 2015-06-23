@@ -27,18 +27,22 @@ test('generateLayout', function(t) {
 });
 
 test('generateImage', function(t) {
-    var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite.png'));
-    var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite.json'));
-    var formatted = spritezero.generateLayout(getFixtures(), 1, true);
-    var layout = spritezero.generateLayout(getFixtures(), 1);
-    if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
-    t.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
+            var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
+            var formatted = spritezero.generateLayout(getFixtures(), scale, true);
+            var layout = spritezero.generateLayout(getFixtures(), scale);
+            if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
+            tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 
-    spritezero.generateImage(layout, function(err, res) {
-        t.notOk(err, 'no error');
-        t.ok(res, 'produces image');
-        if (update) fs.writeFileSync(pngPath, res);
-        t.deepEqual(res, fs.readFileSync(pngPath));
-        t.end();
+            spritezero.generateImage(layout, function(err, res) {
+                tt.notOk(err, 'no error');
+                tt.ok(res, 'produces image');
+                if (update) fs.writeFileSync(pngPath, res);
+                tt.deepEqual(res, fs.readFileSync(pngPath));
+                tt.end();
+            });
+        });
     });
 });

@@ -21,6 +21,7 @@ Uses bin-pack.
 | parameter | type              | description                                                   |
 | --------- | ----------------- | ------------------------------------------------------------- |
 | `imgs`    | Array\.\<Object\> | array of `{ svg: Buffer, id: String }` |
+| `scale`    | number | pixel scale. default is 1, retina is 2 |
 | `format`  | boolean           | format this layout for mapbox gl                              |
 
 
