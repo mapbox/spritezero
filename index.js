@@ -1,6 +1,5 @@
 var blend = require('blend'),
     mapnik = require('mapnik'),
-    tiletype = require('tiletype'),
     xtend = require('xtend'),
     pack = require('bin-pack');
 
@@ -16,11 +15,11 @@ function generateLayout(imgs, format) {
 
     // calculate the size of each image and add to width, height props
     var imagesWithSizes = imgs.map(function(img) {
-        var buffer = mapnik.Image.fromSVGBytesSync(img.svg).encodeSync('png');
-        var dimensions = tiletype.dimensions(buffer);
+        var image = mapnik.Image.fromSVGBytesSync(img.svg);
+        var buffer = image.encodeSync('png');
         return xtend(img, {
-            width: dimensions[0],
-            height: dimensions[1],
+            width: image.width(),
+            height: image.height(),
             buffer: buffer
         });
     });
