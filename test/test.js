@@ -7,32 +7,22 @@ var test = require('tape'),
 var update = !!process.env.UPDATE;
 
 function getFixtures() {
-    return glob.sync(path.resolve(path.join(__dirname, '/fixture/maki/*2x.png')))
+    return glob.sync(path.resolve(path.join(__dirname, '/fixture/maki/*.svg')))
         .map(function(im) {
-            var isRetina = im.indexOf('@2x') !== -1;
             return {
-                buffer: fs.readFileSync(im),
-                pixelRatio: isRetina ? 2 : 1,
-                id: path.basename(im).replace('.png', '').replace('@2x', '')
+                svg: fs.readFileSync(im),
+                id: path.basename(im).replace('.svg', '')
             };
+        }).sort(function(a, b) {
+            return b.id < a.id;
         });
 }
 
 test('generateLayout', function(t) {
     var layout = spritezero.generateLayout(getFixtures());
-    t.equal(layout.items.length, 351);
-
-    t.equal(layout.items[0].id, 'fast-food-24');
+    t.equal(layout.items.length, 358);
     t.equal(layout.items[0].x, 0);
     t.equal(layout.items[0].y, 0);
-    t.equal(layout.items[0].pixelRatio, 2);
-
-    t.equal(layout.items[1].x, 48);
-    t.equal(layout.items[1].y, 0);
-    t.equal(layout.items[1].pixelRatio, 2);
-
-    t.equal(layout.items[2].x, 0);
-    t.equal(layout.items[2].y, 48);
     t.end();
 });
 
