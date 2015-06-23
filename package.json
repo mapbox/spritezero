@@ -17,7 +17,6 @@
   "license": "ISC",
   "dependencies": {
     "bin-pack": "^1.0.1",
-    "blend": "^1.0.2",
     "mapnik": "https://github.com/mapnik/node-mapnik/tarball/svg-rasterizer2",
     "xtend": "^4.0.0"
   },

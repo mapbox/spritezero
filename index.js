@@ -1,5 +1,4 @@
-var blend = require('blend'),
-    mapnik = require('mapnik'),
+var mapnik = require('mapnik'),
     assert = require('assert'),
     xtend = require('xtend'),
     pack = require('bin-pack');
@@ -60,7 +59,7 @@ module.exports.generateLayout = generateLayout;
 function generateImage(packing, callback) {
     assert(typeof packing === 'object' && typeof callback === 'function');
 
-    blend(packing.items, {
+    mapnik.blend(packing.items, {
         width: packing.width,
         height: packing.height
     }, callback);
