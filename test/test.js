@@ -19,7 +19,7 @@ function getFixtures() {
 }
 
 test('generateLayout', function(t) {
-    var layout = spritezero.generateLayout(getFixtures());
+    var layout = spritezero.generateLayout(getFixtures(), 1);
     t.equal(layout.items.length, 358);
     t.equal(layout.items[0].x, 0);
     t.equal(layout.items[0].y, 0);
@@ -29,8 +29,8 @@ test('generateLayout', function(t) {
 test('generateImage', function(t) {
     var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite.png'));
     var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite.json'));
-    var formatted = spritezero.generateLayout(getFixtures(), true);
-    var layout = spritezero.generateLayout(getFixtures());
+    var formatted = spritezero.generateLayout(getFixtures(), 1, true);
+    var layout = spritezero.generateLayout(getFixtures(), 1);
     if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
     t.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 

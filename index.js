@@ -1,5 +1,6 @@
 var blend = require('blend'),
     mapnik = require('mapnik'),
+    assert = require('assert'),
     xtend = require('xtend'),
     pack = require('bin-pack');
 
@@ -11,11 +12,12 @@ var blend = require('blend'),
  * pixel density
  * @return {Object} layout
  */
-function generateLayout(imgs, format) {
+function generateLayout(imgs, pixelRatio, format) {
+    assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
 
     // calculate the size of each image and add to width, height props
     var imagesWithSizes = imgs.map(function(img) {
-        var image = mapnik.Image.fromSVGBytesSync(img.svg);
+        var image = mapnik.Image.fromSVGBytesSync(img.svg, { scale: pixelRatio });
         var buffer = image.encodeSync('png');
         return xtend(img, {
             width: image.width(),
@@ -56,6 +58,8 @@ module.exports.generateLayout = generateLayout;
  * @param {Function} callback
  */
 function generateImage(packing, callback) {
+    assert(typeof packing === 'object' && typeof callback === 'function');
+
     blend(packing.items, {
         width: packing.width,
         height: packing.height
