@@ -1,3 +1,9 @@
 language: node_js
 node_js:
   - '0.10'
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++6 # upgrade libstdc++ on linux to support C++11
