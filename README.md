@@ -2,8 +2,14 @@
 
 [![build status](https://secure.travis-ci.org/mapbox/spritezero.png)](http://travis-ci.org/mapbox/spritezero)
 
-small opinionated sprites
+Small opinionated sprites.
 
+Why is this different than sprite generation libraries like [spritesmith](https://github.com/Ensighten/spritesmith)?
+spritezero was initially created to power a sprite API, and thus is geared towards
+_performance_, as well as an ability to work with image data in _buffers_
+rather than on disk. Also, since version 2.0, spritezero generates sprites
+based on SVG graphics alone, therefore making it possible to support @2x
+and higher-dpi sprites from the same source.
 
 ### `generateLayout(imgs, format)`
 
@@ -14,7 +20,8 @@ Uses bin-pack.
 
 | parameter | type              | description                                                   |
 | --------- | ----------------- | ------------------------------------------------------------- |
-| `imgs`    | Array\.\<Object\> | array of `{ buffer: Buffer, id: String, pixelRatio: Number }` |
+| `imgs`    | Array\.\<Object\> | array of `{ svg: Buffer, id: String }` |
+| `scale`    | number | pixel scale. default is 1, retina is 2 |
 | `format`  | boolean           | format this layout for mapbox gl                              |
 
 
