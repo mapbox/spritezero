@@ -1,6 +1,6 @@
 # spritezero
 
-[![build status](https://secure.travis-ci.org/mapbox/spritezero.png)](http://travis-ci.org/mapbox/spritezero)
+[![build status](https://secure.travis-ci.org/mapbox/spritezero.svg)](http://travis-ci.org/mapbox/spritezero)
 
 Small opinionated sprites.
 
