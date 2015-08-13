@@ -41,7 +41,8 @@ function generateLayout(imgs, pixelRatio, format) {
                 width: item.width,
                 height: item.height,
                 x: item.x,
-                y: item.y
+                y: item.y,
+                pixelRatio: pixelRatio
             };
         });
         return obj;
