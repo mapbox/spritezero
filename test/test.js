@@ -7,7 +7,7 @@ var test = require('tape'),
 var update = !!process.env.UPDATE;
 
 function getFixtures() {
-    return glob.sync(path.resolve(path.join(__dirname, '/fixture/maki/*.svg')))
+    return glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
         .map(function(im) {
             return {
                 svg: fs.readFileSync(im),
@@ -20,7 +20,7 @@ function getFixtures() {
 
 test('generateLayout', function(t) {
     var layout = spritezero.generateLayout(getFixtures(), 1);
-    t.equal(layout.items.length, 358);
+    t.equal(layout.items.length, 359);
     t.equal(layout.items[0].x, 0);
     t.equal(layout.items[0].y, 0);
     t.end();
