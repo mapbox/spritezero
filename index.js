@@ -13,17 +13,26 @@ var mapnik = require('mapnik'),
  */
 function generateLayout(imgs, pixelRatio, format) {
     assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
+    var imagesWithSizes;
 
-    // calculate the size of each image and add to width, height props
-    var imagesWithSizes = imgs.map(function(img) {
-        var image = mapnik.Image.fromSVGBytesSync(img.svg, { scale: pixelRatio });
-        var buffer = image.encodeSync('png');
-        return xtend(img, {
-            width: image.width(),
-            height: image.height(),
-            buffer: buffer
+    if (!imgs.length) {
+        imagesWithSizes = [{
+            width: 1,
+            height: 1,
+            buffer: new mapnik.Image(1, 1).encodeSync('png')
+        }];
+    } else {
+        // calculate the size of each image and add to width, height props
+        imagesWithSizes = imgs.map(function(img) {
+            var image = mapnik.Image.fromSVGBytesSync(img.svg, { scale: pixelRatio });
+            var buffer = image.encodeSync('png');
+            return xtend(img, {
+                width: image.width(),
+                height: image.height(),
+                buffer: buffer
+            });
         });
-    });
+    }
 
     // bin-pack the images, adding x, y props
     var packing = pack(imagesWithSizes);
