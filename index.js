@@ -1,7 +1,8 @@
 var mapnik = require('mapnik'),
     assert = require('assert'),
     xtend = require('xtend'),
-    pack = require('bin-pack');
+    pack = require('bin-pack'),
+    emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 /**
  * Pack a list of images with width and height into a sprite layout.
@@ -59,7 +60,7 @@ module.exports.generateLayout = generateLayout;
  */
 function generateImage(packing, callback) {
     assert(typeof packing === 'object' && typeof callback === 'function');
-    if (!packing.items.length) return new mapnik.Image(1, 1).encode('png', callback);
+    if (!packing.items.length) return callback(null, emptyPNG);
 
     mapnik.blend(packing.items, {
         width: packing.width,
