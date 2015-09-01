@@ -59,7 +59,7 @@ module.exports.generateLayout = generateLayout;
  */
 function generateImage(packing, callback) {
     assert(typeof packing === 'object' && typeof callback === 'function');
-    if (!packing.items.length) return callback(null, new mapnik.Image(1, 1).encodeSync('png'));
+    if (!packing.items.length) return new mapnik.Image(1, 1).encode('png', callback);
 
     mapnik.blend(packing.items, {
         width: packing.width,
