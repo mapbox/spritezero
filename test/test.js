@@ -46,3 +46,13 @@ test('generateImage', function(t) {
         });
     });
 });
+
+test('generateImage with empty input', function(t) {
+    var layout = spritezero.generateLayout([], 1);
+    spritezero.generateImage(layout, function(err, sprite) {
+        t.notOk(err, 'no error');
+        t.ok(sprite, 'produces image');
+        t.equal(typeof sprite, 'object');
+        t.end();
+    });
+});
