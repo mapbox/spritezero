@@ -26,6 +26,14 @@ test('generateLayout', function(t) {
     t.end();
 });
 
+test('generateLayout with empty array', function(t) {
+    var layout = spritezero.generateLayout([], 1);
+    t.equal(layout.items.length, 1);
+    t.equal(layout.height, 1);
+    t.equal(layout.width, 1);
+    t.end();
+});
+
 test('generateImage', function(t) {
     [1, 2, 4].forEach(function(scale) {
         t.test('@' + scale, function(tt) {
