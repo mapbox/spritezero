@@ -1,6 +1,6 @@
 {
   "name": "spritezero",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "small opinionated sprites",
   "main": "index.js",
   "scripts": {
