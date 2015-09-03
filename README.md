@@ -11,18 +11,19 @@ rather than on disk. Also, since version 2.0, spritezero generates sprites
 based on SVG graphics alone, therefore making it possible to support @2x
 and higher-dpi sprites from the same source.
 
-### `generateLayout(imgs, format)`
+### `generateLayout(imgs, ratio, format, callback)`
 
 Pack a list of images with width and height into a sprite layout.
 Uses bin-pack.
 
 ### Parameters
 
-| parameter | type              | description                                                   |
-| --------- | ----------------- | ------------------------------------------------------------- |
-| `imgs`    | Array\.\<Object\> | array of `{ svg: Buffer, id: String }` |
+| parameter  | type              | description                                                   |
+| ---------- | ----------------- | ------------------------------------------------------------- |
+| `imgs`     | Array\.\<Object\> | array of `{ svg: Buffer, id: String }` |
 | `scale`    | number | pixel scale. default is 1, retina is 2 |
-| `format`  | boolean           | format this layout for mapbox gl                              |
+| `format`   | boolean           | format this layout for mapbox gl                              |
+| `callback` | function          | returns two arguments, `err` and `layout` |
 
 
 
@@ -54,5 +55,3 @@ $ npm install spritezero
 ```sh
 $ npm test
 ```
-
-
