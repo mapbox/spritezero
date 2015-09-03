@@ -2,6 +2,7 @@ var mapnik = require('mapnik'),
     assert = require('assert'),
     xtend = require('xtend'),
     pack = require('bin-pack'),
+    queue = require('queue-async');
     emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 /**
@@ -11,45 +12,56 @@ var mapnik = require('mapnik'),
  * @param {number} pixelRatio ratio of a 72dpi screen pixel to the destination
  * pixel density
  * @return {Object} layout
+ * @param {Function} callback
  */
-function generateLayout(imgs, pixelRatio, format) {
+function generateLayout(imgs, pixelRatio, format, callback) {
     assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
+    var q = new queue();
 
-    // calculate the size of each image and add to width, height props
-    var imagesWithSizes = imgs.map(function(img) {
-        var image = mapnik.Image.fromSVGBytesSync(img.svg, { scale: pixelRatio });
-        var buffer = image.encodeSync('png');
-        return xtend(img, {
-            width: image.width(),
-            height: image.height(),
-            buffer: buffer
+    function createImagesWithSize(img, callback) {
+        mapnik.Image.fromSVGBytes(img.svg, { scale: pixelRatio }, function(err, image) {
+            if (err) return callback(err);
+            image.encode('png', function(err, buffer) {
+                if (err) return callback(err);
+                callback(null, xtend(img, {
+                    width: image.width(),
+                    height: image.height(),
+                    buffer: buffer
+                }));
+            });
         });
-    });
-
-    // bin-pack the images, adding x, y props
-    var packing = pack(imagesWithSizes);
-
-    var obj = {};
-
-    packing.items.forEach(function(item) {
-        item.id = item.item.id;
-        item.buffer = item.item.buffer;
-    });
-
-    if (format) {
-        packing.items.forEach(function(item) {
-            obj[item.id] = {
-                width: item.width,
-                height: item.height,
-                x: item.x,
-                y: item.y,
-                pixelRatio: pixelRatio
-            };
-        });
-        return obj;
-    } else {
-        return packing;
     }
+
+    imgs.forEach(function(img) {
+        q.defer(createImagesWithSize, img);
+    });
+
+    q.awaitAll(function(err, imagesWithSizes){
+        if (err) return callback(err);
+        var packing = pack(imagesWithSizes);
+
+        var obj = {};
+
+        packing.items.forEach(function(item) {
+            item.id = item.item.id;
+            item.buffer = item.item.buffer;
+        });
+
+        if (format) {
+            packing.items.forEach(function(item) {
+                obj[item.id] = {
+                    width: item.width,
+                    height: item.height,
+                    x: item.x,
+                    y: item.y,
+                    pixelRatio: pixelRatio
+                };
+            });
+            return callback(null, obj);
+        } else {
+            return callback(null, packing);
+        }
+    })
 }
 module.exports.generateLayout = generateLayout;
 

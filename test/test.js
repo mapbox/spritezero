@@ -19,11 +19,12 @@ function getFixtures() {
 }
 
 test('generateLayout', function(t) {
-    var layout = spritezero.generateLayout(getFixtures(), 1);
-    t.equal(layout.items.length, 359);
-    t.equal(layout.items[0].x, 0);
-    t.equal(layout.items[0].y, 0);
-    t.end();
+    spritezero.generateLayout(getFixtures(), 1, false, function(err, layout){
+        t.equal(layout.items.length, 359);
+        t.equal(layout.items[0].x, 0);
+        t.equal(layout.items[0].y, 0);
+        t.end();
+    });
 });
 
 test('generateImage', function(t) {
@@ -31,33 +32,38 @@ test('generateImage', function(t) {
         t.test('@' + scale, function(tt) {
             var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
             var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
-            var formatted = spritezero.generateLayout(getFixtures(), scale, true);
-            var layout = spritezero.generateLayout(getFixtures(), scale);
-            if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
-            tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
+            spritezero.generateLayout(getFixtures(), scale, true, function(err, formatted) {
+                spritezero.generateLayout(getFixtures(), scale, false, function(err, layout) {
+                    if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
+                    tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 
-            spritezero.generateImage(layout, function(err, res) {
-                tt.notOk(err, 'no error');
-                tt.ok(res, 'produces image');
-                if (update) fs.writeFileSync(pngPath, res);
-                tt.deepEqual(res, fs.readFileSync(pngPath));
-                tt.end();
+                    spritezero.generateImage(layout, function(err, res) {
+                        tt.notOk(err, 'no error');
+                        tt.ok(res, 'produces image');
+                        if (update) fs.writeFileSync(pngPath, res);
+                        tt.deepEqual(res, fs.readFileSync(pngPath));
+                        tt.end();
+                    });
+                });
             });
         });
     });
 });
 
 test('generateLayout with empty input', function(t) {
-    t.deepEqual(spritezero.generateLayout([], 1, true), {});
-    t.end();
+    spritezero.generateLayout([], 1, true, function(err, layout) {
+        t.deepEqual(layout, {});
+        t.end();
+    });
 });
 
 test('generateImage with empty input', function(t) {
-    var layout = spritezero.generateLayout([], 1);
-    spritezero.generateImage(layout, function(err, sprite) {
-        t.notOk(err, 'no error');
-        t.ok(sprite, 'produces image');
-        t.equal(typeof sprite, 'object');
-        t.end();
+    spritezero.generateLayout([], 1, false, function(err, layout) {
+        spritezero.generateImage(layout, function(err, sprite) {
+            t.notOk(err, 'no error');
+            t.ok(sprite, 'produces image');
+            t.equal(typeof sprite, 'object');
+            t.end();
+        });
     });
 });
