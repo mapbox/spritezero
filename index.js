@@ -12,6 +12,7 @@ var mapnik = require('mapnik'),
  * @param {number} pixelRatio ratio of a 72dpi screen pixel to the destination
  * pixel density
  * @return {Object} layout
+ * @param {Function} callback
  */
 function generateLayout(imgs, pixelRatio, format, callback) {
     assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
