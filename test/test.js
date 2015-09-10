@@ -19,7 +19,8 @@ function getFixtures() {
 }
 
 test('generateLayout', function(t) {
-    spritezero.generateLayout(getFixtures(), 1, false, function(err, layout){
+    spritezero.generateLayout(getFixtures(), 1, false, function(err, layout) {
+        t.ifError(err);
         t.equal(layout.items.length, 359);
         t.equal(layout.items[0].x, 0);
         t.equal(layout.items[0].y, 0);
@@ -33,7 +34,9 @@ test('generateImage', function(t) {
             var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
             var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
             spritezero.generateLayout(getFixtures(), scale, true, function(err, formatted) {
+                t.ifError(err);
                 spritezero.generateLayout(getFixtures(), scale, false, function(err, layout) {
+                    t.ifError(err);
                     if (update) fs.writeFileSync(jsonPath, JSON.stringify(formatted, null, 2));
                     tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 
@@ -52,6 +55,7 @@ test('generateImage', function(t) {
 
 test('generateLayout with empty input', function(t) {
     spritezero.generateLayout([], 1, true, function(err, layout) {
+        t.ifError(err);
         t.deepEqual(layout, {});
         t.end();
     });
@@ -59,6 +63,7 @@ test('generateLayout with empty input', function(t) {
 
 test('generateImage with empty input', function(t) {
     spritezero.generateLayout([], 1, false, function(err, layout) {
+        t.ifError(err);
         spritezero.generateImage(layout, function(err, sprite) {
             t.notOk(err, 'no error');
             t.ok(sprite, 'produces image');
