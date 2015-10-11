@@ -21,7 +21,7 @@ function getFixtures() {
 test('generateLayout', function(t) {
     spritezero.generateLayout(getFixtures(), 1, false, function(err, layout) {
         t.ifError(err);
-        t.equal(layout.items.length, 359);
+        t.equal(layout.items.length, 360);
         t.equal(layout.items[0].x, 0);
         t.equal(layout.items[0].y, 0);
         t.end();
