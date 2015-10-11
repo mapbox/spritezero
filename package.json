@@ -22,10 +22,10 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "dox": "^0.7.0",
+    "dox": "^0.8.0",
     "doxme": "^1.8.2",
     "glob": "^5.0.3",
-    "tape": "^3.5.0"
+    "tape": "^4.2.1"
   },
   "repository": {
     "type": "git",
