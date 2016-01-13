@@ -1,3 +1,7 @@
+# 3.1.0
+
+- Adds `spritezero` executable. 
+
 # 3.0.0
 
 - Changes the `generateLayout` function to be asynchronous. 
