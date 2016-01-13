@@ -2,6 +2,7 @@
   "name": "spritezero",
   "version": "3.0.2",
   "description": "small opinionated sprites",
+  "bin": "bin/spritezero",
   "main": "index.js",
   "scripts": {
     "test": "tape test/test.js",
@@ -18,13 +19,14 @@
   "dependencies": {
     "bin-pack": "^1.0.1",
     "mapnik": "~3.4.14",
+    "minimist": "^1.2.0",
+    "glob": "^6.0.4",
     "queue-async": "^1.0.7",
     "xtend": "^4.0.1"
   },
   "devDependencies": {
     "dox": "^0.8.0",
     "doxme": "^1.8.2",
-    "glob": "^6.0.4",
     "tape": "^4.4.0"
   },
   "repository": {
