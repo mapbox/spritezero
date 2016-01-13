@@ -9,11 +9,10 @@ var argv = require('minimist')(process.argv.slice(2), {
 });
 
 if (argv.help) {
-    console.log('usage: font-inspect ./path/to/svgdirectory');
+    console.log('usage: spritezero ./path/to/svgdirectory');
     console.log('option: --json ./path/to/output.json');
     console.log('option: --png ./path/to/output.png');
     console.log('option: --scale 2');
-    console.log('option: --verbose');
     return;
 }
 

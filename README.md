@@ -50,6 +50,22 @@ Requires [nodejs](http://nodejs.org/).
 $ npm install spritezero
 ```
 
+## Executable
+
+There is also an executable for bundling and creating your own sprites from a folder of svg's:
+
+```bash
+$ npm install -g spritezero
+$ spritezero --help
+usage: spritezero ./path/to/svgdirectory
+option: --json ./path/to/output.json
+option: --png ./path/to/output.png
+option: --scale 2
+```
+
+By default, the output json will be at `sprite@1.json` and the output png will be at `sprite@1.png`. The default scale is `1`.
+
+
 ## Tests
 
 ```sh
