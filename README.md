@@ -52,19 +52,17 @@ $ npm install spritezero
 
 ## Executable
 
-There is also an executable for bundling and creating your own sprites from a folder of svg's:
+[spritezero-cli](https://github.com/mapbox/spritezero-cli) is an executable for bundling and creating your own sprites from a folder of svg's:
 
 ```bash
-$ npm install -g spritezero
+$ npm install -g spritezero-cli
 $ spritezero --help
-usage: spritezero ./path/to/svgdirectory
-option: --json ./path/to/output.json
-option: --png ./path/to/output.png
-option: --scale 2
+
+Usage:
+spritezero [output filename] [input directory]
+  --retina      shorthand for --ratio=2
+  --ratio=[n]   pixel ratio
 ```
-
-By default, the output json will be at `sprite@1.json` and the output png will be at `sprite@1.png`. The default scale is `1`.
-
 
 ## Tests
 
