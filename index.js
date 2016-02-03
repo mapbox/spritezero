@@ -1,9 +1,9 @@
-var mapnik = require('mapnik'),
-    assert = require('assert'),
-    xtend = require('xtend'),
-    pack = require('bin-pack'),
-    queue = require('queue-async');
-    emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
+var mapnik = require('mapnik');
+var assert = require('assert');
+var xtend = require('xtend');
+var pack = require('bin-pack');
+var queue = require('queue-async');
+var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 /**
  * Pack a list of images with width and height into a sprite layout.
