@@ -1,7 +1,7 @@
 var mapnik = require('mapnik');
 var assert = require('assert');
 var xtend = require('xtend');
-var pack = require('bin-pack');
+var pack = require('shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
@@ -38,14 +38,21 @@ function generateLayout(imgs, pixelRatio, format, callback) {
 
     q.awaitAll(function(err, imagesWithSizes){
         if (err) return callback(err);
-        var packing = pack(imagesWithSizes);
+        var height = 1;
+        var width = 1;
+        var packing = new pack(width, height);
+
+        imagesWithSizes.forEach(function(image) {
+            var packed = packing.allocate(width, height);
+            if (packed.x === -1 && packed.y === -1) {
+                if (image.width + width > packing.width) width += image.width;
+                if (image.height + height > packing.height) height += image.height;
+                packing.resize(width, height);
+                packing.allocate(image.width, image.height);
+            }
+        });
 
         var obj = {};
-
-        packing.items.forEach(function(item) {
-            item.id = item.item.id;
-            item.buffer = item.item.buffer;
-        });
 
         if (format) {
             packing.items.forEach(function(item) {
@@ -61,7 +68,7 @@ function generateLayout(imgs, pixelRatio, format, callback) {
         } else {
             return callback(null, packing);
         }
-    })
+    });
 }
 module.exports.generateLayout = generateLayout;
 
