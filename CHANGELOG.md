@@ -1,3 +1,7 @@
+# 3.3.0
+
+- Updated to mapnik 3.5.0
+
 # 3.1.1
 
 - Adds missing `var`
