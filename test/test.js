@@ -13,8 +13,8 @@ function getFixtures() {
                 svg: fs.readFileSync(im),
                 id: path.basename(im).replace('.svg', '')
             };
-        }).sort(function(a, b) {
-            return b.id < a.id;
+        }).sort(function() {
+            return Math.random() - 0.5;
         });
 }
 
