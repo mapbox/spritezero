@@ -1,3 +1,11 @@
+# 3.4.0
+
+- Sort icons array to produce a more deterministic sprite sheet
+
+# 3.3.0
+
+- Updated to mapnik 3.5.0
+
 # 3.1.1
 
 - Adds missing `var`

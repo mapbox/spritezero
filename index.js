@@ -4,6 +4,9 @@ var xtend = require('xtend');
 var pack = require('shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
+var sortBy = require('sort-by');
+
+var heightAscThanNameComparator = sortBy('-height', 'id');
 
 /**
  * Pack a list of images with width and height into a sprite layout.
