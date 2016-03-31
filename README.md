@@ -14,7 +14,7 @@ and higher-dpi sprites from the same source.
 ### `generateLayout(imgs, ratio, format, callback)`
 
 Pack a list of images with width and height into a sprite layout.
-Uses bin-pack.
+Uses [shelf-pack](https://github.com/mapbox/shelf-pack).
 
 ### Parameters
 

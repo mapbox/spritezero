@@ -1,7 +1,7 @@
 var mapnik = require('mapnik');
 var assert = require('assert');
 var xtend = require('xtend');
-var pack = require('bin-pack');
+var ShelfPack = require('shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 var sortBy = require('sort-by');
@@ -10,7 +10,7 @@ var heightAscThanNameComparator = sortBy('-height', 'id');
 
 /**
  * Pack a list of images with width and height into a sprite layout.
- * Uses bin-pack.
+ * Uses shelf-pack.
  * @param {Array<Object>} imgs array of `{ buffer: Buffer, id: String }`
  * @param {number} pixelRatio ratio of a 72dpi screen pixel to the destination
  * pixel density
@@ -43,17 +43,13 @@ function generateLayout(imgs, pixelRatio, format, callback) {
         if (err) return callback(err);
 
         imagesWithSizes.sort(heightAscThanNameComparator);
-        var packing = pack(imagesWithSizes);
 
-        var obj = {};
-
-        packing.items.forEach(function(item) {
-            item.id = item.item.id;
-            item.buffer = item.item.buffer;
-        });
+        var sprite = new ShelfPack(1, 1, { autoResize: true });
+        sprite.pack(imagesWithSizes, { inPlace: true });
 
         if (format) {
-            packing.items.forEach(function(item) {
+            var obj = {};
+            imagesWithSizes.forEach(function(item) {
                 obj[item.id] = {
                     width: item.width,
                     height: item.height,
@@ -63,10 +59,16 @@ function generateLayout(imgs, pixelRatio, format, callback) {
                 };
             });
             return callback(null, obj);
+
         } else {
-            return callback(null, packing);
+            return callback(null, {
+                width: sprite.w,
+                height: sprite.h,
+                items: imagesWithSizes
+            });
         }
-    })
+
+    });
 }
 module.exports.generateLayout = generateLayout;
 
