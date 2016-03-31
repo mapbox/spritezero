@@ -11,30 +11,32 @@ rather than on disk. Also, since version 2.0, spritezero generates sprites
 based on SVG graphics alone, therefore making it possible to support @2x
 and higher-dpi sprites from the same source.
 
-### `generateLayout(imgs, ratio, format, callback)`
+
+## API
+
+###`generateLayout(imgs, ratio, format, callback)`
 
 Pack a list of images with width and height into a sprite layout.
 Uses [shelf-pack](https://github.com/mapbox/shelf-pack).
 
-### Parameters
+**Parameters**
 
-| parameter  | type              | description                                                   |
-| ---------- | ----------------- | ------------------------------------------------------------- |
+| parameter  | type              | description                            |
+| ---------- | ----------------- | -------------------------------------- |
 | `imgs`     | Array\.\<Object\> | array of `{ svg: Buffer, id: String }` |
-| `scale`    | number | pixel scale. default is 1, retina is 2 |
-| `format`   | boolean           | format this layout for mapbox gl                              |
-| `callback` | function          | returns two arguments, `err` and `layout` |
+| `scale`    | number            | pixel scale. default is 1, retina is 2 |
+| `format`   | boolean           | format this layout for Mapbox GL       |
+| `callback` | function          | accepts two arguments, `err` and `layout` Object |
 
+**Returns** results of `callback`
 
+---
 
-**Returns** `Object`, layout
-
-
-### `generateImage(packing, callback)`
+###`generateImage(packing, callback)`
 
 Generate a PNG image with positioned icons on a sprite.
 
-### Parameters
+**Parameters**
 
 | parameter  | type     | description |
 | ---------- | -------- | ----------- |

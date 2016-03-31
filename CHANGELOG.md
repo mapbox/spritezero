@@ -1,29 +1,33 @@
-# 3.4.0
+## 3.5.0
 
-- Sort icons array to produce a more deterministic sprite sheet
+* Use shelf-pack binpacker
 
-# 3.3.0
+## 3.4.0
 
-- Updated to mapnik 3.5.0
+* Sort icons array to produce a more deterministic sprite sheet
 
-# 3.1.1
+## 3.3.0
 
-- Adds missing `var`
+* Updated to mapnik 3.5.0
 
-# 3.1.0
+## 3.1.1
 
-- Adds `spritezero` executable.
+* Adds missing `var`
 
-# 3.0.0
+## 3.1.0
 
-- Changes the `generateLayout` function to be asynchronous.
+* Adds `spritezero` executable.
 
-# 2.2.1
+## 3.0.0
 
-- No longer throws an error if `generateImage()` is supplied with empty list.
+* Changes the `generateLayout` function to be asynchronous.
 
-# 2.0.0
+## 2.2.1
 
-- In the second major version, spritezero makes a big pivot: instead of
+* No longer throws an error if `generateImage()` is supplied with empty list.
+
+## 2.0.0
+
+* In the second major version, spritezero makes a big pivot: instead of
 positioning and compositing raster sprites, it receives and composites vector
 sprites composed of SVG data.
