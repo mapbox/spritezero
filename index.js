@@ -18,9 +18,55 @@ var heightAscThanNameComparator = sortBy('-height', 'id');
  * @param {Function} callback
  */
 function generateLayout(imgs, pixelRatio, format, callback) {
-    assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
-    var q = new queue();
+    return generateLayoutInternal(imgs, pixelRatio, format, false, callback);
+}
 
+/**
+ * Same as generateLayout but can be used to dedupe identical SVGs
+ * and still preserve the reference.
+ * For example if A.svg and B.svg are identical, a single icon
+ * will be in the sprite image and both A and B will reference the same image
+ */
+function generateLayoutUnique(imgs, pixelRatio, format, callback) {
+    return generateLayoutInternal(imgs, pixelRatio, format, true, callback);
+}
+
+function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
+    assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
+    
+    if (unique) {
+        /* If 2 items are pointing to identical buffers (svg icons)
+         * create a single image in the sprite but have all ids point to it
+         * Remove duplicates from imgs, but if format == true then when creating the 
+         * resulting layout, make sure all item that had the same signature 
+         * of an item are also updated with the same layout information.
+        */
+    
+        /* The svg signature of each item */
+        var svgPerItemId = {}
+    
+        /* The items for each SVG signature */
+        var itemIdsPerSvg = {};
+    
+        imgs.forEach(function(item) {
+            var svg = item.svg.toString('base64');
+        
+            svgPerItemId[item.id] = svg;
+        
+            if (svg in itemIdsPerSvg) {
+                itemIdsPerSvg[svg].push(item.id);
+            } else {
+                itemIdsPerSvg[svg] = [item.id];
+            }
+        });
+    
+        /* Only keep 1 item per svg signature for packing */
+        imgs = imgs.filter(function(item) {
+            var svg = svgPerItemId[item.id];
+            return item.id === itemIdsPerSvg[svg][0]
+        });
+    }
+    
     function createImagesWithSize(img, callback) {
         mapnik.Image.fromSVGBytes(img.svg, { scale: pixelRatio }, function(err, image) {
             if (err) return callback(err);
@@ -35,6 +81,8 @@ function generateLayout(imgs, pixelRatio, format, callback) {
         });
     }
 
+    var q = new queue();
+
     imgs.forEach(function(img) {
         q.defer(createImagesWithSize, img);
     });
@@ -43,20 +91,27 @@ function generateLayout(imgs, pixelRatio, format, callback) {
         if (err) return callback(err);
 
         imagesWithSizes.sort(heightAscThanNameComparator);
-
+        
         var sprite = new ShelfPack(1, 1, { autoResize: true });
         sprite.pack(imagesWithSizes, { inPlace: true });
 
         if (format) {
             var obj = {};
             imagesWithSizes.forEach(function(item) {
-                obj[item.id] = {
-                    width: item.width,
-                    height: item.height,
-                    x: item.x,
-                    y: item.y,
-                    pixelRatio: pixelRatio
-                };
+                var itemIdsToUpdate = [item.id];
+                if (unique) {
+                    var svg = svgPerItemId[item.id];
+                    itemIdsToUpdate = itemIdsPerSvg[svg];
+                }
+                itemIdsToUpdate.forEach(function(itemIdToUpdate) {
+                    obj[itemIdToUpdate] = {
+                        width: item.width,
+                        height: item.height,
+                        x: item.x,
+                        y: item.y,
+                        pixelRatio: pixelRatio
+                    };
+                });
             });
             return callback(null, obj);
 
@@ -71,6 +126,7 @@ function generateLayout(imgs, pixelRatio, format, callback) {
     });
 }
 module.exports.generateLayout = generateLayout;
+module.exports.generateLayoutUnique = generateLayoutUnique;
 
 /**
  * Generate a PNG image with positioned icons on a sprite.
