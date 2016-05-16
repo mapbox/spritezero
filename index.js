@@ -91,7 +91,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         if (err) return callback(err);
 
         imagesWithSizes.sort(heightAscThanNameComparator);
-        
+
         var sprite = new ShelfPack(1, 1, { autoResize: true });
         sprite.pack(imagesWithSizes, { inPlace: true });
 
