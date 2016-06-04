@@ -20,7 +20,6 @@
     "mapnik": "~3.5.0",
     "queue-async": "^1.0.7",
     "shelf-pack": "1.0.0",
-    "sort-by": "^1.1.1",
     "xtend": "^4.0.1"
   },
   "devDependencies": {
