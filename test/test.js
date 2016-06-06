@@ -2,6 +2,7 @@ var test = require('tape'),
     fs = require('fs'),
     glob = require('glob'),
     path = require('path'),
+    queue = require('queue-async'),
     spritezero = require('../');
 
 var update = !!process.env.UPDATE;
@@ -24,6 +25,28 @@ test('generateLayout', function(t) {
         t.equal(layout.items.length, 360);
         t.equal(layout.items[0].x, 0);
         t.equal(layout.items[0].y, 0);
+        t.end();
+    });
+});
+
+test('generateLayout bench (concurrency=1,x10)', function(t) {
+    var start = +new Date();
+    var q = queue(1);
+    for (var i = 0; i < 10; i++) q.defer(spritezero.generateLayout, getFixtures(), 1, false);
+    q.awaitAll(function(err) {
+        t.ifError(err);
+        t.ok(true, (+new Date() - start) + 'ms');
+        t.end();
+    });
+});
+
+test('generateLayout bench (concurrency=4,x20)', function(t) {
+    var start = +new Date();
+    var q = queue(4);
+    for (var i = 0; i < 20; i++) q.defer(spritezero.generateLayout, getFixtures(), 1, false);
+    q.awaitAll(function(err) {
+        t.ifError(err);
+        t.ok(true, (+new Date() - start) + 'ms');
         t.end();
     });
 });
