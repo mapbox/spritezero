@@ -6,7 +6,7 @@ var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 function heightAscThanNameComparator(a, b) {
-    return (b.height - a.height) || (a.id < b.id ? -1 : 1);
+    return (b.height - a.height) || ((a.id === b.id) ? 0 : (a.id < b.id ? -1 : 1));
 };
 
 /**
