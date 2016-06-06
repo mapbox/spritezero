@@ -30,6 +30,11 @@ Uses [shelf-pack](https://github.com/mapbox/shelf-pack).
 
 **Returns** results of `callback`
 
+###`generateLayoutUnique(imgs, ratio, format, callback)`
+
+Identical to `generateLayout(imgs, ratio, format, callback)` but maps identical images to a single 
+image while preserving the reference in the Mapbox GL layout.
+
 ---
 
 ###`generateImage(packing, callback)`
