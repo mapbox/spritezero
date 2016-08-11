@@ -1,5 +1,6 @@
 # spritezero
 
+[![npm version](https://badge.fury.io/js/spritezero.svg)](https://badge.fury.io/js/spritezero)
 [![build status](https://secure.travis-ci.org/mapbox/spritezero.svg)](http://travis-ci.org/mapbox/spritezero)
 
 Small opinionated sprites.
@@ -34,7 +35,7 @@ Uses [shelf-pack](https://github.com/mapbox/shelf-pack).
 
 ###`generateLayoutUnique(imgs, ratio, format, callback)`
 
-Identical to `generateLayout(imgs, ratio, format, callback)` but maps identical images to a single 
+Identical to `generateLayout(imgs, ratio, format, callback)` but maps identical images to a single
 image while preserving the reference in the Mapbox GL layout.
 
 ---
