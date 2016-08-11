@@ -1,5 +1,11 @@
 :warning: = breaking change
 
+## 3.7.0
+##### 2016-08-10
+* Update to shelf-pack v2
+* ShelfPack now trims sprite to minimum dimensions after a batch pack
+* Make sure heightAscThanNameComparator is transitive (#29)
+
 ## 3.6.0
 ##### 2016-06-05
 * Perf improvement, replace sort-by with custom comparator (#27)
