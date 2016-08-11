@@ -19,7 +19,7 @@
   "dependencies": {
     "mapnik": "~3.5.0",
     "queue-async": "^1.0.7",
-    "shelf-pack": "1.0.0",
+    "shelf-pack": "2.0.0",
     "xtend": "^4.0.1",
     "json-stable-stringify": "^1.0.1"
   },
