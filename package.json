@@ -19,13 +19,13 @@
   "dependencies": {
     "mapnik": "~3.5.0",
     "queue-async": "^1.0.7",
-    "shelf-pack": "2.0.0",
+    "shelf-pack": "2.0.1",
     "xtend": "^4.0.1",
     "json-stable-stringify": "^1.0.1"
   },
   "devDependencies": {
     "dox": "^0.8.0",
-    "glob": "^6.0.4",
+    "glob": "^7.0.5",
     "doxme": "^1.8.2",
     "tape": "^4.4.0"
   },
