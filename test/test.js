@@ -6,7 +6,7 @@ var test = require('tape'),
     stringify = require('json-stable-stringify'),
     spritezero = require('../');
 
-var update = !!process.env.UPDATE;
+var update = process.env.UPDATE;
 
 function getFixtures() {
     return glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
