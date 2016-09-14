@@ -17,7 +17,7 @@
   "author": "Tom MacWright",
   "license": "ISC",
   "dependencies": {
-    "mapnik": "~3.5.13",
+    "mapnik": "3.5.13",
     "queue-async": "^1.2.1",
     "shelf-pack": "2.0.1",
     "xtend": "^4.0.1",
