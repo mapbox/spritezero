@@ -1,5 +1,9 @@
 :warning: = breaking change
 
+## 3.7.1
+##### 2016-09-14
+* Pin Mapnik dependency at version 3.5.13 (#33)
+
 ## 3.7.0
 ##### 2016-08-10
 * Update to shelf-pack v2
