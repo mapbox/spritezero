@@ -6,6 +6,7 @@ var test = require('tape'),
     stringify = require('json-stable-stringify'),
     spritezero = require('../');
 
+// eslint-disable-next-line no-process-env
 var update = process.env.UPDATE;
 
 function getFixtures() {

@@ -7,7 +7,7 @@ var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 function heightAscThanNameComparator(a, b) {
     return (b.height - a.height) || ((a.id === b.id) ? 0 : (a.id < b.id ? -1 : 1));
-};
+}
 
 /**
  * Pack a list of images with width and height into a sprite layout.
@@ -34,40 +34,40 @@ function generateLayoutUnique(imgs, pixelRatio, format, callback) {
 
 function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
     assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
-    
+
     if (unique) {
         /* If 2 items are pointing to identical buffers (svg icons)
          * create a single image in the sprite but have all ids point to it
-         * Remove duplicates from imgs, but if format == true then when creating the 
-         * resulting layout, make sure all item that had the same signature 
+         * Remove duplicates from imgs, but if format == true then when creating the
+         * resulting layout, make sure all item that had the same signature
          * of an item are also updated with the same layout information.
         */
-    
+
         /* The svg signature of each item */
-        var svgPerItemId = {}
-    
+        var svgPerItemId = {};
+
         /* The items for each SVG signature */
         var itemIdsPerSvg = {};
-    
+
         imgs.forEach(function(item) {
             var svg = item.svg.toString('base64');
-        
+
             svgPerItemId[item.id] = svg;
-        
+
             if (svg in itemIdsPerSvg) {
                 itemIdsPerSvg[svg].push(item.id);
             } else {
                 itemIdsPerSvg[svg] = [item.id];
             }
         });
-    
+
         /* Only keep 1 item per svg signature for packing */
         imgs = imgs.filter(function(item) {
             var svg = svgPerItemId[item.id];
-            return item.id === itemIdsPerSvg[svg][0]
+            return item.id === itemIdsPerSvg[svg][0];
         });
     }
-    
+
     function createImagesWithSize(img, callback) {
         mapnik.Image.fromSVGBytes(img.svg, { scale: pixelRatio }, function(err, image) {
             if (err) return callback(err);

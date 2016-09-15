@@ -1,21 +1,21 @@
 {
   "name": "spritezero",
   "version": "3.7.1",
-  "description": "small opinionated sprites",
   "main": "index.js",
-  "scripts": {
-    "test": "tape test/test.js",
-    "doc": "dox -r < index.js | doxme --readme > README.md",
-    "regenerate-fixtures": "node test/regenerate"
+  "description": "small opinionated sprites",
+  "author": "Tom MacWright",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mapbox/spritezero.git"
   },
+  "bugs": "https://github.com/mapbox/spritezero/issues",
   "keywords": [
     "sprite",
     "images",
     "icons",
     "json"
   ],
-  "author": "Tom MacWright",
-  "license": "ISC",
   "dependencies": {
     "mapnik": "3.5.13",
     "queue-async": "^1.2.1",
@@ -25,12 +25,18 @@
   },
   "devDependencies": {
     "dox": "^0.9.0",
+    "eslint": "~3.5.0",
     "glob": "^7.0.5",
     "doxme": "^1.8.2",
     "tape": "^4.6.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:mapbox/spritezero.git"
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "doc": "dox -r < index.js | doxme --readme > README.md",
+    "lint": "eslint index.js test/",
+    "regenerate-fixtures": "node test/regenerate",
+    "test": "npm run lint && tape test/test.js"
   }
 }
