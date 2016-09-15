@@ -24,17 +24,16 @@
     "json-stable-stringify": "^1.0.1"
   },
   "devDependencies": {
-    "dox": "^0.9.0",
+    "documentation": "4.0.0-beta10",
     "eslint": "~3.5.0",
     "glob": "^7.0.5",
-    "doxme": "^1.8.2",
     "tap": "~7.1.0"
   },
   "engines": {
     "node": ">=4.0.0"
   },
   "scripts": {
-    "doc": "dox -r < index.js | doxme --readme > README.md",
+    "docs": "documentation build index.js --lint --github --format html --output docs/",
     "lint": "eslint index.js test/",
     "regenerate-fixtures": "node test/regenerate.js",
     "test": "npm run lint && tap --cov test/test.js"

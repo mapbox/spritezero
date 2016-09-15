@@ -14,29 +14,50 @@ function heightAscThanNameComparator(a, b) {
     return (b.height - a.height) || ((a.id === b.id) ? 0 : (a.id < b.id ? -1 : 1));
 }
 
+
 /**
  * Pack a list of images with width and height into a sprite layout.
- * Uses shelf-pack.
- * @param {Array<Object>} imgs array of `{ buffer: Buffer, id: String }`
- * @param {number} pixelRatio ratio of a 72dpi screen pixel to the destination
- * pixel density
- * @return {Object} layout
- * @param {Function} callback
+ *
+ * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 function generateLayout(imgs, pixelRatio, format, callback) {
     return generateLayoutInternal(imgs, pixelRatio, format, false, callback);
 }
 
+
 /**
  * Same as generateLayout but can be used to dedupe identical SVGs
  * and still preserve the reference.
- * For example if A.svg and B.svg are identical, a single icon
+ *
+ * For example if `A.svg` and `B.svg` are identical, a single icon
  * will be in the sprite image and both A and B will reference the same image
+ *
+ * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 function generateLayoutUnique(imgs, pixelRatio, format, callback) {
     return generateLayoutInternal(imgs, pixelRatio, format, true, callback);
 }
 
+
+/**
+ * Internally called by `generateLayout()` and `generateLayoutUnique()`
+ *
+ * @private
+ * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {boolean}               unique      If true, deduplicate identical SVG images
+ * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
+ */
 function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
     assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
 
@@ -132,17 +153,67 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
     });
 }
 
+
 /**
  * Generate a PNG image with positioned icons on a sprite.
- * @param {Object} packing
- * @param {Function} callback
+ *
+ * @param  {ImgLayout}   layout    An {@link ImgLayout} Object used to generate the image
+ * @param  {Function}    callback  Accepts two arguments, `err` and `image` data
  */
-function generateImage(packing, callback) {
-    assert(typeof packing === 'object' && typeof callback === 'function');
-    if (!packing.items.length) return callback(null, emptyPNG);
+function generateImage(layout, callback) {
+    assert(typeof layout === 'object' && typeof callback === 'function');
+    if (!layout.items.length) return callback(null, emptyPNG);
 
-    mapnik.blend(packing.items, {
-        width: packing.width,
-        height: packing.height
+    mapnik.blend(layout.items, {
+        width: layout.width,
+        height: layout.height
     }, callback);
 }
+
+
+/**
+ * Spritezero can generate 2 kinds of layout objects: {@link DataLayout} and {@link ImgLayout}.
+ *
+ * A `ImgLayout` Object contains the array of image items along with dimensions
+ * and a buffer of image data that can be used for generating the output image.
+ *
+ * @typedef  {Object}    ImgLayout
+ * @example
+ * {
+ *    width: 512,
+ *    height: 512,
+ *    items: [
+ *      {
+ *        "height": 12,
+ *        "width": 12,
+ *        "x": 133,
+ *        "y": 282,
+ *        "buffer": "..."
+ *      }, ... etc ...
+ *    ]
+ * }
+ */
+
+
+/**
+ * Spritezero can generate 2 kinds of layout objects: {@link DataLayout} and {@link ImgLayout}.
+ *
+ * A `DataLayout` Object contains all the metadata about the contents of the sprite.
+ * This data can be exported to a JSON sprite manifest file.
+ *
+ * The keys of the Object are the icon ids.
+ * The values of the Object are the structured data about each icon.
+ *
+ * @typedef  {Object}    DataLayout
+ * @example
+ * {
+ *    "aerialway-12": {
+ *      "width": 12,
+ *      "height": 12,
+ *      "pixelRatio": 1,
+ *      "x": 133,
+ *      "y": 282
+ *    }, ... etc ...
+ * }
+ */
+

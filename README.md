@@ -1,7 +1,7 @@
-# spritezero
-
 [![npm version](https://badge.fury.io/js/spritezero.svg)](https://badge.fury.io/js/spritezero)
 [![build status](https://secure.travis-ci.org/mapbox/spritezero.svg)](http://travis-ci.org/mapbox/spritezero)
+
+## spritezero
 
 Small opinionated sprites.
 
@@ -13,54 +13,60 @@ based on SVG graphics alone, therefore making it possible to support @2x
 and higher-dpi sprites from the same source.
 
 
-## API
+### Usage
+```js
+var spritezero = require('spritezero');
+var fs = require('fs');
+var glob = require('glob');
+var path = require('path');
 
-###`generateLayout(imgs, ratio, format, callback)`
+[1, 2, 4].forEach(function(pxRatio) {
+    var svgs = glob.sync(path.resolve(path.join(__dirname, 'input/*.svg')))
+        .map(function(f) {
+            return {
+                svg: fs.readFileSync(f),
+                id: path.basename(f).replace('.svg', '')
+            };
+        });
+    var pngPath = path.resolve(path.join(__dirname, 'output/sprite@' + pxRatio + '.png'));
+    var jsonPath = path.resolve(path.join(__dirname, 'output/sprite@' + pxRatio + '.json'));
 
-Pack a list of images with width and height into a sprite layout.
-Uses [shelf-pack](https://github.com/mapbox/shelf-pack).
+    // Pass `true` in the layout parameter to generate a data layout
+    // suitable for exporting to a JSON sprite manifest file.
+    spritezero.generateLayout(svgs, pxRatio, true, function(err, dataLayout) {
+        if (err) return;
+        fs.writeFileSync(jsonPath, JSON.stringify(dataLayout)));
+    });
 
-**Parameters**
+    // Pass `false` in the layout parameter to generate an image layout
+    // suitable for exporting to a PNG sprite image file.
+    spritezero.generateLayout(svgs, pxRatio, false, function(err, imageLayout) {
+        spritezero.generateImage(imageLayout, function(err, image) {
+            if (err) return;
+            fs.writeFileSync(pngPath, image);
+        });
+    });
 
-| parameter  | type              | description                            |
-| ---------- | ----------------- | -------------------------------------- |
-| `imgs`     | Array\.\<Object\> | array of `{ svg: Buffer, id: String }` |
-| `scale`    | number            | pixel scale. default is 1, retina is 2 |
-| `format`   | boolean           | format this layout for Mapbox GL       |
-| `callback` | function          | accepts two arguments, `err` and `layout` Object |
+});
 
-**Returns** results of `callback`
-
----
-
-###`generateLayoutUnique(imgs, ratio, format, callback)`
-
-Identical to `generateLayout(imgs, ratio, format, callback)` but maps identical images to a single
-image while preserving the reference in the Mapbox GL layout.
-
----
-
-###`generateImage(packing, callback)`
-
-Generate a PNG image with positioned icons on a sprite.
-
-**Parameters**
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `packing`  | Object   |             |
-| `callback` | Function |             |
+```
 
 
-## Installation
+### Documentation
 
-Requires [nodejs](http://nodejs.org/).
+Complete API documentation is here:  http://mapbox.github.io/spritezero/
 
-```sh
+
+### Installation
+
+Requires [nodejs](http://nodejs.org/) v4.0.0 or greater.
+
+```bash
 $ npm install spritezero
 ```
 
-## Executable
+
+### Executable
 
 [spritezero-cli](https://github.com/mapbox/spritezero-cli) is an executable for bundling and creating your own sprites from a folder of svg's:
 
@@ -74,8 +80,4 @@ spritezero [output filename] [input directory]
   --ratio=[n]   pixel ratio
 ```
 
-## Tests
 
-```sh
-$ npm test
-```

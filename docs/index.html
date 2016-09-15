@@ -1,0 +1,505 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation'>
+  <div class='max-width-4 mx-auto'>
+    <div class='clearfix md-mxn2'>
+      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#generatelayout'
+                  class="">
+                  generateLayout
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatelayoutunique'
+                  class="">
+                  generateLayoutUnique
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateimage'
+                  class="">
+                  generateImage
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#imglayout'
+                  class="">
+                  ImgLayout
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#datalayout'
+                  class="">
+                  DataLayout
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div class='fix-margin-3'>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='generatelayout'>
+      generateLayout
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/2d2b9b5e6575760832e3eb3a6cd2f5670f96a35b/index.js#L27-L29'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Pack a list of images with width and height into a sprite layout.</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateLayout(imgs: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;, pixelRatio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, format: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>imgs</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;)</code> Array of 
+<code>{ svg: Buffer, id: String }</code>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pixelRatio</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> Ratio of a 72dpi screen pixel to the destination pixel density
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>format</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code> If true, generate 
+<a href="#datalayout">DataLayout</a>
+; if false, generate 
+<a href="#imglayout">ImgLayout</a>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
+<code>err</code>
+ and 
+<code>layout</code>
+ Object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
+        layout      Generated Layout Object with sprite contents
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='generatelayoutunique'>
+      generateLayoutUnique
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/2d2b9b5e6575760832e3eb3a6cd2f5670f96a35b/index.js#L45-L47'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Same as generateLayout but can be used to dedupe identical SVGs
+and still preserve the reference.</p>
+<p>For example if <code>A.svg</code> and <code>B.svg</code> are identical, a single icon
+will be in the sprite image and both A and B will reference the same image</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateLayoutUnique(imgs: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;, pixelRatio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, format: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>imgs</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;)</code> Array of 
+<code>{ svg: Buffer, id: String }</code>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pixelRatio</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> Ratio of a 72dpi screen pixel to the destination pixel density
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>format</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code> If true, generate 
+<a href="#datalayout">DataLayout</a>
+; if false, generate 
+<a href="#imglayout">ImgLayout</a>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
+<code>err</code>
+ and 
+<code>layout</code>
+ Object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
+        layout      Generated Layout Object with sprite contents
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='generateimage'>
+      generateImage
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/2d2b9b5e6575760832e3eb3a6cd2f5670f96a35b/index.js#L163-L171'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Generate a PNG image with positioned icons on a sprite.</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateImage(layout: <a href="#imglayout">ImgLayout</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#imglayout">ImgLayout</a>)</code> An 
+<a href="#imglayout">ImgLayout</a>
+ Object used to generate the image
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
+<code>err</code>
+ and 
+<code>image</code>
+ data
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='imglayout'>
+      ImgLayout
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/2d2b9b5e6575760832e3eb3a6cd2f5670f96a35b/index.js#L163-L171'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Spritezero can generate 2 kinds of layout objects: <a href="#datalayout">DataLayout</a> and <a href="#imglayout">ImgLayout</a>.</p>
+<p>A <code>ImgLayout</code> Object contains the array of image items along with dimensions
+and a buffer of image data that can be used for generating the output image.</p>
+
+
+  <div class='pre p1 fill-light mt0'>ImgLayout</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>{
+   width: <span class="hljs-number">512</span>,
+   height: <span class="hljs-number">512</span>,
+   items: [
+     {
+       <span class="hljs-string">"height"</span>: <span class="hljs-number">12</span>,
+       <span class="hljs-string">"width"</span>: <span class="hljs-number">12</span>,
+       <span class="hljs-string">"x"</span>: <span class="hljs-number">133</span>,
+       <span class="hljs-string">"y"</span>: <span class="hljs-number">282</span>,
+       <span class="hljs-string">"buffer"</span>: <span class="hljs-string">"..."</span>
+     }, ... etc ...
+   ]
+}</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='datalayout'>
+      DataLayout
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/2d2b9b5e6575760832e3eb3a6cd2f5670f96a35b/index.js#L163-L171'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Spritezero can generate 2 kinds of layout objects: <a href="#datalayout">DataLayout</a> and <a href="#imglayout">ImgLayout</a>.</p>
+<p>A <code>DataLayout</code> Object contains all the metadata about the contents of the sprite.
+This data can be exported to a JSON sprite manifest file.</p>
+<p>The keys of the Object are the icon ids.
+The values of the Object are the structured data about each icon.</p>
+
+
+  <div class='pre p1 fill-light mt0'>DataLayout</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>{
+   <span class="hljs-string">"aerialway-12"</span>: {
+     <span class="hljs-string">"width"</span>: <span class="hljs-number">12</span>,
+     <span class="hljs-string">"height"</span>: <span class="hljs-number">12</span>,
+     <span class="hljs-string">"pixelRatio"</span>: <span class="hljs-number">1</span>,
+     <span class="hljs-string">"x"</span>: <span class="hljs-number">133</span>,
+     <span class="hljs-string">"y"</span>: <span class="hljs-number">282</span>
+   }, ... etc ...
+}</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
