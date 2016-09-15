@@ -1,4 +1,4 @@
-var test = require('tape'),
+var test = require('tap').test,
     fs = require('fs'),
     glob = require('glob'),
     path = require('path'),
@@ -88,53 +88,55 @@ test('generateLayoutUnique', function(t) {
 });
 
 test('generateImage', function(t) {
-   [1, 2, 4].forEach(function(scale) {
-       t.test('@' + scale, function(tt) {
-           var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
-           var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
-           spritezero.generateLayout(getFixtures(), scale, true, function(err, formatted) {
-               t.ifError(err);
-               spritezero.generateLayout(getFixtures(), scale, false, function(err, layout) {
-                   t.ifError(err);
-                   if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
-                   tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
+            var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
+            spritezero.generateLayout(getFixtures(), scale, true, function(err, formatted) {
+                tt.ifError(err);
+                spritezero.generateLayout(getFixtures(), scale, false, function(err, layout) {
+                    tt.ifError(err);
+                    if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
+                    tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 
-                   spritezero.generateImage(layout, function(err, res) {
-                       tt.notOk(err, 'no error');
-                       tt.ok(res, 'produces image');
-                       if (update) fs.writeFileSync(pngPath, res);
-                       tt.deepEqual(res, fs.readFileSync(pngPath));
-                       tt.end();
-                   });
-               });
-           });
-       });
-   });
+                    spritezero.generateImage(layout, function(err, res) {
+                        tt.notOk(err, 'no error');
+                        tt.ok(res, 'produces image');
+                        if (update) fs.writeFileSync(pngPath, res);
+                        tt.deepEqual(res, fs.readFileSync(pngPath));
+                        tt.end();
+                    });
+                });
+            });
+        });
+    });
+    t.end();
 });
 
 test('generateImageUnique', function(t) {
-   [1, 2, 4].forEach(function(scale) {
-       t.test('@' + scale, function(tt) {
-           var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.png'));
-           var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.json'));
-           spritezero.generateLayoutUnique(getFixtures(), scale, true, function(err, formatted) {
-               t.ifError(err);
-               spritezero.generateLayoutUnique(getFixtures(), scale, false, function(err, layout) {
-                   t.ifError(err);
-                   if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
-                   tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.png'));
+            var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.json'));
+            spritezero.generateLayoutUnique(getFixtures(), scale, true, function(err, formatted) {
+                tt.ifError(err);
+                spritezero.generateLayoutUnique(getFixtures(), scale, false, function(err, layout) {
+                    tt.ifError(err);
+                    if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
+                    tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 
-                   spritezero.generateImage(layout, function(err, res) {
-                       tt.notOk(err, 'no error');
-                       tt.ok(res, 'produces image');
-                       if (update) fs.writeFileSync(pngPath, res);
-                       tt.deepEqual(res, fs.readFileSync(pngPath));
-                       tt.end();
-                   });
-               });
-           });
-       });
-   });
+                    spritezero.generateImage(layout, function(err, res) {
+                        tt.notOk(err, 'no error');
+                        tt.ok(res, 'produces image');
+                        if (update) fs.writeFileSync(pngPath, res);
+                        tt.deepEqual(res, fs.readFileSync(pngPath));
+                        tt.end();
+                    });
+                });
+            });
+        });
+    });
+    t.end();
 });
 
 test('generateLayout with empty input', function(t) {
@@ -154,25 +156,25 @@ test('generateLayoutUnique with empty input', function(t) {
 });
 
 test('generateImage with empty input', function(t) {
-   spritezero.generateLayout([], 1, false, function(err, layout) {
-       t.ifError(err);
-       spritezero.generateImage(layout, function(err, sprite) {
-           t.notOk(err, 'no error');
-           t.ok(sprite, 'produces image');
-           t.equal(typeof sprite, 'object');
-           t.end();
-       });
-   });
+    spritezero.generateLayout([], 1, false, function(err, layout) {
+        t.ifError(err);
+        spritezero.generateImage(layout, function(err, sprite) {
+            t.notOk(err, 'no error');
+            t.ok(sprite, 'produces image');
+            t.equal(typeof sprite, 'object');
+            t.end();
+        });
+    });
 });
 
 test('generateImage unique with empty input', function(t) {
-   spritezero.generateLayoutUnique([], 1, false, function(err, layout) {
-       t.ifError(err);
-       spritezero.generateImage(layout, function(err, sprite) {
-           t.notOk(err, 'no error');
-           t.ok(sprite, 'produces image');
-           t.equal(typeof sprite, 'object');
-           t.end();
-       });
-   });
+    spritezero.generateLayoutUnique([], 1, false, function(err, layout) {
+        t.ifError(err);
+        spritezero.generateImage(layout, function(err, sprite) {
+            t.notOk(err, 'no error');
+            t.ok(sprite, 'produces image');
+            t.equal(typeof sprite, 'object');
+            t.end();
+        });
+    });
 });

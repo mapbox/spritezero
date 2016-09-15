@@ -28,7 +28,7 @@
     "eslint": "~3.5.0",
     "glob": "^7.0.5",
     "doxme": "^1.8.2",
-    "tape": "^4.6.0"
+    "tap": "~7.1.0"
   },
   "engines": {
     "node": ">=4.0.0"
@@ -36,7 +36,7 @@
   "scripts": {
     "doc": "dox -r < index.js | doxme --readme > README.md",
     "lint": "eslint index.js test/",
-    "regenerate-fixtures": "node test/regenerate",
-    "test": "npm run lint && tape test/test.js"
+    "regenerate-fixtures": "node test/regenerate.js",
+    "test": "npm run lint && tap --cov test/test.js"
   }
 }

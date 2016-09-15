@@ -5,6 +5,11 @@ var ShelfPack = require('shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
+module.exports.generateLayout = generateLayout;
+module.exports.generateLayoutUnique = generateLayoutUnique;
+module.exports.generateImage = generateImage;
+
+
 function heightAscThanNameComparator(a, b) {
     return (b.height - a.height) || ((a.id === b.id) ? 0 : (a.id < b.id ? -1 : 1));
 }
@@ -126,8 +131,6 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
 
     });
 }
-module.exports.generateLayout = generateLayout;
-module.exports.generateLayoutUnique = generateLayoutUnique;
 
 /**
  * Generate a PNG image with positioned icons on a sprite.
@@ -143,5 +146,3 @@ function generateImage(packing, callback) {
         height: packing.height
     }, callback);
 }
-
-module.exports.generateImage = generateImage;
