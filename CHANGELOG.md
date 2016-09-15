@@ -1,8 +1,12 @@
 :warning: = breaking change
 
+## 3.8.0
+##### 2016-09-15
+* Update to mapnik 3.5.14 (#26)
+
 ## 3.7.1
 ##### 2016-09-14
-* Pin Mapnik dependency at version 3.5.13 (#33)
+* Pin mapnik dependency at version 3.5.13 (#33)
 
 ## 3.7.0
 ##### 2016-08-10
