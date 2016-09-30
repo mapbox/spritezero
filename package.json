@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "documentation": "4.0.0-beta10",
-    "eslint": "~3.6.0",
+    "eslint": "~3.7.0",
     "glob": "^7.0.5",
     "tap": "~7.1.0"
   },
