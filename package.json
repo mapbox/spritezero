@@ -5,10 +5,7 @@
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:mapbox/spritezero.git"
-  },
+  "repository": "mapbox/spritezero",
   "bugs": "https://github.com/mapbox/spritezero/issues",
   "keywords": [
     "sprite",
@@ -25,9 +22,9 @@
   },
   "devDependencies": {
     "documentation": "4.0.0-beta10",
-    "eslint": "~3.8.0",
+    "eslint": "^3.8.0",
     "glob": "^7.0.5",
-    "tap": "~8.0.0"
+    "tap": "^8.0.0"
   },
   "engines": {
     "node": ">=4.0.0"
