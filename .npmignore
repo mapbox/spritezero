@@ -1,1 +1,7 @@
-test
+.DS_Store
+.nyc_output
+.travis.yml
+coverage/
+node_modules/
+npm-debug.log
+test/
