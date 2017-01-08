@@ -24,7 +24,7 @@
     "documentation": "4.0.0-beta10",
     "eslint": "^3.9.0",
     "glob": "^7.1.0",
-    "tap": "^8.0.0"
+    "tap": "^9.0.1"
   },
   "engines": {
     "node": ">=4.0.0"
