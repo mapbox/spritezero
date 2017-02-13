@@ -1,5 +1,9 @@
 :warning: = breaking change
 
+## 4.0.0
+##### 2017-02-12
+* :warning: spritezero now a scoped package under @mapbox namespace (#40)
+
 ## 3.8.0
 ##### 2016-09-15
 * Update to mapnik 3.5.14 (#26)
