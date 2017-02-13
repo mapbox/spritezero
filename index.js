@@ -1,7 +1,7 @@
 var mapnik = require('mapnik');
 var assert = require('assert');
 var xtend = require('xtend');
-var ShelfPack = require('shelf-pack');
+var ShelfPack = require('@mapbox/shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 

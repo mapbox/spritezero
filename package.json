@@ -15,9 +15,9 @@
   ],
   "dependencies": {
     "json-stable-stringify": "^1.0.1",
+    "@mapbox/shelf-pack": "~3.0.0",
     "mapnik": "3.5.14",
     "queue-async": "^1.2.1",
-    "shelf-pack": "2.0.1",
     "xtend": "^4.0.1"
   },
   "devDependencies": {
