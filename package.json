@@ -25,7 +25,7 @@
     "eslint": "^3.9.0",
     "glob": "^7.1.0",
     "greenkeeper-postpublish": "^1.0.1",
-    "tap": "^9.0.0"
+    "tap": "^10.1.0"
   },
   "engines": {
     "node": ">=4.0.0"
