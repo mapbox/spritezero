@@ -1,5 +1,9 @@
 :warning: = breaking change
 
+## 4.0.1
+##### 2017-02-13
+* Bump ShelfPack dependency to 3.0.0
+
 ## 4.0.0
 ##### 2017-02-12
 * :warning: spritezero now a scoped package under @mapbox namespace (#40)
@@ -14,7 +18,7 @@
 
 ## 3.7.0
 ##### 2016-08-10
-* Update to shelf-pack v2
+* Bump ShelfPack dependency to 2.0.0
 * ShelfPack now trims sprite to minimum dimensions after a batch pack
 * Make sure heightAscThanNameComparator is transitive (#29)
 
@@ -25,7 +29,7 @@
 
 ## 3.5.0
 ##### 2016-03-30
-* Use shelf-pack binpacker (#22)
+* Use ShelfPack binpacker (#22)
 
 ## 3.4.0
 ##### 2016-03-08
