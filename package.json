@@ -1,5 +1,5 @@
 {
-  "name": "spritezero",
+  "name": "@mapbox/spritezero",
   "version": "3.8.0",
   "main": "index.js",
   "description": "small opinionated sprites",
