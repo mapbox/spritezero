@@ -15,7 +15,7 @@ and higher-dpi sprites from the same source.
 
 ### Usage
 ```js
-var spritezero = require('spritezero');
+var spritezero = require('@mapbox/spritezero');
 var fs = require('fs');
 var glob = require('glob');
 var path = require('path');
@@ -62,7 +62,7 @@ Complete API documentation is here:  http://mapbox.github.io/spritezero/
 Requires [nodejs](http://nodejs.org/) v4.0.0 or greater.
 
 ```bash
-$ npm install spritezero
+$ npm install @mapbox/spritezero
 ```
 
 
