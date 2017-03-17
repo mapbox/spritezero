@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "documentation": "4.0.0-beta10",
-    "eslint": "^3.9.0",
+    "eslint": "^3.18.0",
     "glob": "^7.1.0",
     "greenkeeper-postpublish": "^1.0.1",
     "tap": "^10.1.0"
