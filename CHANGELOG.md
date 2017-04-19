@@ -1,5 +1,9 @@
 :warning: = breaking change
 
+## 4.1.0
+##### 2017-04-19
+* Updates Mapnik dependency to 3.6.0
+
 ## 4.0.1
 ##### 2017-02-13
 * Bump ShelfPack dependency to 3.0.0
