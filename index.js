@@ -25,9 +25,9 @@ function heightAscThanNameComparator(a, b) {
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 // function generateLayout(imgs, pixelRatio, format, callback) {
-function generateLayout(options) {
+function generateLayout(options, callback) {
     options.unique = false;
-    return generateLayoutInternal(options));
+    return generateLayoutInternal(options, callback);
 }
 
 
@@ -45,9 +45,9 @@ function generateLayout(options) {
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 // function generateLayoutUnique(imgs, pixelRatio, format, callback) {
-function generateLayoutUnique(options) {
+function generateLayoutUnique(options, callback) {
     options.unique = true;
-    return generateLayoutInternal(options);
+    return generateLayoutInternal(options, callback);
 }
 
 
@@ -63,7 +63,7 @@ function generateLayoutUnique(options) {
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 // function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
-function generateLayoutInternal(options) {
+function generateLayoutInternal(options, callback) {
     assert(typeof options.pixelRatio === 'number' && Array.isArray(options.imgs));
 
     if (options.unique) {
@@ -100,7 +100,7 @@ function generateLayoutInternal(options) {
     }
 
     function createImagesWithSize(img, callback) {
-        var mapnikOpts = { scale: options.pixelRation };
+        var mapnikOpts = { scale: options.pixelRatio };
         if (options.max_size) {
             mapnikOpts.max_size = options.max_size;
         }
