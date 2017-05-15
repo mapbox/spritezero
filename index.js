@@ -24,8 +24,10 @@ function heightAscThanNameComparator(a, b) {
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-function generateLayout(imgs, pixelRatio, format, callback) {
-    return generateLayoutInternal(imgs, pixelRatio, format, false, callback);
+// function generateLayout(imgs, pixelRatio, format, callback) {
+function generateLayout(options) {
+    options.unique = false;
+    return generateLayoutInternal(options));
 }
 
 
@@ -42,8 +44,10 @@ function generateLayout(imgs, pixelRatio, format, callback) {
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-function generateLayoutUnique(imgs, pixelRatio, format, callback) {
-    return generateLayoutInternal(imgs, pixelRatio, format, true, callback);
+// function generateLayoutUnique(imgs, pixelRatio, format, callback) {
+function generateLayoutUnique(options) {
+    options.unique = true;
+    return generateLayoutInternal(options);
 }
 
 
@@ -58,10 +62,11 @@ function generateLayoutUnique(imgs, pixelRatio, format, callback) {
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
-    assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
+// function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
+function generateLayoutInternal(options) {
+    assert(typeof options.pixelRatio === 'number' && Array.isArray(options.imgs));
 
-    if (unique) {
+    if (options.unique) {
         /* If 2 items are pointing to identical buffers (svg icons)
          * create a single image in the sprite but have all ids point to it
          * Remove duplicates from imgs, but if format == true then when creating the
@@ -75,7 +80,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         /* The items for each SVG signature */
         var itemIdsPerSvg = {};
 
-        imgs.forEach(function(item) {
+        options.imgs.forEach(function(item) {
             var svg = item.svg.toString('base64');
 
             svgPerItemId[item.id] = svg;
@@ -88,14 +93,18 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         });
 
         /* Only keep 1 item per svg signature for packing */
-        imgs = imgs.filter(function(item) {
+        options.imgs = options.imgs.filter(function(item) {
             var svg = svgPerItemId[item.id];
             return item.id === itemIdsPerSvg[svg][0];
         });
     }
 
     function createImagesWithSize(img, callback) {
-        mapnik.Image.fromSVGBytes(img.svg, { scale: pixelRatio }, function(err, image) {
+        var mapnikOpts = { scale: options.pixelRation };
+        if (options.max_size) {
+            mapnikOpts.max_size = options.max_size;
+        }
+        mapnik.Image.fromSVGBytes(img.svg, mapnikOpts, function(err, image) {
             if (err) return callback(err);
             image.encode('png', function(err, buffer) {
                 if (err) return callback(err);
@@ -110,7 +119,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
 
     var q = new queue();
 
-    imgs.forEach(function(img) {
+    options.imgs.forEach(function(img) {
         q.defer(createImagesWithSize, img);
     });
 
@@ -122,11 +131,11 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         var sprite = new ShelfPack(1, 1, { autoResize: true });
         sprite.pack(imagesWithSizes, { inPlace: true });
 
-        if (format) {
+        if (options.format) {
             var obj = {};
             imagesWithSizes.forEach(function(item) {
                 var itemIdsToUpdate = [item.id];
-                if (unique) {
+                if (options.unique) {
                     var svg = svgPerItemId[item.id];
                     itemIdsToUpdate = itemIdsPerSvg[svg];
                 }
@@ -136,7 +145,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
                         height: item.height,
                         x: item.x,
                         y: item.y,
-                        pixelRatio: pixelRatio
+                        pixelRatio: options.pixelRatio
                     };
                 });
             });
@@ -216,4 +225,3 @@ function generateImage(layout, callback) {
  *    }, ... etc ...
  * }
  */
-
