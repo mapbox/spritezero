@@ -24,7 +24,6 @@ function heightAscThanNameComparator(a, b) {
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-// function generateLayout(imgs, pixelRatio, format, callback) {
 function generateLayout(options, callback) {
     options.unique = false;
     return generateLayoutInternal(options, callback);
@@ -44,7 +43,6 @@ function generateLayout(options, callback) {
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-// function generateLayoutUnique(imgs, pixelRatio, format, callback) {
 function generateLayoutUnique(options, callback) {
     options.unique = true;
     return generateLayoutInternal(options, callback);
@@ -62,7 +60,6 @@ function generateLayoutUnique(options, callback) {
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-// function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
 function generateLayoutInternal(options, callback) {
     assert(typeof options.pixelRatio === 'number' && Array.isArray(options.imgs));
 
