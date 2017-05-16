@@ -181,7 +181,6 @@ test('generateImage unique with empty input', function(t) {
 
 test('generateImage unique with max_size', function(t) {
     spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: 1, format: false, max_size: 10 }, function(err, layout) {
-        console.log(err);
         t.ok(err);
         t.equal(err.message, 'image created from svg must be 10 pixels or fewer on each side');
         t.end();
