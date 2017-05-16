@@ -23,6 +23,7 @@ function heightAscThanNameComparator(a, b) {
  * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
+ * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 function generateLayout(options, callback) {
@@ -39,10 +40,12 @@ function generateLayout(options, callback) {
  * will be in the sprite image and both A and B will reference the same image
  *
  * options object with the following keys:
+ *
  * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
  * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
+ * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
 function generateLayoutUnique(options, callback) {
@@ -59,6 +62,7 @@ function generateLayoutUnique(options, callback) {
  * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               unique      If true, deduplicate identical SVG images
+ * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
@@ -100,8 +104,8 @@ function generateLayoutInternal(options, callback) {
 
     function createImagesWithSize(img, callback) {
         var mapnikOpts = { scale: options.pixelRatio };
-        if (options.max_size) {
-            mapnikOpts.max_size = options.max_size;
+        if (options.maxIconSize) {
+            mapnikOpts.max_size = options.maxIconSize;
         }
         mapnik.Image.fromSVGBytes(img.svg, mapnikOpts, function(err, image) {
             if (err) return callback(err);
