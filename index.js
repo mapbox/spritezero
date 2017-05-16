@@ -17,6 +17,7 @@ function heightAscThanNameComparator(a, b) {
 
 /**
  * Pack a list of images with width and height into a sprite layout.
+ * options object with the following keys:
  *
  * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
  * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
@@ -37,6 +38,7 @@ function generateLayout(options, callback) {
  * For example if `A.svg` and `B.svg` are identical, a single icon
  * will be in the sprite image and both A and B will reference the same image
  *
+ * options object with the following keys:
  * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
  * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
