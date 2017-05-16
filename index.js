@@ -19,14 +19,16 @@ function heightAscThanNameComparator(a, b) {
  * Pack a list of images with width and height into a sprite layout.
  * options object with the following keys:
  *
- * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
- * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
- * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
+ * @param   {Object}                [options]
+ * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
 function generateLayout(options, callback) {
+    options = options || {};
     options.unique = false;
     return generateLayoutInternal(options, callback);
 }
@@ -41,14 +43,16 @@ function generateLayout(options, callback) {
  *
  * options object with the following keys:
  *
- * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
- * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
- * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
+ * @param   {Object}                [options]
+ * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
 function generateLayoutUnique(options, callback) {
+    options = options || {};
     options.unique = true;
     return generateLayoutInternal(options, callback);
 }
