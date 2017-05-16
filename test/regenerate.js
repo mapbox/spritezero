@@ -30,7 +30,7 @@ filepaths(path.resolve(__dirname, 'fixture', 'svg')).forEach(function (file) {
 
 q.awaitAll(function (err, buffers) {
     [1, 2, 4].forEach(function (ratio) {
-        spritezero.generateLayout(buffers, ratio, true, function (err, formattedLayout) {
+        spritezero.generateLayout({ imgs: buffers, pixelRatio: ratio, unique: true }, function (err, formattedLayout) {
             if (err) throw err;
             fs.writeFile(
                 path.resolve(__dirname, 'fixture', 'sprite@' + ratio + '.json'),
@@ -41,7 +41,7 @@ q.awaitAll(function (err, buffers) {
                 }
             );
         });
-        spritezero.generateLayout(buffers, ratio, false, function (err, layout) {
+        spritezero.generateLayout({ imgs: buffers, pixelRatio: ratio, unique: false }, function (err, layout) {
             if (err) throw err;
             spritezero.generateImage(layout, function (err, image) {
                 if (err) throw err;
