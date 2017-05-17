@@ -1,4 +1,7 @@
 :warning: = breaking change
+## 5.0.0
+##### 2017-04-19
+* :warning: change `generateLayout` and `generateLayoutUnique` to accept options arguments and add functionality to pass optional max_size argument
 
 ## 4.1.0
 ##### 2017-04-19

@@ -91,17 +91,18 @@
       generateLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/adf5cb53e556b66b231d5fb486a20ca2cfa9f2ab/index.js#L27-L29'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/1cf9f2ce6eded0166dfcd373aa8e5ed066e214ef/index.js#L30-L34'>
       <span>index.js</span>
       </a>
     
   </div>
   
 
-  <p>Pack a list of images with width and height into a sprite layout.</p>
+  <p>Pack a list of images with width and height into a sprite layout.
+options object with the following keys:</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateLayout(imgs: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;, pixelRatio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, format: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
+  <div class='pre p1 fill-light mt0'>generateLayout(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
 
   
 
@@ -117,29 +118,56 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>imgs</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;)</code> Array of 
+            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.imgs</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
+                  </td>
+                  <td class='break-word'><span>Array of 
 <code>{ svg: Buffer, id: String }</code>
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>pixelRatio</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> Ratio of a 72dpi screen pixel to the destination pixel density
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>format</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code> If true, generate 
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
+                  </td>
+                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.format</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>If true, generate 
 <a href="#datalayout">DataLayout</a>
 ; if false, generate 
 <a href="#imglayout">ImgLayout</a>
-
-          </div>
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.maxIconSize</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>optional, overrides the max_size in mapnik
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -164,7 +192,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout      Generated Layout Object with sprite contents
+        layout                Generated Layout Object with sprite contents
 
       
     
@@ -192,7 +220,7 @@
       generateLayoutUnique
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/adf5cb53e556b66b231d5fb486a20ca2cfa9f2ab/index.js#L45-L47'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/1cf9f2ce6eded0166dfcd373aa8e5ed066e214ef/index.js#L54-L58'>
       <span>index.js</span>
       </a>
     
@@ -203,9 +231,10 @@
 and still preserve the reference.</p>
 <p>For example if <code>A.svg</code> and <code>B.svg</code> are identical, a single icon
 will be in the sprite image and both A and B will reference the same image</p>
+<p>options object with the following keys:</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateLayoutUnique(imgs: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;, pixelRatio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, format: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
+  <div class='pre p1 fill-light mt0'>generateLayoutUnique(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
 
   
 
@@ -221,29 +250,56 @@ will be in the sprite image and both A and B will reference the same image</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>imgs</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;)</code> Array of 
+            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.imgs</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
+                  </td>
+                  <td class='break-word'><span>Array of 
 <code>{ svg: Buffer, id: String }</code>
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>pixelRatio</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> Ratio of a 72dpi screen pixel to the destination pixel density
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>format</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code> If true, generate 
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
+                  </td>
+                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.format</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>If true, generate 
 <a href="#datalayout">DataLayout</a>
 ; if false, generate 
 <a href="#imglayout">ImgLayout</a>
-
-          </div>
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.maxIconSize</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>optional, overrides the max_size in mapnik
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -268,7 +324,7 @@ will be in the sprite image and both A and B will reference the same image</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout      Generated Layout Object with sprite contents
+        layout                Generated Layout Object with sprite contents
 
       
     
@@ -296,7 +352,7 @@ will be in the sprite image and both A and B will reference the same image</p>
       generateImage
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/adf5cb53e556b66b231d5fb486a20ca2cfa9f2ab/index.js#L163-L171'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/1cf9f2ce6eded0166dfcd373aa8e5ed066e214ef/index.js#L179-L187'>
       <span>index.js</span>
       </a>
     
@@ -371,7 +427,7 @@ will be in the sprite image and both A and B will reference the same image</p>
       ImgLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/adf5cb53e556b66b231d5fb486a20ca2cfa9f2ab/index.js#L163-L171'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/1cf9f2ce6eded0166dfcd373aa8e5ed066e214ef/index.js#L179-L187'>
       <span>index.js</span>
       </a>
     
@@ -439,7 +495,7 @@ and a buffer of image data that can be used for generating the output image.</p>
       DataLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/adf5cb53e556b66b231d5fb486a20ca2cfa9f2ab/index.js#L163-L171'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/1cf9f2ce6eded0166dfcd373aa8e5ed066e214ef/index.js#L179-L187'>
       <span>index.js</span>
       </a>
     
