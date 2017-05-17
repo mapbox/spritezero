@@ -33,14 +33,14 @@ var path = require('path');
 
     // Pass `true` in the layout parameter to generate a data layout
     // suitable for exporting to a JSON sprite manifest file.
-    spritezero.generateLayout(svgs, pxRatio, true, function(err, dataLayout) {
+    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: true }, function(err, dataLayout) {
         if (err) return;
         fs.writeFileSync(jsonPath, JSON.stringify(dataLayout)));
     });
 
     // Pass `false` in the layout parameter to generate an image layout
     // suitable for exporting to a PNG sprite image file.
-    spritezero.generateLayout(svgs, pxRatio, false, function(err, imageLayout) {
+    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: false }, function(err, imageLayout) {
         spritezero.generateImage(imageLayout, function(err, image) {
             if (err) return;
             fs.writeFileSync(pngPath, image);
@@ -79,5 +79,3 @@ spritezero [output filename] [input directory]
   --retina      shorthand for --ratio=2
   --ratio=[n]   pixel ratio
 ```
-
-

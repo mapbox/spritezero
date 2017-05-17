@@ -17,15 +17,20 @@ function heightAscThanNameComparator(a, b) {
 
 /**
  * Pack a list of images with width and height into a sprite layout.
+ * options object with the following keys:
  *
- * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
- * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
+ * @param   {Object}                [options]
+ * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
-function generateLayout(imgs, pixelRatio, format, callback) {
-    return generateLayoutInternal(imgs, pixelRatio, format, false, callback);
+function generateLayout(options, callback) {
+    options = options || {};
+    options.unique = false;
+    return generateLayoutInternal(options, callback);
 }
 
 
@@ -36,14 +41,20 @@ function generateLayout(imgs, pixelRatio, format, callback) {
  * For example if `A.svg` and `B.svg` are identical, a single icon
  * will be in the sprite image and both A and B will reference the same image
  *
- * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
- * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
+ * options object with the following keys:
+ *
+ * @param   {Object}                [options]
+ * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
-function generateLayoutUnique(imgs, pixelRatio, format, callback) {
-    return generateLayoutInternal(imgs, pixelRatio, format, true, callback);
+function generateLayoutUnique(options, callback) {
+    options = options || {};
+    options.unique = true;
+    return generateLayoutInternal(options, callback);
 }
 
 
@@ -55,13 +66,14 @@ function generateLayoutUnique(imgs, pixelRatio, format, callback) {
  * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               unique      If true, deduplicate identical SVG images
+ * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
  * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
  */
-function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
-    assert(typeof pixelRatio === 'number' && Array.isArray(imgs));
+function generateLayoutInternal(options, callback) {
+    assert(typeof options.pixelRatio === 'number' && Array.isArray(options.imgs));
 
-    if (unique) {
+    if (options.unique) {
         /* If 2 items are pointing to identical buffers (svg icons)
          * create a single image in the sprite but have all ids point to it
          * Remove duplicates from imgs, but if format == true then when creating the
@@ -75,7 +87,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         /* The items for each SVG signature */
         var itemIdsPerSvg = {};
 
-        imgs.forEach(function(item) {
+        options.imgs.forEach(function(item) {
             var svg = item.svg.toString('base64');
 
             svgPerItemId[item.id] = svg;
@@ -88,14 +100,18 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         });
 
         /* Only keep 1 item per svg signature for packing */
-        imgs = imgs.filter(function(item) {
+        options.imgs = options.imgs.filter(function(item) {
             var svg = svgPerItemId[item.id];
             return item.id === itemIdsPerSvg[svg][0];
         });
     }
 
     function createImagesWithSize(img, callback) {
-        mapnik.Image.fromSVGBytes(img.svg, { scale: pixelRatio }, function(err, image) {
+        var mapnikOpts = { scale: options.pixelRatio };
+        if (options.maxIconSize) {
+            mapnikOpts.max_size = options.maxIconSize;
+        }
+        mapnik.Image.fromSVGBytes(img.svg, mapnikOpts, function(err, image) {
             if (err) return callback(err);
             image.encode('png', function(err, buffer) {
                 if (err) return callback(err);
@@ -110,7 +126,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
 
     var q = new queue();
 
-    imgs.forEach(function(img) {
+    options.imgs.forEach(function(img) {
         q.defer(createImagesWithSize, img);
     });
 
@@ -122,11 +138,11 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
         var sprite = new ShelfPack(1, 1, { autoResize: true });
         sprite.pack(imagesWithSizes, { inPlace: true });
 
-        if (format) {
+        if (options.format) {
             var obj = {};
             imagesWithSizes.forEach(function(item) {
                 var itemIdsToUpdate = [item.id];
-                if (unique) {
+                if (options.unique) {
                     var svg = svgPerItemId[item.id];
                     itemIdsToUpdate = itemIdsPerSvg[svg];
                 }
@@ -136,7 +152,7 @@ function generateLayoutInternal(imgs, pixelRatio, format, unique, callback) {
                         height: item.height,
                         x: item.x,
                         y: item.y,
-                        pixelRatio: pixelRatio
+                        pixelRatio: options.pixelRatio
                     };
                 });
             });
@@ -216,4 +232,3 @@ function generateImage(layout, callback) {
  *    }, ... etc ...
  * }
  */
-
