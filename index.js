@@ -24,6 +24,7 @@ function heightAscThanNameComparator(a, b) {
  * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
  * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
@@ -48,6 +49,7 @@ function generateLayout(options, callback) {
  * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
  * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
  * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
@@ -62,13 +64,15 @@ function generateLayoutUnique(options, callback) {
  * Internally called by `generateLayout()` and `generateLayoutUnique()`
  *
  * @private
- * @param   {Object[]}              imgs        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                pixelRatio  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               format      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {boolean}               unique      If true, deduplicate identical SVG images
- * @param   {boolean}               maxIconSize optional, overrides the max_size in mapnik
- * @param   {Function}              callback    Accepts two arguments, `err` and `layout` Object
- * @return  {DataLayout|ImgLayout}  layout      Generated Layout Object with sprite contents
+ * @param   {Object}                [options]
+ * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
+ * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
+ * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
+ * @param   {boolean}               [options.unique]      If true, deduplicate identical SVG images
+ * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
+ * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
+ * @param   {Function}              callback            Accepts two arguments, `err` and `layout` Object
+ * @return  {DataLayout|ImgLayout}  layout              Generated Layout Object with sprite contents
  */
 function generateLayoutInternal(options, callback) {
     assert(typeof options.pixelRatio === 'number' && Array.isArray(options.imgs));
@@ -112,6 +116,7 @@ function generateLayoutInternal(options, callback) {
             mapnikOpts.max_size = options.maxIconSize;
         }
         mapnik.Image.fromSVGBytes(img.svg, mapnikOpts, function(err, image) {
+            if (err && err.message.match(/image created from svg must be \d+ pixels or fewer on each side/) && options.removeOversizedIcons) return callback(null, null);
             if (err) return callback(err);
             image.encode('png', function(err, buffer) {
                 if (err) return callback(err);
@@ -133,6 +138,11 @@ function generateLayoutInternal(options, callback) {
     q.awaitAll(function(err, imagesWithSizes){
         if (err) return callback(err);
 
+        // remove nulls that get introduced if removeOversizedIcons is true
+        imagesWithSizes = imagesWithSizes.filter(function(img) {
+          return img;
+        });
+        
         imagesWithSizes.sort(heightAscThanNameComparator);
 
         var sprite = new ShelfPack(1, 1, { autoResize: true });

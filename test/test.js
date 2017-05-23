@@ -31,6 +31,16 @@ test('generateLayout', function(t) {
     });
 });
 
+test('generateLayout with icon size filter', function(t) {
+    spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: 1, format: false, removeOversizedIcons: true, maxIconSize: 15 }, function(err, layout) {
+        t.ifError(err);
+        t.equal(layout.items.length, 119);
+        t.equal(layout.items[0].x, 0);
+        t.equal(layout.items[0].y, 0);
+        t.end();
+    });
+});
+
 test('generateLayout bench (concurrency=1,x10)', function(t) {
     var start = +new Date();
     var q = queue(1);
