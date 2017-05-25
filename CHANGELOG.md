@@ -1,4 +1,8 @@
 :warning: = breaking change
+## 5.1.0
+##### 2017-05-25
+* Added removeOversizedIcons boolean to the options args - if set to true, will filter out oversized icons from the response
+
 ## 5.0.0
 ##### 2017-04-19
 * :warning: change `generateLayout` and `generateLayoutUnique` to accept options arguments and add functionality to pass optional max_size argument
