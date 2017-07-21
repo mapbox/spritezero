@@ -16,7 +16,7 @@
   "dependencies": {
     "json-stable-stringify": "^1.0.1",
     "@mapbox/shelf-pack": "~3.0.0",
-    "mapnik": "~3.6.0",
+    "mapnik": "mapnik/node-mapnik#ca7f108a8069ad4fd5d50d0aabbf4e09c214385d",
     "queue-async": "^1.2.1",
     "xtend": "^4.0.1"
   },
