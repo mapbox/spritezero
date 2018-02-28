@@ -1,4 +1,9 @@
 :warning: = breaking change
+## 6.0.0
+##### 2018-02-22
+* Updates Mapnik depedency to 3.7.0
+* Drops support for windows
+
 ## 5.1.0
 ##### 2017-05-25
 * Added removeOversizedIcons boolean to the options args - if set to true, will filter out oversized icons from the response
