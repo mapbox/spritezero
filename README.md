@@ -35,7 +35,7 @@ var path = require('path');
     // suitable for exporting to a JSON sprite manifest file.
     spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: true }, function(err, dataLayout) {
         if (err) return;
-        fs.writeFileSync(jsonPath, JSON.stringify(dataLayout)));
+        fs.writeFileSync(jsonPath, JSON.stringify(dataLayout));
     });
 
     // Pass `false` in the layout parameter to generate an image layout
