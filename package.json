@@ -16,7 +16,7 @@
   "dependencies": {
     "json-stable-stringify": "^1.0.1",
     "@mapbox/shelf-pack": "~3.0.0",
-    "mapnik": "~3.7.0",
+    "mapnik": "https://github.com/mapnik/node-mapnik/tarball/master",
     "queue-async": "^1.2.1",
     "xtend": "^4.0.1"
   },
