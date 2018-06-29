@@ -1,7 +1,12 @@
+
+## 6.1.0
+##### 2018-06-28
+* Updates to Mapnik dependency to 4.0.0
+
 :warning: = breaking change
 ## 6.0.0
 ##### 2018-02-22
-* Updates Mapnik depedency to 3.7.0
+* Updates Mapnik dependency to 3.7.0
 * Drops support for windows
 
 ## 5.1.0
