@@ -35,16 +35,6 @@
               
                 
                 <li><a
-                  href='#generatelayoutunique'
-                  class="">
-                  generateLayoutUnique
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#generateimage'
                   class="">
                   generateImage
@@ -55,9 +45,9 @@
               
                 
                 <li><a
-                  href='#imglayout'
+                  href='#generatemanifest'
                   class="">
-                  ImgLayout
+                  generateManifest
                   
                 </a>
                 
@@ -65,9 +55,19 @@
               
                 
                 <li><a
-                  href='#datalayout'
+                  href='#layout'
                   class="">
-                  DataLayout
+                  Layout
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#manifest'
+                  class="">
+                  Manifest
                   
                 </a>
                 
@@ -91,7 +91,7 @@
       generateLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L31-L35'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L26-L112'>
       <span>index.js</span>
       </a>
     
@@ -102,7 +102,7 @@
 options object with the following keys:</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateLayout(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
+  <div class='pre p1 fill-light mt0'>generateLayout(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): <a href="#layout">Layout</a></div>
 
   
 
@@ -150,16 +150,6 @@ options object with the following keys:</p>
                 </tr>
               
                 <tr>
-                  <td class='break-word'><span class='code bold'>options.format</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>If true, generate 
-<a href="#datalayout">DataLayout</a>
-; if false, generate 
-<a href="#imglayout">ImgLayout</a>
-</span></td>
-                </tr>
-              
-                <tr>
                   <td class='break-word'><span class='code bold'>options.maxIconSize</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
                   </td>
                   <td class='break-word'><span>optional, overrides the max_size in mapnik
@@ -170,6 +160,13 @@ options object with the following keys:</p>
                   <td class='break-word'><span class='code bold'>options.removeOversizedIcons</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
                   </td>
                   <td class='break-word'><span>optional, if set, filters out icons that mapnik says are too big
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.unique</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>optional, if set, filters out duplicate icons
 </span></td>
                 </tr>
               
@@ -198,146 +195,7 @@ options object with the following keys:</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout                Generated Layout Object with sprite contents
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='generatelayoutunique'>
-      generateLayoutUnique
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L56-L60'>
-      <span>index.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Same as generateLayout but can be used to dedupe identical SVGs
-and still preserve the reference.</p>
-<p>For example if <code>A.svg</code> and <code>B.svg</code> are identical, a single icon
-will be in the sprite image and both A and B will reference the same image</p>
-<p>options object with the following keys:</p>
-
-
-  <div class='pre p1 fill-light mt0'>generateLayoutUnique(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.imgs</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
-                  </td>
-                  <td class='break-word'><span>Array of 
-<code>{ svg: Buffer, id: String }</code>
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
-                  </td>
-                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.format</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>If true, generate 
-<a href="#datalayout">DataLayout</a>
-; if false, generate 
-<a href="#imglayout">ImgLayout</a>
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.maxIconSize</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, overrides the max_size in mapnik
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.removeOversizedIcons</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, if set, filters out icons that mapnik says are too big
-</span></td>
-                </tr>
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
-<code>err</code>
- and 
-<code>layout</code>
- Object
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
+      <code><a href="#layout">Layout</a></code>:
         layout                Generated Layout Object with sprite contents
 
       
@@ -366,7 +224,7 @@ will be in the sprite image and both A and B will reference the same image</p>
       generateImage
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L189-L197'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L121-L129'>
       <span>index.js</span>
       </a>
     
@@ -376,7 +234,7 @@ will be in the sprite image and both A and B will reference the same image</p>
   <p>Generate a PNG image with positioned icons on a sprite.</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateImage(layout: <a href="#imglayout">ImgLayout</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
+  <div class='pre p1 fill-light mt0'>generateImage(layout: <a href="#layout">Layout</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
 
   
 
@@ -392,8 +250,8 @@ will be in the sprite image and both A and B will reference the same image</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#imglayout">ImgLayout</a>)</code> An 
-<a href="#imglayout">ImgLayout</a>
+            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#layout">Layout</a>)</code> An 
+<a href="#layout">Layout</a>
  Object used to generate the image
 
           </div>
@@ -437,23 +295,95 @@ will be in the sprite image and both A and B will reference the same image</p>
 
   
   <div class='clearfix'>
-    <h3 class='fl m0' id='imglayout'>
-      ImgLayout
+    <h3 class='fl m0' id='generatemanifest'>
+      generateManifest
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L189-L197'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L138-L155'>
       <span>index.js</span>
       </a>
     
   </div>
   
 
-  <p>Spritezero can generate 2 kinds of layout objects: <a href="#datalayout">DataLayout</a> and <a href="#imglayout">ImgLayout</a>.</p>
-<p>A <code>ImgLayout</code> Object contains the array of image items along with dimensions
-and a buffer of image data that can be used for generating the output image.</p>
+  <p>Generate a {Manifest} object with information on where the icons are on the sprite.</p>
 
 
-  <div class='pre p1 fill-light mt0'>ImgLayout</div>
+  <div class='pre p1 fill-light mt0'>generateManifest(layout: <a href="#layout">Layout</a>): <a href="#manifest">Manifest</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#layout">Layout</a>)</code> An 
+<a href="#layout">Layout</a>
+ Object used to generate the image
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#manifest">Manifest</a></code>:
+        layout    A Manifest object
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='layout'>
+      Layout
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L138-L155'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A <code>Layout</code> Object contains the array of image items along with dimensions
+and a buffer of image data that can be used for generating the output image.
+It can be used to generate a PNG sprite sheet with <a href="#generateimage">generateImage</a>, or a
+JSON manifest file with <a href="#generatemanifest">generateManifest</a>.</p>
+
+
+  <div class='pre p1 fill-light mt0'>Layout</div>
 
   
 
@@ -478,13 +408,15 @@ and a buffer of image data that can be used for generating the output image.</p>
       <pre class='p1 overflow-auto round fill-light'>{
    <span class="hljs-attr">width</span>: <span class="hljs-number">512</span>,
    <span class="hljs-attr">height</span>: <span class="hljs-number">512</span>,
+   <span class="hljs-attr">pixelRatio</span>: <span class="hljs-number">1</span>,
    <span class="hljs-attr">items</span>: [
      {
        <span class="hljs-string">"height"</span>: <span class="hljs-number">12</span>,
        <span class="hljs-string">"width"</span>: <span class="hljs-number">12</span>,
        <span class="hljs-string">"x"</span>: <span class="hljs-number">133</span>,
        <span class="hljs-string">"y"</span>: <span class="hljs-number">282</span>,
-       <span class="hljs-string">"buffer"</span>: <span class="hljs-string">"..."</span>
+       <span class="hljs-string">"buffer"</span>: <span class="hljs-string">"..."</span>,
+       <span class="hljs-string">"names"</span>: [ ... ]
      }, ... etc ...
    ]
 }</pre>
@@ -505,25 +437,24 @@ and a buffer of image data that can be used for generating the output image.</p>
 
   
   <div class='clearfix'>
-    <h3 class='fl m0' id='datalayout'>
-      DataLayout
+    <h3 class='fl m0' id='manifest'>
+      Manifest
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L189-L197'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L138-L155'>
       <span>index.js</span>
       </a>
     
   </div>
   
 
-  <p>Spritezero can generate 2 kinds of layout objects: <a href="#datalayout">DataLayout</a> and <a href="#imglayout">ImgLayout</a>.</p>
-<p>A <code>DataLayout</code> Object contains all the metadata about the contents of the sprite.
+  <p>A <code>Manifest</code> Object contains all the metadata about the contents of the sprite.
 This data can be exported to a JSON sprite manifest file.</p>
 <p>The keys of the Object are the icon ids.
 The values of the Object are the structured data about each icon.</p>
 
 
-  <div class='pre p1 fill-light mt0'>DataLayout</div>
+  <div class='pre p1 fill-light mt0'>Manifest</div>
 
   
 
