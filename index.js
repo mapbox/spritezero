@@ -1,19 +1,14 @@
 var mapnik = require('mapnik');
 var assert = require('assert');
 var xtend = require('xtend');
+var crypto = require('crypto');
 var ShelfPack = require('@mapbox/shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 module.exports.generateLayout = generateLayout;
-module.exports.generateLayoutUnique = generateLayoutUnique;
 module.exports.generateImage = generateImage;
-
-
-function heightAscThanNameComparator(a, b) {
-    return (b.height - a.height) || ((a.id === b.id) ? 0 : (a.id < b.id ? -1 : 1));
-}
-
+module.exports.generateManifest = generateManifest;
 
 /**
  * Pack a list of images with width and height into a sprite layout.
@@ -22,67 +17,22 @@ function heightAscThanNameComparator(a, b) {
  * @param   {Object}                [options]
  * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
  * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
  * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
+ * @param   {boolean}               [options.unique]      optional, if set, filters out duplicate icons
  * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
- * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
+ * @return  {Layout}                layout                Generated Layout Object with sprite contents
  */
 function generateLayout(options, callback) {
     options = options || {};
-    options.unique = false;
-    return generateLayoutInternal(options, callback);
-}
-
-
-/**
- * Same as generateLayout but can be used to dedupe identical SVGs
- * and still preserve the reference.
- *
- * For example if `A.svg` and `B.svg` are identical, a single icon
- * will be in the sprite image and both A and B will reference the same image
- *
- * options object with the following keys:
- *
- * @param   {Object}                [options]
- * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
- * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
- * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
- * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
- */
-function generateLayoutUnique(options, callback) {
-    options = options || {};
-    options.unique = true;
-    return generateLayoutInternal(options, callback);
-}
-
-
-/**
- * Internally called by `generateLayout()` and `generateLayoutUnique()`
- *
- * @private
- * @param   {Object}                [options]
- * @param   {Object[]}              [options.imgs]        Array of `{ svg: Buffer, id: String }`
- * @param   {number}                [options.pixelRatio]  Ratio of a 72dpi screen pixel to the destination pixel density
- * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
- * @param   {boolean}               [options.unique]      If true, deduplicate identical SVG images
- * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
- * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
- * @param   {Function}              callback            Accepts two arguments, `err` and `layout` Object
- * @return  {DataLayout|ImgLayout}  layout              Generated Layout Object with sprite contents
- */
-function generateLayoutInternal(options, callback) {
     assert(typeof options.pixelRatio === 'number' && Array.isArray(options.imgs));
 
     if (options.unique) {
         /* If 2 items are pointing to identical buffers (svg icons)
          * create a single image in the sprite but have all ids point to it
-         * Remove duplicates from imgs, but if format == true then when creating the
-         * resulting layout, make sure all item that had the same signature
-         * of an item are also updated with the same layout information.
+         * Remove duplicates from imgs, but stores the names of all input images
+         * so that metadata generating creates individual references to the same
+         * location on the sprite sheet.
         */
 
         /* The svg signature of each item */
@@ -92,14 +42,14 @@ function generateLayoutInternal(options, callback) {
         var itemIdsPerSvg = {};
 
         options.imgs.forEach(function(item) {
-            var svg = item.svg.toString('base64');
+            var hash = crypto.createHash('sha1').update(item.svg).digest('hex');
 
-            svgPerItemId[item.id] = svg;
+            svgPerItemId[item.id] = hash;
 
-            if (svg in itemIdsPerSvg) {
-                itemIdsPerSvg[svg].push(item.id);
+            if (hash in itemIdsPerSvg) {
+                itemIdsPerSvg[hash].push(item.id);
             } else {
-                itemIdsPerSvg[svg] = [item.id];
+                itemIdsPerSvg[hash] = [item.id];
             }
         });
 
@@ -123,7 +73,8 @@ function generateLayoutInternal(options, callback) {
                 callback(null, xtend(img, {
                     width: image.width(),
                     height: image.height(),
-                    buffer: buffer
+                    buffer: buffer,
+                    names: options.unique ? itemIdsPerSvg[svgPerItemId[img.id]] : [ img.id ]
                 }));
             });
         });
@@ -143,39 +94,20 @@ function generateLayoutInternal(options, callback) {
           return img;
         });
         
-        imagesWithSizes.sort(heightAscThanNameComparator);
+        // sorts by height ascendingly, then by name
+        imagesWithSizes.sort(function (a, b) {
+            return (b.height - a.height) || ((a.id === b.id) ? 0 : (a.id < b.id ? -1 : 1));
+        });
 
         var sprite = new ShelfPack(1, 1, { autoResize: true });
         sprite.pack(imagesWithSizes, { inPlace: true });
 
-        if (options.format) {
-            var obj = {};
-            imagesWithSizes.forEach(function(item) {
-                var itemIdsToUpdate = [item.id];
-                if (options.unique) {
-                    var svg = svgPerItemId[item.id];
-                    itemIdsToUpdate = itemIdsPerSvg[svg];
-                }
-                itemIdsToUpdate.forEach(function(itemIdToUpdate) {
-                    obj[itemIdToUpdate] = {
-                        width: item.width,
-                        height: item.height,
-                        x: item.x,
-                        y: item.y,
-                        pixelRatio: options.pixelRatio
-                    };
-                });
-            });
-            return callback(null, obj);
-
-        } else {
-            return callback(null, {
-                width: sprite.w,
-                height: sprite.h,
-                items: imagesWithSizes
-            });
-        }
-
+        return callback(null, {
+            width: sprite.w,
+            height: sprite.h,
+            pixelRatio: options.pixelRatio,
+            items: imagesWithSizes
+        });
     });
 }
 
@@ -183,8 +115,8 @@ function generateLayoutInternal(options, callback) {
 /**
  * Generate a PNG image with positioned icons on a sprite.
  *
- * @param  {ImgLayout}   layout    An {@link ImgLayout} Object used to generate the image
- * @param  {Function}    callback  Accepts two arguments, `err` and `image` data
+ * @param  {Layout}   layout    An {@link Layout} Object used to generate the image
+ * @param  {Function} callback  Accepts two arguments, `err` and `image` data
  */
 function generateImage(layout, callback) {
     assert(typeof layout === 'object' && typeof callback === 'function');
@@ -198,23 +130,51 @@ function generateImage(layout, callback) {
 
 
 /**
- * Spritezero can generate 2 kinds of layout objects: {@link DataLayout} and {@link ImgLayout}.
+ * Generate a {Manifest} object with information on where the icons are on the sprite.
  *
- * A `ImgLayout` Object contains the array of image items along with dimensions
+ * @param  {Layout}   layout    An {@link Layout} Object used to generate the image
+ * @return {Manifest} layout    A Manifest object
+ */
+function generateManifest(layout) {
+    assert(typeof layout === 'object');
+    if (!layout.items.length) return {};
+
+    var obj = {};
+    layout.items.forEach(function(item) {
+        item.names.forEach(function(name) {
+            obj[name] = {
+                width: item.width,
+                height: item.height,
+                x: item.x,
+                y: item.y,
+                pixelRatio: layout.pixelRatio
+            };
+        });
+    });
+    return obj;
+}
+
+
+/**
+ * A `Layout` Object contains the array of image items along with dimensions
  * and a buffer of image data that can be used for generating the output image.
+ * It can be used to generate a PNG sprite sheet with {@link generateImage}, or a
+ * JSON manifest file with {@link generateManifest}.
  *
- * @typedef  {Object}    ImgLayout
+ * @typedef  {Object}    Layout
  * @example
  * {
  *    width: 512,
  *    height: 512,
+ *    pixelRatio: 1,
  *    items: [
  *      {
  *        "height": 12,
  *        "width": 12,
  *        "x": 133,
  *        "y": 282,
- *        "buffer": "..."
+ *        "buffer": "...",
+ *        "names": [ ... ]
  *      }, ... etc ...
  *    ]
  * }
@@ -222,15 +182,13 @@ function generateImage(layout, callback) {
 
 
 /**
- * Spritezero can generate 2 kinds of layout objects: {@link DataLayout} and {@link ImgLayout}.
- *
- * A `DataLayout` Object contains all the metadata about the contents of the sprite.
+ * A `Manifest` Object contains all the metadata about the contents of the sprite.
  * This data can be exported to a JSON sprite manifest file.
  *
  * The keys of the Object are the icon ids.
  * The values of the Object are the structured data about each icon.
  *
- * @typedef  {Object}    DataLayout
+ * @typedef  {Object}    Manifest
  * @example
  * {
  *    "aerialway-12": {

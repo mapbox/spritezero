@@ -33,14 +33,14 @@ var path = require('path');
 
     // Pass `true` in the layout parameter to generate a data layout
     // suitable for exporting to a JSON sprite manifest file.
-    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: true }, function(err, dataLayout) {
+    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio }, function(err, layout) {
         if (err) return;
-        fs.writeFileSync(jsonPath, JSON.stringify(dataLayout));
-    });
 
-    // Pass `false` in the layout parameter to generate an image layout
-    // suitable for exporting to a PNG sprite image file.
-    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: false }, function(err, imageLayout) {
+        // Store the metadata as JSON
+        var manifest = spritezero.generateManifest(layout);
+        fs.writeFileSync(jsonPath, JSON.stringify(manifest));
+
+        // Genreate the sprite image in PNG format
         spritezero.generateImage(imageLayout, function(err, image) {
             if (err) return;
             fs.writeFileSync(pngPath, image);
