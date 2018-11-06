@@ -2,6 +2,8 @@ var mapnik = require('mapnik');
 var assert = require('assert');
 var xtend = require('xtend');
 var crypto = require('crypto');
+var crc = require('crc');
+var Pbf = require('pbf');
 var ShelfPack = require('@mapbox/shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
@@ -9,6 +11,8 @@ var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 module.exports.generateLayout = generateLayout;
 module.exports.generateImage = generateImage;
 module.exports.generateManifest = generateManifest;
+module.exports.embedManifest = embedManifest;
+module.exports.extractManifest = extractManifest;
 
 /**
  * Pack a list of images with width and height into a sprite layout.
@@ -152,6 +156,100 @@ function generateManifest(layout) {
         });
     });
     return obj;
+}
+
+function encodeBinaryManifest(manifest) {
+    function writeImage(data, pbf) {
+        pbf.writeStringField(1, data.id);
+        pbf.writeVarintField(2, data.img.width);
+        pbf.writeVarintField(3, data.img.height);
+        pbf.writeVarintField(4, data.img.x);
+        pbf.writeVarintField(5, data.img.y);
+        if (data.img.pixelRatio !== 1) {
+            pbf.writeFloatField(6, data.img.pixelRatio);
+        }
+        if (data.img.sdf) {
+            pbf.writeBooleanField(7, data.img.sdf);
+        }
+    }
+
+    var pbf = new Pbf();
+    for (var id in manifest) {
+        pbf.writeMessage(1, writeImage, { id: id, img: manifest[id] });
+    }
+    return pbf.finish();
+}
+
+
+/**
+ * Embeds the Manifest as a private chunk inside the PNG image.
+ *
+ * @param  {Manifest} manifest    A {@link Manifest} Object used to generate the image
+ * @param  {Buffer}   png         The image data encoded as a PNG image.
+ */
+function embedManifest(manifest, png) {
+    assert(typeof manifest === 'object');
+    assert(Buffer.isBuffer(png));
+    assert(png[0] === 137 && png[1] === 80 && png[2] === 78 && png[3] === 71 &&
+           png[4] === 13 && png[5] === 10 && png[6] === 26 && png[7] === 10);
+
+    // Embed the PBF inside the PNG with chunk code 'mbSM' (Mapbox sprite manifest)
+    var type = Buffer.from('mbSM');
+    var data = Buffer.from(encodeBinaryManifest(manifest));
+    var length = Buffer.alloc(4);
+    length.writeUInt32BE(data.length, 0);
+    var checksum = Buffer.alloc(4);
+    checksum.writeUInt32BE(crc.crc32(data, crc.crc32(type)), 0);
+    return Buffer.concat([
+        png.slice(0, png.length - 12),
+        length, type, data, checksum,
+        png.slice(png.length - 12)
+    ]);
+}
+
+
+function parseBinaryManifest(data) {
+    return new Pbf(data).readFields(function(tag, manifest, pbf) {
+        if (tag === 1) {
+            var id;
+            var img = pbf.readMessage(function(tag, img, pbf) {
+                if (tag === 1) id = pbf.readString();
+                else if (tag === 2) img.width = pbf.readVarint();
+                else if (tag === 3) img.height = pbf.readVarint();
+                else if (tag === 4) img.x = pbf.readVarint();
+                else if (tag === 5) img.y = pbf.readVarint();
+                else if (tag === 6) img.y = pbf.readFloat();
+                else if (tag === 7) img.sdf = pbf.readBoolean();
+            }, { pixelRatio: 1 });
+            if (id) {
+                manifest[id] = img;
+            }
+        }
+    }, {});
+}
+
+/**
+ * Extracts the Manifest embedded in a PNG image.
+ *
+ * @param  {Buffer}   png         The image data encoded as a PNG image.
+ * @return {Manifest} manifest    A {@link Mabufest} object describing the icons in this sprite.
+ */
+function extractManifest(png) {
+    assert(Buffer.isBuffer(png));
+    assert(png[0] === 137 && png[1] === 80 && png[2] === 78 && png[3] === 71 &&
+           png[4] === 13 && png[5] === 10 && png[6] === 26 && png[7] === 10);
+
+    for (var i = 8; i < png.length;) {
+        var length = png.readUInt32BE(i);
+        var type = png.toString('ascii', i + 4, i + 8);
+        if (type === 'mbSM') {
+            var data = png.slice(i + 8, i + 8 + length);
+            var checksum = png.readUInt32BE(i + 8 + length);
+            assert(crc.crc32(data, crc.crc32(type)) === checksum);
+            return parseBinaryManifest(data);
+        }
+        i += 12 + length;
+    }
 }
 
 

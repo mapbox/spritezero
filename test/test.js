@@ -112,6 +112,32 @@ test('generateImage', function(t) {
     t.end();
 });
 
+test('embedManifest and extractManifest', function(t) {
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: 1 }, function(err, layout) {
+                tt.ifError(err);
+                spritezero.generateImage(layout, function(err, sprite) {
+                    tt.ifError(err);
+                    var manifest = spritezero.generateManifest(layout);
+                    var embedded = spritezero.embedManifest(manifest, sprite);
+                    tt.ok(embedded);
+
+                    var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite-embedded@' + scale + '.png'));
+                    if (update) fs.writeFileSync(pngPath, embedded);
+                    var existing = fs.readFileSync(pngPath);
+                    tt.deepEqual(embedded, existing);
+
+                    var extracted = spritezero.extractManifest(existing);
+                    tt.deepEqual(manifest, extracted);
+                    tt.end();
+                });
+            });
+        });
+    });
+    t.end();
+});
+
 test('generateLayout with empty input', function(t) {
     [false, true].forEach(function(unique) {
         t.test('unique = ' + unique, function(tt) {
