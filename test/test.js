@@ -86,46 +86,25 @@ test('generateLayout with deduplication', function(t) {
 });
 
 test('generateImage', function(t) {
-    [1, 2, 4].forEach(function(scale) {
-        t.test('@' + scale, function(tt) {
-            var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
-            var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
-            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale }, function(err, layout) {
-                tt.ifError(err);
-                var formatted = spritezero.generateManifest(layout);
-                if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
-                tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
+    [false, true].forEach(function(unique) {
+        [1, 2, 4].forEach(function(scale) {
+            t.test('unique = ' + unique + ', @' + scale, function(tt) {
+                var prefix = unique ? 'fixture/sprite-uniq@' : 'fixture/sprite@';
+                var pngPath = path.resolve(path.join(__dirname, prefix + scale + '.png'));
+                var jsonPath = path.resolve(path.join(__dirname, prefix + scale + '.json'));
+                spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, unique: unique }, function(err, layout) {
+                    tt.ifError(err);
+                    var formatted = spritezero.generateManifest(layout);
+                    if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
+                    tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
 
-                spritezero.generateImage(layout, function(err, res) {
-                    tt.notOk(err, 'no error');
-                    tt.ok(res, 'produces image');
-                    if (update) fs.writeFileSync(pngPath, res);
-                    tt.deepEqual(res, fs.readFileSync(pngPath));
-                    tt.end();
-                });
-            });
-        });
-    });
-    t.end();
-});
-
-test('generateImage unique', function(t) {
-    [1, 2, 4].forEach(function(scale) {
-        t.test('@' + scale, function(tt) {
-            var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.png'));
-            var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.json'));
-            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, unique: true }, function(err, layout) {
-                tt.ifError(err);
-                var formatted = spritezero.generateManifest(layout);
-                if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
-                tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
-
-                spritezero.generateImage(layout, function(err, res) {
-                    tt.notOk(err, 'no error');
-                    tt.ok(res, 'produces image');
-                    if (update) fs.writeFileSync(pngPath, res);
-                    tt.deepEqual(res, fs.readFileSync(pngPath));
-                    tt.end();
+                    spritezero.generateImage(layout, function(err, res) {
+                        tt.notOk(err, 'no error');
+                        tt.ok(res, 'produces image');
+                        if (update) fs.writeFileSync(pngPath, res);
+                        tt.deepEqual(res, fs.readFileSync(pngPath));
+                        tt.end();
+                    });
                 });
             });
         });
@@ -134,57 +113,40 @@ test('generateImage unique', function(t) {
 });
 
 test('generateLayout with empty input', function(t) {
-    spritezero.generateLayout({ imgs: [], pixelRatio: 1 }, function(err, layout) {
-        t.ifError(err);
-        t.deepEqual(layout, {
-            width: 1,
-            height: 1,
-            pixelRatio: 1,
-            items: []
+    [false, true].forEach(function(unique) {
+        t.test('unique = ' + unique, function(tt) {
+            spritezero.generateLayout({ imgs: [], pixelRatio: 1, unique: unique }, function(err, layout) {
+                tt.ifError(err);
+                tt.deepEqual(layout, {
+                    width: 1,
+                    height: 1,
+                    pixelRatio: 1,
+                    items: []
+                });
+                var formatted = spritezero.generateManifest(layout);
+                tt.deepEqual(formatted, {});
+                tt.end();
+            });
         });
-        var formatted = spritezero.generateManifest(layout);
-        t.deepEqual(formatted, {});
-        t.end();
     });
-});
-
-test('generateLayout unique with empty input', function(t) {
-    spritezero.generateLayout({ imgs: [], pixelRatio: 1, unique: true }, function(err, layout) {
-        t.ifError(err);
-        t.deepEqual(layout, {
-            width: 1,
-            height: 1,
-            pixelRatio: 1,
-            items: []
-        });
-        var formatted = spritezero.generateManifest(layout);
-        t.deepEqual(formatted, {}); 
-        t.end();
-    });
+    t.end();
 });
 
 test('generateImage with empty input', function(t) {
-    spritezero.generateLayout({ imgs: [], pixelRatio: 1 }, function(err, layout) {
-        t.ifError(err);
-        spritezero.generateImage(layout, function(err, sprite) {
-            t.notOk(err, 'no error');
-            t.ok(sprite, 'produces image');
-            t.equal(typeof sprite, 'object');
-            t.end();
+    [false, true].forEach(function(unique) {
+        t.test('unique = ' + unique, function(tt) {
+            spritezero.generateLayout({ imgs: [], pixelRatio: 1, unique: unique }, function(err, layout) {
+                tt.ifError(err);
+                spritezero.generateImage(layout, function(err, sprite) {
+                    tt.notOk(err, 'no error');
+                    tt.ok(sprite, 'produces image');
+                    tt.equal(typeof sprite, 'object');
+                    tt.end();
+                });
+            });
         });
     });
-});
-
-test('generateImage unique with empty input', function(t) {
-    spritezero.generateLayout({ imgs: [], pixelRatio: 1, unique: true }, function(err, layout) {
-        t.ifError(err);
-        spritezero.generateImage(layout, function(err, sprite) {
-            t.notOk(err, 'no error');
-            t.ok(sprite, 'produces image');
-            t.equal(typeof sprite, 'object');
-            t.end();
-        });
-    });
+    t.end();
 });
 
 test('generateImage unique with max_size', function(t) {
