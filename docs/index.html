@@ -55,6 +55,26 @@
               
                 
                 <li><a
+                  href='#embedmanifest'
+                  class="">
+                  embedManifest
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#extractmanifest'
+                  class="">
+                  extractManifest
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#layout'
                   class="">
                   Layout
@@ -91,7 +111,7 @@
       generateLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L26-L112'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L30-L116'>
       <span>index.js</span>
       </a>
     
@@ -224,7 +244,7 @@ options object with the following keys:</p>
       generateImage
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L121-L129'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L125-L133'>
       <span>index.js</span>
       </a>
     
@@ -299,7 +319,7 @@ options object with the following keys:</p>
       generateManifest
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L138-L155'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L142-L159'>
       <span>index.js</span>
       </a>
     
@@ -366,11 +386,153 @@ options object with the following keys:</p>
 
   
   <div class='clearfix'>
+    <h3 class='fl m0' id='embedmanifest'>
+      embedManifest
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L190-L208'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Embeds the Manifest as a private chunk inside the PNG image.</p>
+
+
+  <div class='pre p1 fill-light mt0'>embedManifest(manifest: <a href="#manifest">Manifest</a>, png: <a href="https://nodejs.org/api/buffer.html">Buffer</a>)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>manifest</span> <code class='quiet'>(<a href="#manifest">Manifest</a>)</code> A 
+<a href="#manifest">Manifest</a>
+ Object used to generate the image
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>png</span> <code class='quiet'>(<a href="https://nodejs.org/api/buffer.html">Buffer</a>)</code> The image data encoded as a PNG image.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='extractmanifest'>
+      extractManifest
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L237-L253'>
+      <span>index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Extracts the Manifest embedded in a PNG image.</p>
+
+
+  <div class='pre p1 fill-light mt0'>extractManifest(png: <a href="https://nodejs.org/api/buffer.html">Buffer</a>): <a href="#manifest">Manifest</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>png</span> <code class='quiet'>(<a href="https://nodejs.org/api/buffer.html">Buffer</a>)</code> The image data encoded as a PNG image.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#manifest">Manifest</a></code>:
+        manifest    A 
+<a href="Mabufest">Mabufest</a>
+ object describing the icons in this sprite.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
     <h3 class='fl m0' id='layout'>
       Layout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L138-L155'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L237-L253'>
       <span>index.js</span>
       </a>
     
@@ -441,7 +603,7 @@ JSON manifest file with <a href="#generatemanifest">generateManifest</a>.</p>
       Manifest
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4f55186b7f80196b31b8a4364ff4e904b47b8af7/index.js#L138-L155'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/ddbf3c5f0b022c712dbdd4768a9251c4bea61a66/index.js#L237-L253'>
       <span>index.js</span>
       </a>
     
