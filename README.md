@@ -71,7 +71,7 @@ $ npm install @mapbox/spritezero
 [spritezero-cli](https://github.com/mapbox/spritezero-cli) is an executable for bundling and creating your own sprites from a folder of svg's:
 
 ```bash
-$ npm install -g spritezero-cli
+$ npm install -g @mapbox/spritezero-cli
 $ spritezero --help
 
 Usage:
