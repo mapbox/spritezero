@@ -212,7 +212,6 @@ test('generateLayout relative width/height SVG returns empty', function(t) {
 
     spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
         t.ifError(err);
-        console.log(formatted);
         t.deepEqual(formatted, { art: { width: 18, height: 18, x: 0, y: 0, pixelRatio: 1 } });
         t.end();
     });
