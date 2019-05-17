@@ -197,3 +197,23 @@ test('generateImage unique with max_size', function(t) {
         t.end();
     });
 });
+
+test('generateLayout relative width/height SVG returns empty', function(t) {
+    var fixtures = [
+      {
+        id: 'relative-dimensions',
+        svg: fs.readFileSync('./test/fixture/relative-dimensions.svg')
+      },
+      {
+        id: 'art',
+        svg: fs.readFileSync('./test/fixture/svg/art-gallery-18.svg')
+      }
+    ];
+
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
+        t.ifError(err);
+        console.log(formatted);
+        t.deepEqual(formatted, { art: { width: 18, height: 18, x: 0, y: 0, pixelRatio: 1 } });
+        t.end();
+    });
+});
