@@ -216,3 +216,18 @@ test('generateLayout relative width/height SVG returns empty', function(t) {
         t.end();
     });
 });
+
+test('generateLayout only relative width/height SVG returns empty sprite object', function(t) {
+    var fixtures = [
+      {
+        id: 'relative-dimensions',
+        svg: fs.readFileSync('./test/fixture/relative-dimensions.svg')
+      }
+    ];
+
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
+        t.ifError(err);
+        t.deepEqual(formatted, {}, 'empty object');
+        t.end();
+    });
+});
