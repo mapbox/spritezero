@@ -4,10 +4,12 @@ var test = require('tap').test,
     path = require('path'),
     queue = require('queue-async'),
     stringify = require('json-stable-stringify'),
-    spritezero = require('../');
+    spritezero = require('../'),
+    mapnik = require('mapnik');
 
 // eslint-disable-next-line no-process-env
 var update = process.env.UPDATE;
+var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 function getFixtures() {
     return glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
@@ -225,9 +227,14 @@ test('generateLayout only relative width/height SVG returns empty sprite object'
       }
     ];
 
-    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
         t.ifError(err);
-        t.deepEqual(formatted, {}, 'empty object');
-        t.end();
+        t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+
+        spritezero.generateImage(layout, function(err, image) {
+            t.ifError(err);
+            t.deepEqual(image, emptyPNG, 'empty PNG response');
+            t.end();
+        });
     });
 });
