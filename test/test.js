@@ -4,10 +4,12 @@ var test = require('tap').test,
     path = require('path'),
     queue = require('queue-async'),
     stringify = require('json-stable-stringify'),
-    spritezero = require('../');
+    spritezero = require('../'),
+    mapnik = require('mapnik');
 
 // eslint-disable-next-line no-process-env
 var update = process.env.UPDATE;
+var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
 function getFixtures() {
     return glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
@@ -195,5 +197,44 @@ test('generateImage unique with max_size', function(t) {
         t.notOk(layout);
         t.equal(err.message, 'image created from svg must be 10 pixels or fewer on each side');
         t.end();
+    });
+});
+
+test('generateLayout relative width/height SVG returns empty', function(t) {
+    var fixtures = [
+      {
+        id: 'relative-dimensions',
+        svg: fs.readFileSync('./test/fixture/relative-dimensions.svg')
+      },
+      {
+        id: 'art',
+        svg: fs.readFileSync('./test/fixture/svg/art-gallery-18.svg')
+      }
+    ];
+
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
+        t.ifError(err);
+        t.deepEqual(formatted, { art: { width: 18, height: 18, x: 0, y: 0, pixelRatio: 1 } });
+        t.end();
+    });
+});
+
+test('generateLayout only relative width/height SVG returns empty sprite object', function(t) {
+    var fixtures = [
+      {
+        id: 'relative-dimensions',
+        svg: fs.readFileSync('./test/fixture/relative-dimensions.svg')
+      }
+    ];
+
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
+        t.ifError(err);
+        t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+
+        spritezero.generateImage(layout, function(err, image) {
+            t.ifError(err);
+            t.deepEqual(image, emptyPNG, 'empty PNG response');
+            t.end();
+        });
     });
 });

@@ -118,6 +118,7 @@ function generateLayoutInternal(options, callback) {
         mapnik.Image.fromSVGBytes(img.svg, mapnikOpts, function(err, image) {
             if (err && err.message.match(/image created from svg must be \d+ pixels or fewer on each side/) && options.removeOversizedIcons) return callback(null, null);
             if (err) return callback(err);
+            if (!image.width() || !image.height()) return callback(null, null);
             image.encode('png', function(err, buffer) {
                 if (err) return callback(err);
                 callback(null, xtend(img, {
@@ -142,7 +143,7 @@ function generateLayoutInternal(options, callback) {
         imagesWithSizes = imagesWithSizes.filter(function(img) {
           return img;
         });
-        
+
         imagesWithSizes.sort(heightAscThanNameComparator);
 
         var sprite = new ShelfPack(1, 1, { autoResize: true });
