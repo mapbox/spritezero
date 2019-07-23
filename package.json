@@ -14,10 +14,14 @@
     "json"
   ],
   "dependencies": {
-    "json-stable-stringify": "^1.0.1",
     "@mapbox/shelf-pack": "~3.0.0",
+    "fontnik": "github:nickpeihl/fontnik#hv-commands",
+    "jsdom": "^15.1.1",
+    "json-stable-stringify": "^1.0.1",
     "mapnik": "3.x || 4.x",
+    "pngjs": "^3.4.0",
     "queue-async": "^1.2.1",
+    "svgpath": "^2.2.2",
     "xtend": "^4.0.1"
   },
   "devDependencies": {

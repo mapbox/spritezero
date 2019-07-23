@@ -4,6 +4,10 @@ var xtend = require('xtend');
 var ShelfPack = require('@mapbox/shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
+var { JSDOM } = require('jsdom');
+var SvgPath = require('svgpath');
+var sdf = require('fontnik').pathToSDF;
+var PNG = require('pngjs').PNG;
 
 module.exports.generateLayout = generateLayout;
 module.exports.generateLayoutUnique = generateLayoutUnique;
@@ -25,6 +29,7 @@ function heightAscThanNameComparator(a, b) {
  * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
  * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
+ * @param   {boolean}               [options.sdf]         If true, create PNGs from signed distance fields
  * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
@@ -50,6 +55,7 @@ function generateLayout(options, callback) {
  * @param   {boolean}               [options.format]      If true, generate {@link DataLayout}; if false, generate {@link ImgLayout}
  * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
  * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
+ * @param   {boolean}               [options.sdf]         If true, create PNGs from signed distance fields
  * @param   {Function}              callback              Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout                Generated Layout Object with sprite contents
  */
@@ -71,6 +77,7 @@ function generateLayoutUnique(options, callback) {
  * @param   {boolean}               [options.unique]      If true, deduplicate identical SVG images
  * @param   {boolean}               [options.maxIconSize] optional, overrides the max_size in mapnik
  * @param   {boolean}               [options.removeOversizedIcons] optional, if set, filters out icons that mapnik says are too big
+ * @param   {boolean}               [options.sdf]         If true, create PNGs from signed distance fields
  * @param   {Function}              callback            Accepts two arguments, `err` and `layout` Object
  * @return  {DataLayout|ImgLayout}  layout              Generated Layout Object with sprite contents
  */
@@ -111,6 +118,9 @@ function generateLayoutInternal(options, callback) {
     }
 
     function createImagesWithSize(img, callback) {
+        if (options.sdf) {
+          return sdfRender(img, callback);
+        }
         var mapnikOpts = { scale: options.pixelRatio };
         if (options.maxIconSize) {
             mapnikOpts.max_size = options.maxIconSize;
@@ -128,6 +138,87 @@ function generateLayoutInternal(options, callback) {
                 }));
             });
         });
+    }
+
+    function sdfRender(img, callback) {
+        var buffer = 3;
+        var cutoff = 2/8;
+        var svg = JSDOM.fragment(img.svg.toString());
+
+        var w = parseInt(svg.querySelector('svg').getAttribute('width'));
+        var h = parseInt(svg.querySelector('svg').getAttribute('height'));
+        var wb = w + 2 * buffer;
+        var hb = h + 2 * buffer;
+
+        var commands = [];
+
+        var paths = svg.querySelectorAll('path');
+        for (var i = 0; i < paths.length; i++) {
+          var path = paths[i];
+
+          var svgPath = new SvgPath(path.getAttribute('d')).abs().unshort().unarc();
+
+          var parent = path.parentElement;
+          while (parent.tagName === 'G') {
+            if (parent.querySelector('transform')) {
+              svgPath.transform(parent.querySelector('transform'));
+            }
+            parent = parent.parentElement;
+          }
+
+          if (svg.querySelector('viewBox')) {
+            var viewBox = svg.querySelector('viewBox').split(/\s+/);
+            svgPath.translate(-viewBox[0], -viewBox[1]);
+          }
+          var commands = commands.concat(svgPath.segments.map(function(segment) {
+            switch (segment[0]) {
+              case 'H':
+                return { type: segment[0], x: segment[1] };
+              case 'V':
+                return { type: segment[0], y: segment[1] };
+              case 'M':
+              case 'L':
+                return { type: segment[0], x: segment[1], y: segment[2] };
+              case 'Q':
+                return {
+                  type: segment[0],
+                  x1: segment[1],
+                  y1: segment[2],
+                  x: segment[3],
+                  y: segment[4]
+                };
+              case 'C':
+                return {
+                  type: segment[0],
+                  x1: segment[1],
+                  y1: segment[2],
+                  x2: segment[3],
+                  y2: segment[4],
+                  x: segment[5],
+                  y: segment[6]
+                };
+              case 'Z':
+                return { type: segment[0] };
+              default:
+                throw new Error('Unknown command: ' + segment[0]);
+            }
+          }));
+        }
+        var data = sdf(commands, w, h, buffer, cutoff);
+        var png = new PNG({ width: wb, height: hb });
+
+        for (var j = 0; j < wb * hb; j++) {
+          png.data[j * 4] = 0;
+          png.data[j * 4 + 1] = 0;
+          png.data[j * 4 + 2] = 0;
+          png.data[j * 4 + 3] = data[j];
+        }
+        var buf = PNG.sync.write(png);
+        callback(null, xtend(img, {
+          width: wb,
+          height: hb,
+          buffer: buf
+        }));
     }
 
     var q = new queue();
@@ -165,6 +256,9 @@ function generateLayoutInternal(options, callback) {
                         y: item.y,
                         pixelRatio: options.pixelRatio
                     };
+                    if (options.sdf) {
+                      obj[itemIdToUpdate].sdf = true;
+                    }
                 });
             });
             return callback(null, obj);

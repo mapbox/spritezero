@@ -87,6 +87,17 @@ test('generateLayout', function(t) {
     });
 });
 
+test('generateLayout with sdf images', function(t) {
+  spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: 1, format: true, sdf: true }, function(err, formatted) {
+      t.ifError(err);
+      t.equals(Object.keys(formatted).length, 362);
+      t.ok(Object.keys(formatted).every(function(format) {
+        return formatted[format].sdf === true;
+      }));
+      t.end();
+  });
+});
+
 test('generateLayoutUnique', function(t) {
     spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: 1, format: true }, function(err, formatted) {
         t.ifError(err);
