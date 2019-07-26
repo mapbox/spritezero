@@ -145,8 +145,10 @@ function generateLayoutInternal(options, callback) {
         var cutoff = 2/8;
         var svg = JSDOM.fragment(img.svg.toString());
 
-        var w = parseInt(svg.querySelector('svg').getAttribute('width'));
-        var h = parseInt(svg.querySelector('svg').getAttribute('height'));
+        var el = svg.querySelector('svg');
+
+        var w = parseInt(el.getAttribute('width')) * options.pixelRatio;
+        var h = parseInt(el.getAttribute('height')) * options.pixelRatio;
         var wb = w + 2 * buffer;
         var hb = h + 2 * buffer;
 
@@ -156,7 +158,8 @@ function generateLayoutInternal(options, callback) {
         for (var i = 0; i < paths.length; i++) {
           var path = paths[i];
 
-          var svgPath = new SvgPath(path.getAttribute('d')).abs().unshort().unarc();
+          var scaledPath = new SvgPath(path.getAttribute('d')).scale(options.pixelRatio).toString()
+          var svgPath = new SvgPath(scaledPath).abs().unshort().unarc();
 
           var parent = path.parentElement;
           while (parent.tagName === 'G') {
@@ -170,6 +173,7 @@ function generateLayoutInternal(options, callback) {
             var viewBox = svg.querySelector('viewBox').split(/\s+/);
             svgPath.translate(-viewBox[0], -viewBox[1]);
           }
+
           var commands = commands.concat(svgPath.segments.map(function(segment) {
             switch (segment[0]) {
               case 'H':
