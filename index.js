@@ -4,7 +4,7 @@ var xtend = require('xtend');
 var ShelfPack = require('@mapbox/shelf-pack');
 var queue = require('queue-async');
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
-var { JSDOM } = require('jsdom');
+var JSDOM = require('jsdom').JSDOM;
 var SvgPath = require('svgpath');
 var sdf = require('fontnik').pathToSDF;
 var PNG = require('pngjs').PNG;
@@ -158,7 +158,7 @@ function generateLayoutInternal(options, callback) {
         for (var i = 0; i < paths.length; i++) {
           var path = paths[i];
 
-          var scaledPath = new SvgPath(path.getAttribute('d')).scale(options.pixelRatio).toString()
+          var scaledPath = new SvgPath(path.getAttribute('d')).scale(options.pixelRatio).toString();
           var svgPath = new SvgPath(scaledPath).abs().unshort().unarc();
 
           var parent = path.parentElement;
@@ -174,7 +174,7 @@ function generateLayoutInternal(options, callback) {
             svgPath.translate(-viewBox[0], -viewBox[1]);
           }
 
-          var commands = commands.concat(svgPath.segments.map(function(segment) {
+          commands = commands.concat(svgPath.segments.map(function(segment) {
             switch (segment[0]) {
               case 'H':
                 return { type: segment[0], x: segment[1] };
