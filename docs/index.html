@@ -25,6 +25,26 @@
               
                 
                 <li><a
+                  href='#extractmetadata'
+                  class="">
+                  extractMetadata
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#metadata'
+                  class="">
+                  Metadata
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#generatelayout'
                   class="">
                   generateLayout
@@ -73,6 +93,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#validatemetadata'
+                  class="">
+                  validateMetadata
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -87,12 +117,184 @@
 
   
   <div class='clearfix'>
+    <h3 class='fl m0' id='extractmetadata'>
+      extractMetadata
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/extract-svg-metadata.js#L65-L98'>
+      <span>lib/extract-svg-metadata.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Parses a SVG document and extracts metadata from its shapes and paths.</p>
+
+
+  <div class='pre p1 fill-light mt0'>extractMetadata(img: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): <a href="#metadata">Metadata</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>img</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>img.svg</span> <code class='quiet'>[(<a href="https://nodejs.org/api/buffer.html">Buffer</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)]</code>
+                  </td>
+                  <td class='break-word'><span>A string of the SVG.
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>img.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
+                  </td>
+                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
+<code>err</code>
+ and 
+<code>metadata</code>
+ Object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#metadata">Metadata</a></code>:
+        metadata              An object with the extracted information.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='metadata'>
+      Metadata
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/extract-svg-metadata.js#L100-L100'>
+      <span>lib/extract-svg-metadata.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A <code>Metadata</code> objects stores information about how an image can be stretched in a non-linear</p>
+<p>The keys of the Object are the icon ids.
+The values of the Object are the structured data about each icon.</p>
+
+
+  <div class='pre p1 fill-light mt0'>Metadata</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>{
+   {
+     <span class="hljs-string">"content"</span>: [ <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">18</span>, <span class="hljs-number">11</span> ],
+     <span class="hljs-string">"stretch-x"</span>: [ [<span class="hljs-number">3</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">14</span>, <span class="hljs-number">18</span>] ],
+     <span class="hljs-string">"stretch-y"</span>: [ [ <span class="hljs-number">5</span>, <span class="hljs-number">11</span> ] ]
+   }
+}</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
     <h3 class='fl m0' id='generatelayout'>
       generateLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L31-L35'>
-      <span>index.js</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L31-L35'>
+      <span>lib/generate.js</span>
       </a>
     
   </div>
@@ -227,8 +429,8 @@ options object with the following keys:</p>
       generateLayoutUnique
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L56-L60'>
-      <span>index.js</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L56-L60'>
+      <span>lib/generate.js</span>
       </a>
     
   </div>
@@ -366,8 +568,8 @@ will be in the sprite image and both A and B will reference the same image</p>
       generateImage
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L189-L197'>
-      <span>index.js</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L190-L198'>
+      <span>lib/generate.js</span>
       </a>
     
   </div>
@@ -441,8 +643,8 @@ will be in the sprite image and both A and B will reference the same image</p>
       ImgLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L189-L197'>
-      <span>index.js</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L190-L198'>
+      <span>lib/generate.js</span>
       </a>
     
   </div>
@@ -509,8 +711,8 @@ and a buffer of image data that can be used for generating the output image.</p>
       DataLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/9721b4c8961504c79b914662617f363523e21c11/index.js#L189-L197'>
-      <span>index.js</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L190-L198'>
+      <span>lib/generate.js</span>
       </a>
     
   </div>
@@ -555,6 +757,91 @@ The values of the Object are the structured data about each icon.</p>
    }, ... etc ...
 }</pre>
     
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    <h3 class='fl m0' id='validatemetadata'>
+      validateMetadata
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/validate-svg-metadata.js#L8-L77'>
+      <span>lib/validate-svg-metadata.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Validates metadata that is parsed from an SVG metadata</p>
+
+
+  <div class='pre p1 fill-light mt0'>validateMetadata(img: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, metadata: <a href="#metadata">Metadata</a>): (null | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>img</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> An image object with 
+<code>width</code>
+ and 
+<code>height</code>
+.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>metadata</span> <code class='quiet'>(<a href="#metadata">Metadata</a>)</code> A metadata object.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(null | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>)</code>:
+        err              An 
+<code>Error</code>
+ object if validation fails, 
+<code>null</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
   
 
   
