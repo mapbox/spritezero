@@ -1,7 +1,7 @@
 {
   "name": "@mapbox/spritezero",
   "version": "6.1.2",
-  "main": "index.js",
+  "main": "./lib/generate.js",
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
   "license": "ISC",
@@ -31,10 +31,10 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "docs": "documentation build index.js --lint --github --format html --output docs/",
-    "lint": "eslint index.js test/",
+    "docs": "documentation build lib --lint --github --format html --output docs/",
+    "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
-    "test": "npm run lint && tap --cov test/test.js",
+    "test": "npm run lint && tap --cov test/*.test.js",
     "postpublish": "greenkeeper-postpublish"
   }
 }
