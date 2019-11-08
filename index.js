@@ -117,6 +117,8 @@ function generateLayoutInternal(options, callback) {
         }
         mapnik.Image.fromSVGBytes(img.svg, mapnikOpts, function(err, image) {
             if (err && err.message.match(/image created from svg must be \d+ pixels or fewer on each side/) && options.removeOversizedIcons) return callback(null, null);
+            // Produce a null result if no width or height attributes. The error message from mapnik has a typo "then"; account for potential future fix to "than".
+            if (err && err.message.match(/image created from svg must have a width and height greater (then|than) zero/)) return callback(null, null);
             if (err) return callback(err);
             if (!image.width() || !image.height()) return callback(null, null);
             image.encode('png', function(err, buffer) {
