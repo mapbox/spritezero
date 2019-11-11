@@ -1,5 +1,5 @@
-## HEAD
-##### 2019-11-08
+## 6.1.2
+##### 2019-11-11
 * Check if SVG has width/height attributes before encoding as image in `generateLayout` [#62](https://github.com/mapbox/spritezero/pull/69)
 
 ## 6.1.1
