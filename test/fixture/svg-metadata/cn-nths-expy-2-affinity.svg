@@ -5,9 +5,9 @@
         <g>
             <path d="M3,0.5l14,0c1.371,0 2.5,1.129 2.5,2.5l0,14c0,1.371 -1.129,2.5 -2.5,2.5l-14,0c-1.371,0 -2.5,-1.129 -2.5,-2.5l0,-14c0,-1.371 1.129,-2.5 2.5,-2.5" style="fill:#0e8c38;fill-rule:nonzero;"/>
             <g id="metadata">
-                <path id="mapbox-icon-stretch-x" d="M4,0l12,0" style="fill:none;"/>
-                <path id="mapbox-icon-stretch-y" d="M0,5l0,11" style="fill:none;"/>
-                <rect id="mapbox-icon-content" x="2" y="5" width="16" height="13" style="fill:none;"/>
+                <path id="mapbox-stretch-x" d="M4,0l12,0" style="fill:none;"/>
+                <path id="mapbox-stretch-y" d="M0,5l0,11" style="fill:none;"/>
+                <rect id="mapbox-content" x="2" y="5" width="16" height="13" style="fill:none;"/>
             </g>
             <path d="M17,1c1.097,0 2,0.903 2,2l0,14c0,1.097 -0.903,2 -2,2l-14,0c-1.097,0 -2,-0.903 -2,-2l0,-14c0,-1.097 0.903,-2 2,-2l14,0m0,-1l-14,0c-1.646,0 -3,1.354 -3,3l0,14c0,1.646 1.354,3 3,3l14,0c1.646,0 3,-1.354 3,-3l0,-14c0,-1.646 -1.354,-3 -3,-3Z" style="fill:#fff;fill-rule:nonzero;"/>
         </g>

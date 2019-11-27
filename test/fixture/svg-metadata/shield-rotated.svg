@@ -4,8 +4,8 @@
 <g transform="translate(2 2)">
     <rect x="3" y="3" width="12" height="12" style="fill:#fff;stroke:#000;stroke-width:2px;"/>
     <rect x="4" y="4" width="10" height="4" style="fill:#0fe;"/>
-    <rect id="mapbox-icon-content" x="4" y="8" width="10" height="6" style="fill:none;"/>
-    <rect id="mapbox-icon-stretch-y" x="13" y="8" width="1" height="6" style="fill:none;"/>
-    <rect id="mapbox-icon-stretch-x" x="4" y="13" width="10" height="1" style="fill:none;"/>
+    <rect id="mapbox-content" x="4" y="8" width="10" height="6" style="fill:none;"/>
+    <rect id="mapbox-stretch-y" x="13" y="8" width="1" height="6" style="fill:none;"/>
+    <rect id="mapbox-stretch-x" x="4" y="13" width="10" height="1" style="fill:none;"/>
 </g>
 </svg>

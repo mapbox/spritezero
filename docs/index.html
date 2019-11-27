@@ -25,6 +25,16 @@
               
                 
                 <li><a
+                  href='#stronground'
+                  class="">
+                  strongRound
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#extractmetadata'
                   class="">
                   extractMetadata
@@ -117,11 +127,82 @@
 
   
   <div class='clearfix'>
+    <h3 class='fl m0' id='stronground'>
+      strongRound
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/extract-svg-metadata.js#L39-L51'>
+      <span>lib/extract-svg-metadata.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Decrease accuracy of floating-point numbers
+in path data keeping a specified number of decimals.
+Smart rounds values like 2.3491 to 2.35 instead of 2.349.
+Doesn&#x27;t apply &quot;smartness&quot; if the number precision fits already.</p>
+<p>Taken from svgo at <a href="https://github.com/svg/svgo/blob/72db8eb/plugins/convertPathData.js#L773">https://github.com/svg/svgo/blob/72db8eb/plugins/convertPathData.js#L773</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>strongRound(value: any, precision: any)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>precision</span> <code class='quiet'>(any)</code> 
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
     <h3 class='fl m0' id='extractmetadata'>
       extractMetadata
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/extract-svg-metadata.js#L65-L98'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/extract-svg-metadata.js#L133-L180'>
       <span>lib/extract-svg-metadata.js</span>
       </a>
     
@@ -231,7 +312,7 @@
       Metadata
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/extract-svg-metadata.js#L100-L100'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/extract-svg-metadata.js#L182-L182'>
       <span>lib/extract-svg-metadata.js</span>
       </a>
     
@@ -268,8 +349,8 @@ The values of the Object are the structured data about each icon.</p>
       <pre class='p1 overflow-auto round fill-light'>{
    {
      <span class="hljs-string">"content"</span>: [ <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">18</span>, <span class="hljs-number">11</span> ],
-     <span class="hljs-string">"stretch-x"</span>: [ [<span class="hljs-number">3</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">14</span>, <span class="hljs-number">18</span>] ],
-     <span class="hljs-string">"stretch-y"</span>: [ [ <span class="hljs-number">5</span>, <span class="hljs-number">11</span> ] ]
+     <span class="hljs-string">"stretchX"</span>: [ [<span class="hljs-number">3</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">14</span>, <span class="hljs-number">18</span>] ],
+     <span class="hljs-string">"stretchY"</span>: [ [ <span class="hljs-number">5</span>, <span class="hljs-number">11</span> ] ]
    }
 }</pre>
     
@@ -293,7 +374,7 @@ The values of the Object are the structured data about each icon.</p>
       generateLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L31-L35'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L31-L35'>
       <span>lib/generate.js</span>
       </a>
     
@@ -429,7 +510,7 @@ options object with the following keys:</p>
       generateLayoutUnique
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L56-L60'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L56-L60'>
       <span>lib/generate.js</span>
       </a>
     
@@ -568,7 +649,7 @@ will be in the sprite image and both A and B will reference the same image</p>
       generateImage
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L190-L198'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L192-L200'>
       <span>lib/generate.js</span>
       </a>
     
@@ -643,7 +724,7 @@ will be in the sprite image and both A and B will reference the same image</p>
       ImgLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L190-L198'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L192-L200'>
       <span>lib/generate.js</span>
       </a>
     
@@ -711,7 +792,7 @@ and a buffer of image data that can be used for generating the output image.</p>
       DataLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/generate.js#L190-L198'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L192-L200'>
       <span>lib/generate.js</span>
       </a>
     
@@ -777,7 +858,7 @@ The values of the Object are the structured data about each icon.</p>
       validateMetadata
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/0958378a38d2996942fe4d644ece89a1aca7475d/lib/validate-svg-metadata.js#L8-L77'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/validate-svg-metadata.js#L8-L77'>
       <span>lib/validate-svg-metadata.js</span>
       </a>
     
