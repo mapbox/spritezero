@@ -21,8 +21,8 @@ test('image with nested metadata', function(t) {
         t.error(err);
         t.ok(metadata);
         t.deepEqual(metadata, {
-            'stretch-x': [[4, 16]],
-            'stretch-y': [[5, 16]],
+            stretchX: [[4, 16]],
+            stretchY: [[5, 16]],
             content: [2, 5, 18, 18]
         });
         t.end();
@@ -37,8 +37,8 @@ test('image exported by Illustrator', function(t) {
         t.ok(metadata);
         t.deepEqual(metadata, {
             content: [4, 8, 14, 14],
-            'stretch-y': [[8, 14]],
-            'stretch-x': [[4, 14]]
+            stretchY: [[8, 14]],
+            stretchX: [[4, 14]]
         });
         t.end();
     });
@@ -52,8 +52,8 @@ test('image exported by Illustrator, rotated', function(t) {
         t.ok(metadata);
         t.deepEqual(metadata, {
             content: [3.703, 5.806, 12.189, 14.291],
-            'stretch-y': [[10.58, 14.257]],
-            'stretch-x': [[3.73, 9.528]]
+            stretchY: [[10.58, 14.257]],
+            stretchX: [[3.73, 9.528]]
         });
         t.end();
     });
@@ -67,8 +67,8 @@ test('image exported by Illustrator, rotated + translated', function(t) {
         t.ok(metadata);
         t.deepEqual(metadata, {
             content: [4.242, 7.07, 11.313, 14.142],
-            'stretch-y': [[10.606, 14.142]],
-            'stretch-x': [[4.242, 9.192]]
+            stretchY: [[10.606, 14.142]],
+            stretchX: [[4.242, 9.192]]
         });
         t.end();
     });
@@ -82,8 +82,8 @@ test('image exported by Illustrator, rotated + reversed', function(t) {
         t.ok(metadata);
         t.deepEqual(metadata, {
             content: [6, 8, 12, 12],
-            'stretch-y': [[8, 12]],
-            'stretch-x': [[6, 12]]
+            stretchY: [[8, 12]],
+            stretchX: [[6, 12]]
         });
         t.end();
     });
@@ -96,8 +96,8 @@ test('image with one stretch rect', function(t) {
         t.error(err);
         t.ok(metadata);
         t.deepEqual(metadata, {
-            'stretch-x': [[3, 17]],
-            'stretch-y': [[5, 17]],
+            stretchX: [[3, 17]],
+            stretchY: [[5, 17]],
         });
         t.end();
     });
@@ -110,8 +110,8 @@ test('image with multiple stretch zones', function(t) {
         t.error(err);
         t.ok(metadata);
         t.deepEqual(metadata, {
-            'stretch-x': [[5, 7], [20, 22]],
-            'content': [3, 7, 23, 18]
+            stretchX: [[5, 7], [20, 22]],
+            content: [3, 7, 23, 18]
         });
         t.end();
     });
@@ -125,8 +125,8 @@ test('image with multiple stretch zones and higher pixelRatio', function(t) {
         t.error(err);
         t.ok(metadata);
         t.deepEqual(metadata, {
-            'stretch-x': [[10, 14], [40, 44]],
-            'content': [6, 14, 46, 36]
+            stretchX: [[10, 14], [40, 44]],
+            content: [6, 14, 46, 36]
         });
         t.end();
     });
@@ -185,9 +185,9 @@ test('valid metadata', function(t) {
     t.error(validateMetadata(img, { content: [ 2, 2, 22, 16 ] }));
     t.error(validateMetadata(img, { content: [ 0, 0, 24, 18 ] }));
 
-    t.error(validateMetadata(img, { 'stretch-x': [] }));
-    t.error(validateMetadata(img, { 'stretch-x': [[10, 14]] }));
-    t.error(validateMetadata(img, { 'stretch-y': [[8, 10]] }));
+    t.error(validateMetadata(img, { stretchX: [] }));
+    t.error(validateMetadata(img, { stretchX: [[10, 14]] }));
+    t.error(validateMetadata(img, { stretchY: [[8, 10]] }));
 
     t.end();
 });
@@ -230,34 +230,34 @@ test('invalid metadata', function(t) {
     t.match(validateMetadata(img, { content: [ 0, -1, 24, 18 ] }),
         { message: 'image content area must be within image bounds' }, 'rejects invalid content area size');
 
-    t.match(validateMetadata(img, { 'stretch-x': {} }),
-        { message: 'image stretch-x zones must be an array' }, 'rejects invalid stretch-x format');
-    t.match(validateMetadata(img, { 'stretch-x': [ 'yes' ] }),
-        { message: 'image stretch-x zone must consist of two numbers' }, 'rejects invalid stretch-x format');
-    t.match(validateMetadata(img, { 'stretch-x': [ [] ] }),
-        { message: 'image stretch-x zone must consist of two numbers' }, 'rejects invalid stretch-x format');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 4, 4, 4 ] ] }),
-        { message: 'image stretch-x zone must consist of two numbers' }, 'rejects invalid stretch-x format');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 4, 5 ], [ 6, null ] ] }),
-        { message: 'image stretch-x zone must consist of two numbers' }, 'rejects invalid stretch-x format');
+    t.match(validateMetadata(img, { stretchX: {} }),
+        { message: 'image stretchX zones must be an array' }, 'rejects invalid stretchX format');
+    t.match(validateMetadata(img, { stretchX: [ 'yes' ] }),
+        { message: 'image stretchX zone must consist of two numbers' }, 'rejects invalid stretchX format');
+    t.match(validateMetadata(img, { stretchX: [ [] ] }),
+        { message: 'image stretchX zone must consist of two numbers' }, 'rejects invalid stretchX format');
+    t.match(validateMetadata(img, { stretchX: [ [ 4, 4, 4 ] ] }),
+        { message: 'image stretchX zone must consist of two numbers' }, 'rejects invalid stretchX format');
+    t.match(validateMetadata(img, { stretchX: [ [ 4, 5 ], [ 6, null ] ] }),
+        { message: 'image stretchX zone must consist of two numbers' }, 'rejects invalid stretchX format');
 
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 4, 4 ] ] }),
-        { message: 'image stretch-x zone may not be zero-size' }, 'rejects invalid stretch-x size');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 8, 4 ] ] }),
-        { message: 'image stretch-x zone may not be zero-size' }, 'rejects invalid stretch-x size');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ -2, 2 ] ] }),
-        { message: 'image stretch-x zone must be within image bounds' }, 'rejects invalid stretch-x size');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 0, 25 ] ] }),
-        { message: 'image stretch-x zone must be within image bounds' }, 'rejects invalid stretch-x size');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 0, 24.999 ] ] }),
-        { message: 'image stretch-x zone must be within image bounds' }, 'rejects invalid stretch-x size');
+    t.match(validateMetadata(img, { stretchX: [ [ 4, 4 ] ] }),
+        { message: 'image stretchX zone may not be zero-size' }, 'rejects invalid stretchX size');
+    t.match(validateMetadata(img, { stretchX: [ [ 8, 4 ] ] }),
+        { message: 'image stretchX zone may not be zero-size' }, 'rejects invalid stretchX size');
+    t.match(validateMetadata(img, { stretchX: [ [ -2, 2 ] ] }),
+        { message: 'image stretchX zone must be within image bounds' }, 'rejects invalid stretchX size');
+    t.match(validateMetadata(img, { stretchX: [ [ 0, 25 ] ] }),
+        { message: 'image stretchX zone must be within image bounds' }, 'rejects invalid stretchX size');
+    t.match(validateMetadata(img, { stretchX: [ [ 0, 24.999 ] ] }),
+        { message: 'image stretchX zone must be within image bounds' }, 'rejects invalid stretchX size');
 
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 0, 2 ], [ 1, 3 ] ] }),
-        { message: 'image stretch-x zones may not overlap' }, 'rejects overlapping stretch-x zones');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 0, 24 ], [ 8, 16 ] ] }),
-        { message: 'image stretch-x zones may not overlap' }, 'rejects overlapping stretch-x zones');
-    t.match(validateMetadata(img, { 'stretch-x': [ [ 18, 24 ], [ 0, 6 ] ] }),
-        { message: 'image stretch-x zones may not overlap' }, 'rejects unsorted stretch-x zones');
+    t.match(validateMetadata(img, { stretchX: [ [ 0, 2 ], [ 1, 3 ] ] }),
+        { message: 'image stretchX zones may not overlap' }, 'rejects overlapping stretchX zones');
+    t.match(validateMetadata(img, { stretchX: [ [ 0, 24 ], [ 8, 16 ] ] }),
+        { message: 'image stretchX zones may not overlap' }, 'rejects overlapping stretchX zones');
+    t.match(validateMetadata(img, { stretchX: [ [ 18, 24 ], [ 0, 6 ] ] }),
+        { message: 'image stretchX zones may not overlap' }, 'rejects unsorted stretchX zones');
 
     t.end();
 });
