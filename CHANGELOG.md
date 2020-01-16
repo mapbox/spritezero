@@ -1,3 +1,7 @@
+## 6.2.0
+#### 2020-01-16
+* Parse and validate metadata for stretchable icons from SVGs
+
 ## 6.1.2
 ##### 2019-11-11
 * Check if SVG has width/height attributes before encoding as image in `generateLayout` [#62](https://github.com/mapbox/spritezero/pull/69)
