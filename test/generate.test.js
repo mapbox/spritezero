@@ -249,3 +249,42 @@ test('generateLayout only relative width/height SVG returns empty sprite object'
         });
     });
 });
+
+test('generateLayout containing image with no width or height SVG', function(t) {
+    var fixtures = [
+      {
+        id: 'no-width-or-height',
+        svg: fs.readFileSync('./test/fixture/no-width-or-height.svg')
+      },
+      {
+        id: 'art',
+        svg: fs.readFileSync('./test/fixture/svg/art-gallery-18.svg')
+      }
+    ];
+
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
+        t.ifError(err);
+        t.deepEqual(formatted, { art: { width: 18, height: 18, x: 0, y: 0, pixelRatio: 1 } }, 'only "art" is in layout');
+        t.end();
+    });
+});
+
+test('generateLayout containing only image with no width or height', function(t) {
+    var fixtures = [
+        {
+          id: 'no-width-or-height',
+          svg: fs.readFileSync('./test/fixture/no-width-or-height.svg')
+        }
+      ];
+
+      spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
+          t.ifError(err);
+          t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+
+          spritezero.generateImage(layout, function(err, image) {
+              t.ifError(err);
+              t.deepEqual(image, emptyPNG, 'empty PNG response');
+              t.end();
+          });
+      });
+});
