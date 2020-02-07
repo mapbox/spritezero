@@ -1,3 +1,7 @@
+## HEAD
+* Drop support for Node < 10
+* Updates Mapnik dependency to 4.4.0
+
 ## 6.1.2
 ##### 2019-11-11
 * Check if SVG has width/height attributes before encoding as image in `generateLayout` [#62](https://github.com/mapbox/spritezero/pull/69)

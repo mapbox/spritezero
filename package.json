@@ -30,7 +30,7 @@
     "tap": "^10.1.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "scripts": {
     "docs": "documentation build lib --lint --github --format html --output docs/",
