@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "@mapbox/shelf-pack": "~3.0.0",
-    "fontnik": "github:nickpeihl/fontnik#hv-commands",
+    "@elastic/fontnik": "0.1.0",
     "jsdom": "^15.1.1",
     "json-stable-stringify": "^1.0.1",
     "mapnik": "^4.4.0",
