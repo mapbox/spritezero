@@ -1,7 +1,7 @@
 
 ## 6.2.0
 #### 2020-03-09
-* Parse and validate metadata for stretchable icons from SVGs
+* Add methods to parse and validate metadata for stretchable icons from SVGs: `extractMetadata` and `validateMetadata`
 * Drop support for Node < 10
 * Updates Mapnik dependency to 4.4.0
 
