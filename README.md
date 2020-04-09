@@ -59,7 +59,7 @@ Complete API documentation is here:  http://mapbox.github.io/spritezero/
 
 ### Installation
 
-Requires [nodejs](http://nodejs.org/) v4.0.0 or greater.
+Requires [nodejs](http://nodejs.org/) v10.0.0 or greater.
 
 ```bash
 $ npm install @mapbox/spritezero
