@@ -1,4 +1,9 @@
 
+## 6.3.0
+#### 2020-04-10
+* Adds `stretchMetadata` option (defaults to true) to `generateLayout` and `generateLayoutUnique` [#75](https://github.com/mapbox/spritezero/pull/75)
+* Removes xtend as a direct dependency
+
 ## 6.2.0
 #### 2020-03-09
 * Add methods to parse and validate metadata for stretchable icons from SVGs: `extractMetadata` and `validateMetadata`
@@ -7,7 +12,7 @@
 
 ## 6.1.2
 ##### 2019-11-11
-* Check if SVG has width/height attributes before encoding as image in `generateLayout` [#62](https://github.com/mapbox/spritezero/pull/69)
+* Check if SVG has width/height attributes before encoding as image in `generateLayout` [#69](https://github.com/mapbox/spritezero/pull/69)
 
 ## 6.1.1
 ##### 2019-05-20
