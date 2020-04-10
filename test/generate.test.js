@@ -278,7 +278,7 @@ test('generateLayout containing only image with no width or height', function(t)
       });
 });
 
-test('generateLayout with stretchMetadata option set to true', function (t) {
+test('generateLayout with stretchMetadata option set to false', function (t) {
     var fixtures = [
         {
             id: 'cn',
@@ -286,14 +286,14 @@ test('generateLayout with stretchMetadata option set to true', function (t) {
         }
     ];
 
-    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true, stretchMetadata: true }, function (err, formatted) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true, stretchMetadata: false }, function (err, formatted) {
         t.ifError(err);
-        t.deepEqual(formatted, { cn: { width: 20, height: 23, x: 0, y: 0, pixelRatio: 1, content: [2, 5, 18, 18], stretchX: [[4, 16]], stretchY: [[5, 16]] } });
+        t.deepEqual(formatted, { cn: { width: 20, height: 23, x: 0, y: 0, pixelRatio: 1 } });
         t.end();
     });
 });
 
-test('generateLayout without stretchMetadata option set', function (t) {
+test('generateLayout without stretchMetadata option set (defaults to true)', function (t) {
     var fixtures = [
         {
             id: 'cn',
@@ -303,12 +303,12 @@ test('generateLayout without stretchMetadata option set', function (t) {
 
     spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function (err, formatted) {
         t.ifError(err);
-        t.deepEqual(formatted, { cn: { width: 20, height: 23, x: 0, y: 0, pixelRatio: 1 } });
+        t.deepEqual(formatted, { cn: { width: 20, height: 23, x: 0, y: 0, pixelRatio: 1, content: [2, 5, 18, 18], stretchX: [[4, 16]], stretchY: [[5, 16]] } });
         t.end();
     });
 });
 
-test('generateLayout with stretchMetadata option set to true and format set to false', function (t) {
+test('generateLayout without stretchMetadata option set (defaults to true) when generating an image layout (format set to false)', function (t) {
     var fixtures = [
         {
             id: 'cn',
@@ -316,7 +316,7 @@ test('generateLayout with stretchMetadata option set to true and format set to f
         }
     ];
 
-    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false, stretchMetadata: true }, function (err, formatted) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function (err, formatted) {
         t.ifError(err);
         t.equal(formatted.items[0].stretchX, undefined);
         t.end();
