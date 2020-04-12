@@ -11,16 +11,17 @@ var test = require('tap').test,
 var update = process.env.UPDATE;
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
+const fixtures = glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg'))).map(function(im) {
+    return {
+        svg: fs.readFileSync(im),
+        id: path.basename(im).replace('.svg', '')
+    };
+});
+
 function getFixtures() {
-    return glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
-        .map(function(im) {
-            return {
-                svg: fs.readFileSync(im),
-                id: path.basename(im).replace('.svg', '')
-            };
-        }).sort(function() {
-            return Math.random() - 0.5;
-        });
+    return fixtures.sort(function() {
+        return Math.random() - 0.5;
+    });
 }
 
 test('generateLayout', function(t) {
