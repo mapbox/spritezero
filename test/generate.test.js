@@ -1,11 +1,11 @@
-var test = require('tap').test,
-    fs = require('fs'),
-    glob = require('glob'),
-    path = require('path'),
-    queue = require('queue-async'),
-    stringify = require('json-stable-stringify'),
-    spritezero = require('../'),
-    mapnik = require('mapnik');
+const test = require('tap').test;
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+const queue = require('d3-queue').queue;
+const stringify = require('json-stable-stringify');
+const spritezero = require('../');
+const mapnik = require('mapnik');
 
 // eslint-disable-next-line no-process-env
 var update = process.env.UPDATE;
