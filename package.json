@@ -35,7 +35,7 @@
     "docs": "documentation build lib --lint --github --format html --output docs/",
     "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
-    "test": "npm run lint && tap --cov -R nyan test/*.test.js",
+    "test": "npm run lint && tap --cov -R spec test/*.test.js",
     "postpublish": "greenkeeper-postpublish"
   }
 }
