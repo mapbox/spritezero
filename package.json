@@ -14,7 +14,6 @@
     "json"
   ],
   "dependencies": {
-    "@mapbox/shelf-pack": "^3.2.0",
     "d3-queue": "^3.0.7",
     "json-stable-stringify": "^1.0.1",
     "mapnik": "^4.4.0",
@@ -36,7 +35,7 @@
     "docs": "documentation build lib --lint --github --format html --output docs/",
     "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
-    "test": "npm run lint && tap --cov test/*.test.js",
+    "test": "npm run lint && tap --cov -R nyan test/*.test.js",
     "postpublish": "greenkeeper-postpublish"
   }
 }
