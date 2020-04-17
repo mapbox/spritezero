@@ -11,8 +11,8 @@ var test = require('tap').test,
 var update = process.env.UPDATE;
 var emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
 
-function getFixtures() {
-    return glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
+function getFixtures(subdir = 'svg') {
+    return glob.sync(path.resolve(path.join(__dirname, `/fixture/${subdir}/*.svg`)))
         .map(function(im) {
             return {
                 svg: fs.readFileSync(im),
@@ -199,6 +199,29 @@ test('generateImage unique with max_size', function(t) {
         t.end();
     });
 });
+
+test('generateImage - bad packing', function(t) {
+    var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite-packing.png'));
+    var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite-packing.json'));
+
+    spritezero.generateLayout({ imgs: getFixtures('svg-packing'), pixelRatio: 1, format: true }, function(err, formatted) {
+        t.ifError(err);
+        spritezero.generateLayout({ imgs: getFixtures('svg-packing'), pixelRatio: 1, format: false }, function(err, layout) {
+            t.ifError(err);
+            if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
+            t.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
+
+            spritezero.generateImage(layout, function(err, res) {
+                t.notOk(err, 'no error');
+                t.ok(res, 'produces image');
+                if (update) fs.writeFileSync(pngPath, res);
+                t.deepEqual(res, fs.readFileSync(pngPath));
+                t.end();
+            });
+        });
+    });
+});
+
 
 test('generateLayout relative width/height SVG returns empty', function(t) {
     var fixtures = [
