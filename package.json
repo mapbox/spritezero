@@ -25,7 +25,6 @@
     "documentation": "4.0.0-beta10",
     "eslint": "^3.9.0",
     "glob": "^7.1.0",
-    "greenkeeper-postpublish": "^1.0.1",
     "tap": "^10.1.0"
   },
   "engines": {
@@ -35,7 +34,6 @@
     "docs": "documentation build lib --lint --github --format html --output docs/",
     "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
-    "test": "npm run lint && tap --cov test/*.test.js",
-    "postpublish": "greenkeeper-postpublish"
+    "test": "npm run lint && tap --cov test/*.test.js"
   }
 }
