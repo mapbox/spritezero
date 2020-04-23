@@ -1,4 +1,8 @@
 
+## 7.0.0
+#### 2020-04-22
+* Optimized layout and image generation: 1.5x faster `generateLayout`
+
 ## 6.3.0
 #### 2020-04-10
 * Adds `stretchMetadata` option (defaults to true) to `generateLayout` and `generateLayoutUnique` [#75](https://github.com/mapbox/spritezero/pull/75)
