@@ -126,6 +126,28 @@ test('generateImage', function(t) {
     t.end();
 });
 
+// Generating both a valid layout and image in one pass
+test('generateImage with format:true', function(t) {
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
+            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, formatted, formatted2) {
+                tt.ifError(err);
+                tt.ok(formatted);
+                tt.ok(formatted2);
+                spritezero.generateImage(formatted2, function(err, res) {
+                    tt.notOk(err, 'no error');
+                    tt.ok(res, 'produces image');
+                    if (update) fs.writeFileSync(pngPath, res);
+                    tt.deepEqual(res, fs.readFileSync(pngPath));
+                    tt.end();
+                });
+            });
+        });
+    });
+    t.end();
+});
+
 test('generateImageUnique', function(t) {
     [1, 2, 4].forEach(function(scale) {
         t.test('@' + scale, function(tt) {
