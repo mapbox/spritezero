@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/spritezero",
-  "version": "7.0.0",
+  "version": "7.0.0-duelfuel.1",
   "main": "./index.js",
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
