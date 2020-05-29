@@ -116,7 +116,7 @@ test('generateImage', function(t) {
                         tt.notOk(err, 'no error');
                         tt.ok(res, 'produces image');
                         if (update) fs.writeFileSync(pngPath, res);
-                        tt.deepEqual(res.length, fs.readFileSync(pngPath).length);
+                        tt.ok(Math.abs(res.length - fs.readFileSync(pngPath).length) < 1000);
                         tt.end();
                     });
                 });
@@ -139,7 +139,7 @@ test('generateImage with format:true', function(t) {
                     tt.notOk(err, 'no error');
                     tt.ok(res, 'produces image');
                     if (update) fs.writeFileSync(optimizedPngPath, res);
-                    tt.deepEqual(res.length, fs.readFileSync(optimizedPngPath).length);
+                    tt.ok(Math.abs(res.length - fs.readFileSync(optimizedPngPath).length) < 1000);
                     tt.end();
                 });
             });
@@ -164,7 +164,7 @@ test('generateImageUnique', function(t) {
                         tt.notOk(err, 'no error');
                         tt.ok(res, 'produces image');
                         if (update) fs.writeFileSync(pngPath, res);
-                        tt.deepEqual(res.length, fs.readFileSync(pngPath).length);
+                        tt.ok(Math.abs(res.length - fs.readFileSync(pngPath).length) < 1000);
                         tt.end();
                     });
                 });
