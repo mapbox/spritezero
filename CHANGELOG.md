@@ -1,4 +1,7 @@
 
+## 7.0.1
+* `generateLayout({format:true})` now returns a second argument, which is an layout object that can be sent to generateImage to generate a final image. Normally users would generate this object with `generateLayout({format:false})` but now `generateLayout({format:true})` will provide both the data layout (as first arg) and the image layout (as the second arg).
+
 ## 7.0.0
 #### 2020-04-22
 * Optimized layout and image generation: 1.5x faster `generateLayout`
