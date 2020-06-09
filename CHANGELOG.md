@@ -1,6 +1,8 @@
 
 ## 7.0.1
-* `generateLayout({format:true})` now returns a second argument, which is an layout object that can be sent to generateImage to generate a final image. Normally users would generate this object with `generateLayout({format:false})` but now `generateLayout({format:true})` will provide both the data layout (as first arg) and the image layout (as the second arg).
+* `generateLayout({format:true})` now returns a second argument, which is a layout object that can be sent to generateImage to generate a final image. Normally users would generate this object with `generateLayout({format:false})` but now `generateLayout({format:true})` will provide both the data layout (as first arg) and the image layout (as the second arg).
+* Added new function `generateOptimizedImage` which, compared to `generateImage`, expects an options argument as the second option and returns a paletted PNG. Currently this options argument accepts a `quality` property to control the quantization level of the resulting PNG.
+
 
 ## 7.0.0
 #### 2020-04-22
