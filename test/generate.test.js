@@ -131,11 +131,11 @@ test('generateImage with format:true', function(t) {
     [1, 2, 4].forEach(function(scale) {
         t.test('@' + scale, function(tt) {
             var optimizedPngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '-64colors.png'));
-            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, formatted, formatted2) {
+            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, dataLayout, imageLayout) {
                 tt.ifError(err);
-                tt.ok(formatted);
-                tt.ok(formatted2);
-                spritezero.generateOptimizedImage(formatted2, {quality: 64}, function(err, res) {
+                tt.ok(dataLayout);
+                tt.ok(imageLayout);
+                spritezero.generateOptimizedImage(imageLayout, {quality: 64}, function(err, res) {
                     tt.notOk(err, 'no error');
                     tt.ok(res, 'produces image');
                     if (update) fs.writeFileSync(optimizedPngPath, res);
