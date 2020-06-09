@@ -116,9 +116,31 @@ test('generateImage', function(t) {
                         tt.notOk(err, 'no error');
                         tt.ok(res, 'produces image');
                         if (update) fs.writeFileSync(pngPath, res);
-                        tt.deepEqual(res, fs.readFileSync(pngPath));
+                        tt.ok(Math.abs(res.length - fs.readFileSync(pngPath).length) < 1000);
                         tt.end();
                     });
+                });
+            });
+        });
+    });
+    t.end();
+});
+
+// Generating both a valid layout and image in one pass
+test('generateImage with format:true', function(t) {
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            var optimizedPngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '-64colors.png'));
+            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, dataLayout, imageLayout) {
+                tt.ifError(err);
+                tt.ok(dataLayout);
+                tt.ok(imageLayout);
+                spritezero.generateOptimizedImage(imageLayout, {quality: 64}, function(err, res) {
+                    tt.notOk(err, 'no error');
+                    tt.ok(res, 'produces image');
+                    if (update) fs.writeFileSync(optimizedPngPath, res);
+                    tt.ok(Math.abs(res.length - fs.readFileSync(optimizedPngPath).length) < 1000);
+                    tt.end();
                 });
             });
         });
@@ -142,7 +164,7 @@ test('generateImageUnique', function(t) {
                         tt.notOk(err, 'no error');
                         tt.ok(res, 'produces image');
                         if (update) fs.writeFileSync(pngPath, res);
-                        tt.deepEqual(res, fs.readFileSync(pngPath));
+                        tt.ok(Math.abs(res.length - fs.readFileSync(pngPath).length) < 1000);
                         tt.end();
                     });
                 });
