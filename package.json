@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/spritezero",
-  "version": "7.0.1",
+  "version": "7.0.1-concurrency.1",
   "main": "./index.js",
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
