@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/%40mapbox%2Fspritezero.svg)](https://badge.fury.io/js/%40mapbox%2Fspritezero)
-[![build status](https://secure.travis-ci.org/mapbox/spritezero.svg)](http://travis-ci.org/mapbox/spritezero)
+[![Build Status](https://travis-ci.com/mapbox/spritezero.svg?branch=main)](https://travis-ci.com/mapbox/spritezero)
 
 ## spritezero
 
