@@ -1,7 +1,7 @@
 var spritezero = require('..');
 var fs = require('fs');
 var path = require('path');
-var queue = require('queue-async');
+var queue = require('d3-queue').queue;
 
 function filepaths (dir) {
     return fs.readdirSync(dir)
