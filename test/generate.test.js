@@ -301,7 +301,7 @@ test('generateLayout containing only image with no width or height', function(t)
       });
 });
 
-test('generateLayout with stretchMetadata option set to false', function (t) {
+test('generateLayout with extractMetadata option set to false', function (t) {
     var fixtures = [
         {
             id: 'cn',
@@ -309,14 +309,14 @@ test('generateLayout with stretchMetadata option set to false', function (t) {
         }
     ];
 
-    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true, stretchMetadata: false }, function (err, formatted) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true, extractMetadata: false }, function (err, formatted) {
         t.ifError(err);
         t.deepEqual(formatted, { cn: { width: 20, height: 23, x: 0, y: 0, pixelRatio: 1 } });
         t.end();
     });
 });
 
-test('generateLayout without stretchMetadata option set (defaults to true)', function (t) {
+test('generateLayout without extractMetadata option set (defaults to true)', function (t) {
     var fixtures = [
         {
             id: 'cn',
@@ -331,7 +331,7 @@ test('generateLayout without stretchMetadata option set (defaults to true)', fun
     });
 });
 
-test('generateLayout without stretchMetadata option set (defaults to true) when generating an image layout (format set to false)', function (t) {
+test('generateLayout without extractMetadata option set (defaults to true) when generating an image layout (format set to false)', function (t) {
     var fixtures = [
         {
             id: 'cn',
@@ -342,6 +342,34 @@ test('generateLayout without stretchMetadata option set (defaults to true) when 
     spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function (err, formatted) {
         t.ifError(err);
         t.equal(formatted.items[0].stretchX, undefined);
+        t.end();
+    });
+});
+
+test('generateLayout with both placeholder and stretch zone', function (t) {
+    var fixtures = [
+        {
+            id: 'au-national-route-5',
+            svg: fs.readFileSync('./test/fixture/svg-metadata/au-national-route-5.svg')
+        }
+    ];
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function (err, formatted) {
+        t.ifError(err);
+        t.deepEqual(
+            formatted,
+            {
+                'au-national-route-5': {
+                    width: 38,
+                    height: 20,
+                    x: 0,
+                    y: 0,
+                    pixelRatio: 1,
+                    content: [3, 7, 23, 18],
+                    stretchX: [[5, 7]],
+                    placeholder: [0, 7, 38, 13]
+                }
+            }
+        );
         t.end();
     });
 });

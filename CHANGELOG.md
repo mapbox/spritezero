@@ -1,3 +1,6 @@
+#### 2021-08-23
+* Changes the `stretchMetadata` option to `extractMetadata`.
+* Extends the `extractMetadata` function to support placeholder text elements.
 
 ## 7.0.1
 * `generateLayout({format:true})` now returns a second argument, which is a layout object that can be sent to generateImage to generate a final image. Normally users would generate this object with `generateLayout({format:false})` but now `generateLayout({format:true})` will provide both the data layout (as first arg) and the image layout (as the second arg).
