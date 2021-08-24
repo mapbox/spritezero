@@ -85,6 +85,16 @@
               
                 
                 <li><a
+                  href='#generateoptimizedimage'
+                  class="">
+                  generateOptimizedImage
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#imglayout'
                   class="">
                   ImgLayout
@@ -131,7 +141,7 @@
       strongRound
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/extract-svg-metadata.js#L39-L51'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L39-L51'>
       <span>lib/extract-svg-metadata.js</span>
       </a>
     
@@ -202,7 +212,7 @@ Doesn&#x27;t apply &quot;smartness&quot; if the number precision fits already.</
       extractMetadata
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/extract-svg-metadata.js#L133-L180'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L134-L181'>
       <span>lib/extract-svg-metadata.js</span>
       </a>
     
@@ -312,7 +322,7 @@ Doesn&#x27;t apply &quot;smartness&quot; if the number precision fits already.</
       Metadata
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/extract-svg-metadata.js#L182-L182'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L183-L183'>
       <span>lib/extract-svg-metadata.js</span>
       </a>
     
@@ -374,7 +384,7 @@ The values of the Object are the structured data about each icon.</p>
       generateLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L31-L35'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L33-L38'>
       <span>lib/generate.js</span>
       </a>
     
@@ -456,6 +466,22 @@ options object with the following keys:</p>
 </span></td>
                 </tr>
               
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.extractMetadata</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>optional, defaults to true; if set to false, omits stretch and placeholder metadata (
+<code>content</code>
+, 
+<code>stretchX</code>
+, 
+<code>stretchY</code>
+, 
+<code>placeholder</code>
+) in 
+<a href="#datalayout">DataLayout</a>
+</span></td>
+                </tr>
+              
             </tbody>
           </table>
           
@@ -482,7 +508,7 @@ options object with the following keys:</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout                Generated Layout Object with sprite contents
+        layout                         Generated Layout Object with sprite contents
 
       
     
@@ -510,7 +536,7 @@ options object with the following keys:</p>
       generateLayoutUnique
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L56-L60'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L60-L65'>
       <span>lib/generate.js</span>
       </a>
     
@@ -576,8 +602,11 @@ will be in the sprite image and both A and B will reference the same image</p>
                   </td>
                   <td class='break-word'><span>If true, generate 
 <a href="#datalayout">DataLayout</a>
-; if false, generate 
+ as first argument to callback and 
 <a href="#imglayout">ImgLayout</a>
+ as the second argument; if false, generate only 
+<a href="#imglayout">ImgLayout</a>
+ as the first argument to the callback function
 </span></td>
                 </tr>
               
@@ -592,6 +621,22 @@ will be in the sprite image and both A and B will reference the same image</p>
                   <td class='break-word'><span class='code bold'>options.removeOversizedIcons</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
                   </td>
                   <td class='break-word'><span>optional, if set, filters out icons that mapnik says are too big
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.extractMetadata</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
+                  </td>
+                  <td class='break-word'><span>optional, defaults to true; if set to false, omits stretch and placeholder metadata (
+<code>content</code>
+, 
+<code>stretchX</code>
+, 
+<code>stretchY</code>
+, 
+<code>placeholder</code>
+) in 
+<a href="#datalayout">DataLayout</a>
 </span></td>
                 </tr>
               
@@ -621,7 +666,7 @@ will be in the sprite image and both A and B will reference the same image</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout                Generated Layout Object with sprite contents
+        layout                         Generated Layout Object with sprite contents
 
       
     
@@ -649,7 +694,7 @@ will be in the sprite image and both A and B will reference the same image</p>
       generateImage
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L192-L200'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L218-L225'>
       <span>lib/generate.js</span>
       </a>
     
@@ -720,11 +765,116 @@ will be in the sprite image and both A and B will reference the same image</p>
 
   
   <div class='clearfix'>
+    <h3 class='fl m0' id='generateoptimizedimage'>
+      generateOptimizedImage
+    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245'>
+      <span>lib/generate.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Generate a PNG image with positioned icons on a sprite.</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateOptimizedImage(layout: <a href="#imglayout">ImgLayout</a>, options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#imglayout">ImgLayout</a>)</code> An 
+<a href="#imglayout">ImgLayout</a>
+ Object used to generate the image
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.quality</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
+                  </td>
+                  <td class='break-word'><span>Number of colors to crush the PNG to (using color quantization) (default 128)
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
+<code>err</code>
+ and 
+<code>image</code>
+ data
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
     <h3 class='fl m0' id='imglayout'>
       ImgLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L192-L200'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245'>
       <span>lib/generate.js</span>
       </a>
     
@@ -792,7 +942,7 @@ and a buffer of image data that can be used for generating the output image.</p>
       DataLayout
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/generate.js#L192-L200'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245'>
       <span>lib/generate.js</span>
       </a>
     
@@ -858,7 +1008,7 @@ The values of the Object are the structured data about each icon.</p>
       validateMetadata
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mapbox/spritezero/blob/4a569c2e33ddf812c20d5af82fdc12ffd55ff04c/lib/validate-svg-metadata.js#L8-L77'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/validate-svg-metadata.js#L8-L77'>
       <span>lib/validate-svg-metadata.js</span>
       </a>
     

@@ -1,3 +1,4 @@
+## 8.0.0
 #### 2021-08-23
 * Changes the `stretchMetadata` option to `extractMetadata`.
 * Extends the `extractMetadata` function to support placeholder text elements.
