@@ -1,6 +1,7 @@
 ## Release Checklist
 
 #### Update version, docs, tag, and publish
+
 - [ ] git checkout main
 - [ ] npm install
 - [ ] npm run test

@@ -1,914 +1,876 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8' />
-  <title>  | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
-  <link href='assets/style.css' type='text/css' rel='stylesheet' />
-  <link href='assets/github.css' type='text/css' rel='stylesheet' />
-</head>
-<body class='documentation'>
-  <div class='max-width-4 mx-auto'>
-    <div class='clearfix md-mxn2'>
-      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
-        <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'></h3>
-          <div class='mb1'><code></code></div>
-          <input
-            placeholder='Filter'
-            id='filter-input'
-            class='col12 block input'
-            type='text' />
-          <div id='toc'>
-            <ul class='list-reset h5 py1-ul'>
-              
-                
-                <li><a
-                  href='#stronground'
-                  class="">
-                  strongRound
-                  
-                </a>
-                
+  <head>
+    <meta charset="utf-8" />
+    <title>| Documentation</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="assets/bass.css" type="text/css" rel="stylesheet" />
+    <link href="assets/style.css" type="text/css" rel="stylesheet" />
+    <link href="assets/github.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body class="documentation">
+    <div class="max-width-4 mx-auto">
+      <div class="clearfix md-mxn2">
+        <div class="fixed xs-hide fix-3 overflow-auto max-height-100">
+          <div class="py1 px2">
+            <h3 class="mb0 no-anchor"></h3>
+            <div class="mb1"><code></code></div>
+            <input
+              placeholder="Filter"
+              id="filter-input"
+              class="col12 block input"
+              type="text"
+            />
+            <div id="toc">
+              <ul class="list-reset h5 py1-ul">
+                <li><a href="#stronground" class=""> strongRound </a></li>
+
+                <li>
+                  <a href="#extractmetadata" class=""> extractMetadata </a>
                 </li>
-              
-                
-                <li><a
-                  href='#extractmetadata'
-                  class="">
-                  extractMetadata
-                  
-                </a>
-                
+
+                <li><a href="#metadata" class=""> Metadata </a></li>
+
+                <li><a href="#generatelayout" class=""> generateLayout </a></li>
+
+                <li>
+                  <a href="#generatelayoutunique" class="">
+                    generateLayoutUnique
+                  </a>
                 </li>
-              
-                
-                <li><a
-                  href='#metadata'
-                  class="">
-                  Metadata
-                  
-                </a>
-                
+
+                <li><a href="#generateimage" class=""> generateImage </a></li>
+
+                <li>
+                  <a href="#generateoptimizedimage" class="">
+                    generateOptimizedImage
+                  </a>
                 </li>
-              
-                
-                <li><a
-                  href='#generatelayout'
-                  class="">
-                  generateLayout
-                  
-                </a>
-                
+
+                <li><a href="#imglayout" class=""> ImgLayout </a></li>
+
+                <li><a href="#datalayout" class=""> DataLayout </a></li>
+
+                <li>
+                  <a href="#validatemetadata" class=""> validateMetadata </a>
                 </li>
-              
-                
-                <li><a
-                  href='#generatelayoutunique'
-                  class="">
-                  generateLayoutUnique
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#generateimage'
-                  class="">
-                  generateImage
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#generateoptimizedimage'
-                  class="">
-                  generateOptimizedImage
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#imglayout'
-                  class="">
-                  ImgLayout
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#datalayout'
-                  class="">
-                  DataLayout
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#validatemetadata'
-                  class="">
-                  validateMetadata
-                  
-                </a>
-                
-                </li>
-              
-            </ul>
-          </div>
-          <div class='mt1 h6 quiet'>
-            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+              </ul>
+            </div>
+            <div class="mt1 h6 quiet">
+              <a href="http://documentation.js.org/reading-documentation.html"
+                >Need help reading this?</a
+              >
+            </div>
           </div>
         </div>
-      </div>
-      <div class='fix-margin-3'>
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+        <div class="fix-margin-3">
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="stronground">strongRound</h3>
 
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='stronground'>
-      strongRound
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L39-L51'>
-      <span>lib/extract-svg-metadata.js</span>
-      </a>
-    
-  </div>
-  
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L39-L51"
+              >
+                <span>lib/extract-svg-metadata.js</span>
+              </a>
+            </div>
 
-  <p>Decrease accuracy of floating-point numbers
-in path data keeping a specified number of decimals.
-Smart rounds values like 2.3491 to 2.35 instead of 2.349.
-Doesn&#x27;t apply &quot;smartness&quot; if the number precision fits already.</p>
-<p>Taken from svgo at <a href="https://github.com/svg/svgo/blob/72db8eb/plugins/convertPathData.js#L773">https://github.com/svg/svgo/blob/72db8eb/plugins/convertPathData.js#L773</a></p>
+            <p>
+              Decrease accuracy of floating-point numbers in path data keeping a
+              specified number of decimals. Smart rounds values like 2.3491 to
+              2.35 instead of 2.349. Doesn&#x27;t apply &quot;smartness&quot; if
+              the number precision fits already.
+            </p>
+            <p>
+              Taken from svgo at
+              <a
+                href="https://github.com/svg/svgo/blob/72db8eb/plugins/convertPathData.js#L773"
+                >https://github.com/svg/svgo/blob/72db8eb/plugins/convertPathData.js#L773</a
+              >
+            </p>
 
+            <div class="pre p1 fill-light mt0">
+              strongRound(value: any, precision: any)
+            </div>
 
-  <div class='pre p1 fill-light mt0'>strongRound(value: any, precision: any)</div>
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">value</span>
+                  <code class="quiet">(any)</code>
+                </div>
+              </div>
 
-  
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">precision</span>
+                  <code class="quiet">(any)</code>
+                </div>
+              </div>
+            </div>
+          </section>
 
-  
-  
-  
-  
-  
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="extractmetadata">extractMetadata</h3>
 
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>precision</span> <code class='quiet'>(any)</code> 
-          </div>
-          
-        </div>
-      
-    </div>
-  
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L134-L181"
+              >
+                <span>lib/extract-svg-metadata.js</span>
+              </a>
+            </div>
 
-  
+            <p>
+              Parses a SVG document and extracts metadata from its shapes and
+              paths.
+            </p>
 
-  
+            <div class="pre p1 fill-light mt0">
+              extractMetadata(img: [<a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                >Object</a
+              >], callback:
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                >Function</a
+              >): <a href="#metadata">Metadata</a>
+            </div>
 
-  
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">img</span>
+                  <code class="quiet"
+                    >([<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                      >Object</a
+                    >])</code
+                  >
+                </div>
 
-  
+                <table class="mt1 mb2 fixed-table h5 col-12">
+                  <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                  </colgroup>
+                  <thead>
+                    <tr class="bold fill-light">
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="mt1">
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">img.svg</span>
+                        <code class="quiet"
+                          >[(<a href="https://nodejs.org/api/buffer.html"
+                            >Buffer</a
+                          >
+                          |
+                          <a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"
+                            >string</a
+                          >)]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span>A string of the SVG. </span>
+                      </td>
+                    </tr>
 
-  
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">img.pixelRatio</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                            >number</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >Ratio of a 72dpi screen pixel to the destination
+                          pixel density
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-  
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">callback</span>
+                  <code class="quiet"
+                    >(<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                      >Function</a
+                    >)</code
+                  >
+                  Accepts two arguments,
+                  <code>err</code>
+                  and
+                  <code>metadata</code>
+                  Object
+                </div>
+              </div>
+            </div>
 
-  
-</section>
+            <div class="py1 quiet mt1 prose-big">Returns</div>
+            <code><a href="#metadata">Metadata</a></code
+            >: metadata An object with the extracted information.
+          </section>
 
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="metadata">Metadata</h3>
 
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='extractmetadata'>
-      extractMetadata
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L134-L181'>
-      <span>lib/extract-svg-metadata.js</span>
-      </a>
-    
-  </div>
-  
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L183-L183"
+              >
+                <span>lib/extract-svg-metadata.js</span>
+              </a>
+            </div>
 
-  <p>Parses a SVG document and extracts metadata from its shapes and paths.</p>
+            <p>
+              A <code>Metadata</code> objects stores information about how an
+              image can be stretched in a non-linear
+            </p>
+            <p>
+              The keys of the Object are the icon ids. The values of the Object
+              are the structured data about each icon.
+            </p>
 
+            <div class="pre p1 fill-light mt0">Metadata</div>
 
-  <div class='pre p1 fill-light mt0'>extractMetadata(img: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): <a href="#metadata">Metadata</a></div>
+            <div class="py1 quiet mt1 prose-big">Example</div>
 
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>img</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>img.svg</span> <code class='quiet'>[(<a href="https://nodejs.org/api/buffer.html">Buffer</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)]</code>
-                  </td>
-                  <td class='break-word'><span>A string of the SVG.
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>img.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
-                  </td>
-                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
-</span></td>
-                </tr>
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
-<code>err</code>
- and 
-<code>metadata</code>
- Object
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#metadata">Metadata</a></code>:
-        metadata              An object with the extracted information.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='metadata'>
-      Metadata
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/extract-svg-metadata.js#L183-L183'>
-      <span>lib/extract-svg-metadata.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>A <code>Metadata</code> objects stores information about how an image can be stretched in a non-linear</p>
-<p>The keys of the Object are the icon ids.
-The values of the Object are the structured data about each icon.</p>
-
-
-  <div class='pre p1 fill-light mt0'>Metadata</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'>{
+            <pre class="p1 overflow-auto round fill-light">{
    {
      <span class="hljs-string">"content"</span>: [ <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">18</span>, <span class="hljs-number">11</span> ],
      <span class="hljs-string">"stretchX"</span>: [ [<span class="hljs-number">3</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">14</span>, <span class="hljs-number">18</span>] ],
      <span class="hljs-string">"stretchY"</span>: [ [ <span class="hljs-number">5</span>, <span class="hljs-number">11</span> ] ]
    }
 }</pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='generatelayout'>
-      generateLayout
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L33-L38'>
-      <span>lib/generate.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Pack a list of images with width and height into a sprite layout.
-options object with the following keys:</p>
-
-
-  <div class='pre p1 fill-light mt0'>generateLayout(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.imgs</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
-                  </td>
-                  <td class='break-word'><span>Array of 
-<code>{ svg: Buffer, id: String }</code>
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
-                  </td>
-                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.format</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>If true, generate 
-<a href="#datalayout">DataLayout</a>
-; if false, generate 
-<a href="#imglayout">ImgLayout</a>
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.maxIconSize</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, overrides the max_size in mapnik
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.removeOversizedIcons</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, if set, filters out icons that mapnik says are too big
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.extractMetadata</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, defaults to true; if set to false, omits stretch and placeholder metadata (
-<code>content</code>
-, 
-<code>stretchX</code>
-, 
-<code>stretchY</code>
-, 
-<code>placeholder</code>
-) in 
-<a href="#datalayout">DataLayout</a>
-</span></td>
-                </tr>
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
-<code>err</code>
- and 
-<code>layout</code>
- Object
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout                         Generated Layout Object with sprite contents
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='generatelayoutunique'>
-      generateLayoutUnique
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L60-L65'>
-      <span>lib/generate.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Same as generateLayout but can be used to dedupe identical SVGs
-and still preserve the reference.</p>
-<p>For example if <code>A.svg</code> and <code>B.svg</code> are identical, a single icon
-will be in the sprite image and both A and B will reference the same image</p>
-<p>options object with the following keys:</p>
-
-
-  <div class='pre p1 fill-light mt0'>generateLayoutUnique(options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>): (<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.imgs</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
-                  </td>
-                  <td class='break-word'><span>Array of 
-<code>{ svg: Buffer, id: String }</code>
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.pixelRatio</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
-                  </td>
-                  <td class='break-word'><span>Ratio of a 72dpi screen pixel to the destination pixel density
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.format</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>If true, generate 
-<a href="#datalayout">DataLayout</a>
- as first argument to callback and 
-<a href="#imglayout">ImgLayout</a>
- as the second argument; if false, generate only 
-<a href="#imglayout">ImgLayout</a>
- as the first argument to the callback function
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.maxIconSize</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, overrides the max_size in mapnik
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.removeOversizedIcons</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, if set, filters out icons that mapnik says are too big
-</span></td>
-                </tr>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.extractMetadata</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>]</code>
-                  </td>
-                  <td class='break-word'><span>optional, defaults to true; if set to false, omits stretch and placeholder metadata (
-<code>content</code>
-, 
-<code>stretchX</code>
-, 
-<code>stretchY</code>
-, 
-<code>placeholder</code>
-) in 
-<a href="#datalayout">DataLayout</a>
-</span></td>
-                </tr>
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
-<code>err</code>
- and 
-<code>layout</code>
- Object
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(<a href="#datalayout">DataLayout</a> | <a href="#imglayout">ImgLayout</a>)</code>:
-        layout                         Generated Layout Object with sprite contents
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='generateimage'>
-      generateImage
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L218-L225'>
-      <span>lib/generate.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Generate a PNG image with positioned icons on a sprite.</p>
-
-
-  <div class='pre p1 fill-light mt0'>generateImage(layout: <a href="#imglayout">ImgLayout</a>, callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#imglayout">ImgLayout</a>)</code> An 
-<a href="#imglayout">ImgLayout</a>
- Object used to generate the image
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
-<code>err</code>
- and 
-<code>image</code>
- data
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='generateoptimizedimage'>
-      generateOptimizedImage
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245'>
-      <span>lib/generate.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Generate a PNG image with positioned icons on a sprite.</p>
-
-
-  <div class='pre p1 fill-light mt0'>generateOptimizedImage(layout: <a href="#imglayout">ImgLayout</a>, options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>], callback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>layout</span> <code class='quiet'>(<a href="#imglayout">ImgLayout</a>)</code> An 
-<a href="#imglayout">ImgLayout</a>
- Object used to generate the image
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>])</code> 
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.quality</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;]</code>
-                  </td>
-                  <td class='break-word'><span>Number of colors to crush the PNG to (using color quantization) (default 128)
-</span></td>
-                </tr>
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> Accepts two arguments, 
-<code>err</code>
- and 
-<code>image</code>
- data
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='imglayout'>
-      ImgLayout
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245'>
-      <span>lib/generate.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Spritezero can generate 2 kinds of layout objects: <a href="#datalayout">DataLayout</a> and <a href="#imglayout">ImgLayout</a>.</p>
-<p>A <code>ImgLayout</code> Object contains the array of image items along with dimensions
-and a buffer of image data that can be used for generating the output image.</p>
-
-
-  <div class='pre p1 fill-light mt0'>ImgLayout</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'>{
+          </section>
+
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="generatelayout">generateLayout</h3>
+
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L33-L38"
+              >
+                <span>lib/generate.js</span>
+              </a>
+            </div>
+
+            <p>
+              Pack a list of images with width and height into a sprite layout.
+              options object with the following keys:
+            </p>
+
+            <div class="pre p1 fill-light mt0">
+              generateLayout(options: [<a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                >Object</a
+              >], callback:
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                >Function</a
+              >): (<a href="#datalayout">DataLayout</a> |
+              <a href="#imglayout">ImgLayout</a>)
+            </div>
+
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">options</span>
+                  <code class="quiet"
+                    >([<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                      >Object</a
+                    >])</code
+                  >
+                </div>
+
+                <table class="mt1 mb2 fixed-table h5 col-12">
+                  <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                  </colgroup>
+                  <thead>
+                    <tr class="bold fill-light">
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="mt1">
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.imgs</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+                            >Array</a
+                          >&lt;<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                            >Object</a
+                          >&gt;]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >Array of
+                          <code>{ svg: Buffer, id: String }</code>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.pixelRatio</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                            >number</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >Ratio of a 72dpi screen pixel to the destination
+                          pixel density
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.format</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >If true, generate
+                          <a href="#datalayout">DataLayout</a>
+                          ; if false, generate
+                          <a href="#imglayout">ImgLayout</a>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.maxIconSize</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span>optional, overrides the max_size in mapnik </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold"
+                          >options.removeOversizedIcons</span
+                        >
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >optional, if set, filters out icons that mapnik says
+                          are too big
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.extractMetadata</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >optional, defaults to true; if set to false, omits
+                          stretch and placeholder metadata (
+                          <code>content</code>
+                          ,
+                          <code>stretchX</code>
+                          ,
+                          <code>stretchY</code>
+                          ,
+                          <code>placeholder</code>
+                          ) in
+                          <a href="#datalayout">DataLayout</a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">callback</span>
+                  <code class="quiet"
+                    >(<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                      >Function</a
+                    >)</code
+                  >
+                  Accepts two arguments,
+                  <code>err</code>
+                  and
+                  <code>layout</code>
+                  Object
+                </div>
+              </div>
+            </div>
+
+            <div class="py1 quiet mt1 prose-big">Returns</div>
+            <code
+              >(<a href="#datalayout">DataLayout</a> |
+              <a href="#imglayout">ImgLayout</a>)</code
+            >: layout Generated Layout Object with sprite contents
+          </section>
+
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="generatelayoutunique">
+                generateLayoutUnique
+              </h3>
+
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L60-L65"
+              >
+                <span>lib/generate.js</span>
+              </a>
+            </div>
+
+            <p>
+              Same as generateLayout but can be used to dedupe identical SVGs
+              and still preserve the reference.
+            </p>
+            <p>
+              For example if <code>A.svg</code> and <code>B.svg</code> are
+              identical, a single icon will be in the sprite image and both A
+              and B will reference the same image
+            </p>
+            <p>options object with the following keys:</p>
+
+            <div class="pre p1 fill-light mt0">
+              generateLayoutUnique(options: [<a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                >Object</a
+              >], callback:
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                >Function</a
+              >): (<a href="#datalayout">DataLayout</a> |
+              <a href="#imglayout">ImgLayout</a>)
+            </div>
+
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">options</span>
+                  <code class="quiet"
+                    >([<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                      >Object</a
+                    >])</code
+                  >
+                </div>
+
+                <table class="mt1 mb2 fixed-table h5 col-12">
+                  <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                  </colgroup>
+                  <thead>
+                    <tr class="bold fill-light">
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="mt1">
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.imgs</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+                            >Array</a
+                          >&lt;<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                            >Object</a
+                          >&gt;]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >Array of
+                          <code>{ svg: Buffer, id: String }</code>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.pixelRatio</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                            >number</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >Ratio of a 72dpi screen pixel to the destination
+                          pixel density
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.format</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >If true, generate
+                          <a href="#datalayout">DataLayout</a>
+                          as first argument to callback and
+                          <a href="#imglayout">ImgLayout</a>
+                          as the second argument; if false, generate only
+                          <a href="#imglayout">ImgLayout</a>
+                          as the first argument to the callback function
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.maxIconSize</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span>optional, overrides the max_size in mapnik </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold"
+                          >options.removeOversizedIcons</span
+                        >
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >optional, if set, filters out icons that mapnik says
+                          are too big
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.extractMetadata</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                            >boolean</a
+                          >]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >optional, defaults to true; if set to false, omits
+                          stretch and placeholder metadata (
+                          <code>content</code>
+                          ,
+                          <code>stretchX</code>
+                          ,
+                          <code>stretchY</code>
+                          ,
+                          <code>placeholder</code>
+                          ) in
+                          <a href="#datalayout">DataLayout</a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">callback</span>
+                  <code class="quiet"
+                    >(<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                      >Function</a
+                    >)</code
+                  >
+                  Accepts two arguments,
+                  <code>err</code>
+                  and
+                  <code>layout</code>
+                  Object
+                </div>
+              </div>
+            </div>
+
+            <div class="py1 quiet mt1 prose-big">Returns</div>
+            <code
+              >(<a href="#datalayout">DataLayout</a> |
+              <a href="#imglayout">ImgLayout</a>)</code
+            >: layout Generated Layout Object with sprite contents
+          </section>
+
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="generateimage">generateImage</h3>
+
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L218-L225"
+              >
+                <span>lib/generate.js</span>
+              </a>
+            </div>
+
+            <p>Generate a PNG image with positioned icons on a sprite.</p>
+
+            <div class="pre p1 fill-light mt0">
+              generateImage(layout: <a href="#imglayout">ImgLayout</a>,
+              callback:
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                >Function</a
+              >)
+            </div>
+
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">layout</span>
+                  <code class="quiet"
+                    >(<a href="#imglayout">ImgLayout</a>)</code
+                  >
+                  An
+                  <a href="#imglayout">ImgLayout</a>
+                  Object used to generate the image
+                </div>
+              </div>
+
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">callback</span>
+                  <code class="quiet"
+                    >(<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                      >Function</a
+                    >)</code
+                  >
+                  Accepts two arguments,
+                  <code>err</code>
+                  and
+                  <code>image</code>
+                  data
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="generateoptimizedimage">
+                generateOptimizedImage
+              </h3>
+
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245"
+              >
+                <span>lib/generate.js</span>
+              </a>
+            </div>
+
+            <p>Generate a PNG image with positioned icons on a sprite.</p>
+
+            <div class="pre p1 fill-light mt0">
+              generateOptimizedImage(layout: <a href="#imglayout">ImgLayout</a>,
+              options: [<a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                >Object</a
+              >], callback:
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                >Function</a
+              >)
+            </div>
+
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">layout</span>
+                  <code class="quiet"
+                    >(<a href="#imglayout">ImgLayout</a>)</code
+                  >
+                  An
+                  <a href="#imglayout">ImgLayout</a>
+                  Object used to generate the image
+                </div>
+              </div>
+
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">options</span>
+                  <code class="quiet"
+                    >([<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                      >Object</a
+                    >])</code
+                  >
+                </div>
+
+                <table class="mt1 mb2 fixed-table h5 col-12">
+                  <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                  </colgroup>
+                  <thead>
+                    <tr class="bold fill-light">
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="mt1">
+                    <tr>
+                      <td class="break-word">
+                        <span class="code bold">options.quality</span>
+                        <code class="quiet"
+                          >[<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+                            >Array</a
+                          >&lt;<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                            >Object</a
+                          >&gt;]</code
+                        >
+                      </td>
+                      <td class="break-word">
+                        <span
+                          >Number of colors to crush the PNG to (using color
+                          quantization) (default 128)
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">callback</span>
+                  <code class="quiet"
+                    >(<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+                      >Function</a
+                    >)</code
+                  >
+                  Accepts two arguments,
+                  <code>err</code>
+                  and
+                  <code>image</code>
+                  data
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="imglayout">ImgLayout</h3>
+
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245"
+              >
+                <span>lib/generate.js</span>
+              </a>
+            </div>
+
+            <p>
+              Spritezero can generate 2 kinds of layout objects:
+              <a href="#datalayout">DataLayout</a> and
+              <a href="#imglayout">ImgLayout</a>.
+            </p>
+            <p>
+              A <code>ImgLayout</code> Object contains the array of image items
+              along with dimensions and a buffer of image data that can be used
+              for generating the output image.
+            </p>
+
+            <div class="pre p1 fill-light mt0">ImgLayout</div>
+
+            <div class="py1 quiet mt1 prose-big">Example</div>
+
+            <pre class="p1 overflow-auto round fill-light">{
    <span class="hljs-attr">width</span>: <span class="hljs-number">512</span>,
    <span class="hljs-attr">height</span>: <span class="hljs-number">512</span>,
    <span class="hljs-attr">items</span>: [
@@ -921,64 +883,40 @@ and a buffer of image data that can be used for generating the output image.</p>
      }, ... etc ...
    ]
 }</pre>
-    
-  
+          </section>
 
-  
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="datalayout">DataLayout</h3>
 
-  
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245"
+              >
+                <span>lib/generate.js</span>
+              </a>
+            </div>
 
-  
-</section>
+            <p>
+              Spritezero can generate 2 kinds of layout objects:
+              <a href="#datalayout">DataLayout</a> and
+              <a href="#imglayout">ImgLayout</a>.
+            </p>
+            <p>
+              A <code>DataLayout</code> Object contains all the metadata about
+              the contents of the sprite. This data can be exported to a JSON
+              sprite manifest file.
+            </p>
+            <p>
+              The keys of the Object are the icon ids. The values of the Object
+              are the structured data about each icon.
+            </p>
 
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+            <div class="pre p1 fill-light mt0">DataLayout</div>
 
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='datalayout'>
-      DataLayout
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/generate.js#L235-L245'>
-      <span>lib/generate.js</span>
-      </a>
-    
-  </div>
-  
+            <div class="py1 quiet mt1 prose-big">Example</div>
 
-  <p>Spritezero can generate 2 kinds of layout objects: <a href="#datalayout">DataLayout</a> and <a href="#imglayout">ImgLayout</a>.</p>
-<p>A <code>DataLayout</code> Object contains all the metadata about the contents of the sprite.
-This data can be exported to a JSON sprite manifest file.</p>
-<p>The keys of the Object are the icon ids.
-The values of the Object are the structured data about each icon.</p>
-
-
-  <div class='pre p1 fill-light mt0'>DataLayout</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'>{
+            <pre class="p1 overflow-auto round fill-light">{
    <span class="hljs-string">"aerialway-12"</span>: {
      <span class="hljs-string">"width"</span>: <span class="hljs-number">12</span>,
      <span class="hljs-string">"height"</span>: <span class="hljs-number">12</span>,
@@ -987,107 +925,79 @@ The values of the Object are the structured data about each icon.</p>
      <span class="hljs-string">"y"</span>: <span class="hljs-number">282</span>
    }, ... etc ...
 }</pre>
-    
-  
+          </section>
 
-  
+          <section class="p2 mb2 clearfix bg-white minishadow">
+            <div class="clearfix">
+              <h3 class="fl m0" id="validatemetadata">validateMetadata</h3>
 
-  
+              <a
+                class="fr fill-darken0 round round pad1x quiet h5"
+                href="https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/validate-svg-metadata.js#L8-L77"
+              >
+                <span>lib/validate-svg-metadata.js</span>
+              </a>
+            </div>
 
-  
-</section>
+            <p>Validates metadata that is parsed from an SVG metadata</p>
 
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+            <div class="pre p1 fill-light mt0">
+              validateMetadata(img:
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                >Object</a
+              >, metadata: <a href="#metadata">Metadata</a>): (null |
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error"
+                >Error</a
+              >)
+            </div>
 
-  
-  <div class='clearfix'>
-    <h3 class='fl m0' id='validatemetadata'>
-      validateMetadata
-    </h3>
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/:mapbox/spritezero/blob/412b5881b1abd54b236056dc3e5b105514ceacc1/lib/validate-svg-metadata.js#L8-L77'>
-      <span>lib/validate-svg-metadata.js</span>
-      </a>
-    
-  </div>
-  
+            <div class="py1 quiet mt1 prose-big">Parameters</div>
+            <div class="prose">
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">img</span>
+                  <code class="quiet"
+                    >(<a
+                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                      >Object</a
+                    >)</code
+                  >
+                  An image object with
+                  <code>width</code>
+                  and
+                  <code>height</code>
+                  .
+                </div>
+              </div>
 
-  <p>Validates metadata that is parsed from an SVG metadata</p>
+              <div class="space-bottom0">
+                <div>
+                  <span class="code bold">metadata</span>
+                  <code class="quiet">(<a href="#metadata">Metadata</a>)</code>
+                  A metadata object.
+                </div>
+              </div>
+            </div>
 
-
-  <div class='pre p1 fill-light mt0'>validateMetadata(img: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, metadata: <a href="#metadata">Metadata</a>): (null | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>)</div>
-
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>img</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> An image object with 
-<code>width</code>
- and 
-<code>height</code>
-.
-
-          </div>
-          
+            <div class="py1 quiet mt1 prose-big">Returns</div>
+            <code
+              >(null |
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error"
+                >Error</a
+              >)</code
+            >: err An
+            <code>Error</code>
+            object if validation fails,
+            <code>null</code>
+            otherwise.
+          </section>
         </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>metadata</span> <code class='quiet'>(<a href="#metadata">Metadata</a>)</code> A metadata object.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(null | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>)</code>:
-        err              An 
-<code>Error</code>
- object if validation fails, 
-<code>null</code>
- otherwise.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
       </div>
     </div>
-  </div>
-  <script src='assets/anchor.js'></script>
-  <script src='assets/site.js'></script>
-</body>
+    <script src="assets/anchor.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
 </html>
