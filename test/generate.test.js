@@ -1,11 +1,11 @@
-var test = require('tap').test,
-    fs = require('fs'),
-    glob = require('glob'),
-    path = require('path'),
-    queue = require('queue-async'),
-    stringify = require('json-stable-stringify'),
-    spritezero = require('../'),
-    mapnik = require('mapnik');
+const test = require('tap').test;
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+const queue = require('d3-queue').queue;
+const stringify = require('json-stable-stringify');
+const spritezero = require('../');
+const mapnik = require('mapnik');
 
 // eslint-disable-next-line no-process-env
 var update = process.env.UPDATE;
@@ -18,14 +18,8 @@ const fixtures = glob.sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg
     };
 });
 
-function getFixtures() {
-    return fixtures.sort(function() {
-        return Math.random() - 0.5;
-    });
-}
-
 test('generateLayout', function(t) {
-    spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: 1, format: false }, function(err, layout) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
         t.ifError(err);
         t.equal(layout.items.length, 362);
         t.equal(layout.items[0].x, 0);
@@ -35,7 +29,7 @@ test('generateLayout', function(t) {
 });
 
 test('generateLayout with icon size filter', function(t) {
-    spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: 1, format: false, removeOversizedIcons: true, maxIconSize: 15 }, function(err, layout) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false, removeOversizedIcons: true, maxIconSize: 15 }, function(err, layout) {
         t.ifError(err);
         t.equal(layout.items.length, 119);
         t.equal(layout.items[0].x, 0);
@@ -47,7 +41,7 @@ test('generateLayout with icon size filter', function(t) {
 test('generateLayout bench (concurrency=1,x10)', function(t) {
     var start = +new Date();
     var q = queue(1);
-    for (var i = 0; i < 10; i++) q.defer(spritezero.generateLayout, { imgs: getFixtures(), pixelRatio: 1, format: false });
+    for (var i = 0; i < 10; i++) q.defer(spritezero.generateLayout, { imgs: fixtures, pixelRatio: 1, format: false });
     q.awaitAll(function(err) {
         t.ifError(err);
         t.ok(true, (+new Date() - start) + 'ms');
@@ -58,7 +52,7 @@ test('generateLayout bench (concurrency=1,x10)', function(t) {
 test('generateLayout bench (concurrency=4,x20)', function(t) {
     var start = +new Date();
     var q = queue(4);
-    for (var i = 0; i < 20; i++) q.defer(spritezero.generateLayout, { imgs: getFixtures(), pixelRatio: 1, format: false });
+    for (var i = 0; i < 20; i++) q.defer(spritezero.generateLayout, { imgs: fixtures, pixelRatio: 1, format: false });
     q.awaitAll(function(err) {
         t.ifError(err);
         t.ok(true, (+new Date() - start) + 'ms');
@@ -67,7 +61,7 @@ test('generateLayout bench (concurrency=4,x20)', function(t) {
 });
 
 test('generateLayoutUnique', function(t) {
-    spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: 1, format: false }, function(err, layout) {
+    spritezero.generateLayoutUnique({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
         t.ifError(err);
         // unique-24.svg and unique-24-copy.svg are unique
         t.equal(layout.items.length, 361);
@@ -78,7 +72,7 @@ test('generateLayoutUnique', function(t) {
 });
 
 test('generateLayout', function(t) {
-    spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: 1, format: true }, function(err, formatted) {
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
         t.ifError(err);
         t.equals(Object.keys(formatted).length, 362);
         // unique-24.svg and unique-24-copy.svg are NOT deduped
@@ -89,7 +83,7 @@ test('generateLayout', function(t) {
 });
 
 test('generateLayoutUnique', function(t) {
-    spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: 1, format: true }, function(err, formatted) {
+    spritezero.generateLayoutUnique({ imgs: fixtures, pixelRatio: 1, format: true }, function(err, formatted) {
         t.ifError(err);
         // unique-24.svg and unique-24-copy.svg are deduped into a single one
         // but the json still references both, so still 362
@@ -105,9 +99,9 @@ test('generateImage', function(t) {
         t.test('@' + scale, function(tt) {
             var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.png'));
             var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '.json'));
-            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, formatted) {
+            spritezero.generateLayout({ imgs: fixtures, pixelRatio: scale, format: true }, function(err, formatted) {
                 tt.ifError(err);
-                spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: false }, function(err, layout) {
+                spritezero.generateLayout({ imgs: fixtures, pixelRatio: scale, format: false }, function(err, layout) {
                     tt.ifError(err);
                     if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
                     tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
@@ -127,11 +121,11 @@ test('generateImage', function(t) {
 });
 
 // Generating both a valid layout and image in one pass
-test('generateImage with format:true', function(t) {
+test('generateOptimizeImage with format:true', function(t) {
     [1, 2, 4].forEach(function(scale) {
         t.test('@' + scale, function(tt) {
             var optimizedPngPath = path.resolve(path.join(__dirname, 'fixture/sprite@' + scale + '-64colors.png'));
-            spritezero.generateLayout({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, dataLayout, imageLayout) {
+            spritezero.generateLayout({ imgs: fixtures, pixelRatio: scale, format: true }, function(err, dataLayout, imageLayout) {
                 tt.ifError(err);
                 tt.ok(dataLayout);
                 tt.ok(imageLayout);
@@ -148,14 +142,35 @@ test('generateImage with format:true', function(t) {
     t.end();
 });
 
-test('generateImageUnique', function(t) {
+test('generateOptimizedImage with format:true - unique', function(t) {
+    [1, 2, 4].forEach(function(scale) {
+        t.test('@' + scale, function(tt) {
+            var optimizedPngPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '-64colors.png'));
+            spritezero.generateLayoutUnique({ imgs: fixtures, pixelRatio: scale, format: true }, function(err, dataLayout, imageLayout) {
+                tt.ifError(err);
+                tt.ok(dataLayout);
+                tt.ok(imageLayout);
+                spritezero.generateOptimizedImage(imageLayout, {quality: 64}, function(err, res) {
+                    tt.notOk(err, 'no error');
+                    tt.ok(res, 'produces image');
+                    if (update) fs.writeFileSync(optimizedPngPath, res);
+                    tt.ok(Math.abs(res.length - fs.readFileSync(optimizedPngPath).length) < 1000);
+                    tt.end();
+                });
+            });
+        });
+    });
+    t.end();
+});
+
+test('generateImage - unique', function(t) {
     [1, 2, 4].forEach(function(scale) {
         t.test('@' + scale, function(tt) {
             var pngPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.png'));
             var jsonPath = path.resolve(path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.json'));
-            spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: scale, format: true }, function(err, formatted) {
+            spritezero.generateLayoutUnique({ imgs: fixtures, pixelRatio: scale, format: true }, function(err, formatted) {
                 tt.ifError(err);
-                spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: scale, format: false }, function(err, layout) {
+                spritezero.generateLayoutUnique({ imgs: fixtures, pixelRatio: scale, format: false }, function(err, layout) {
                     tt.ifError(err);
                     if (update) fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));
                     tt.deepEqual(formatted, JSON.parse(fs.readFileSync(jsonPath)));
@@ -215,7 +230,7 @@ test('generateImage unique with empty input', function(t) {
 });
 
 test('generateImage unique with max_size', function(t) {
-    spritezero.generateLayoutUnique({ imgs: getFixtures(), pixelRatio: 1, format: false, maxIconSize: 10 }, function(err, layout) {
+    spritezero.generateLayoutUnique({ imgs: fixtures, pixelRatio: 1, format: false, maxIconSize: 10 }, function(err, layout) {
         t.ok(err);
         t.notOk(layout);
         t.equal(err.message, 'image created from svg must be 10 pixels or fewer on each side');
@@ -252,7 +267,7 @@ test('generateLayout only relative width/height SVG returns empty sprite object'
 
     spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
         t.ifError(err);
-        t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+        t.deepEqual(layout, { width: 0, height: 0, items: []}, 'empty layout');
 
         spritezero.generateImage(layout, function(err, image) {
             t.ifError(err);
@@ -291,7 +306,7 @@ test('generateLayout containing only image with no width or height', function(t)
 
       spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
           t.ifError(err);
-          t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+          t.deepEqual(layout, { width: 0, height: 0, items: []}, 'empty layout');
 
           spritezero.generateImage(layout, function(err, image) {
               t.ifError(err);
