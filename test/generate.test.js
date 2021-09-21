@@ -2,13 +2,13 @@ const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const queue = require('d3-queue').queue;
-const stringify = require('json-stable-stringify');
 const spritezero = require('../');
 const mapnik = require('mapnik');
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
-// eslint-disable-next-line no-process-env
-const update = process.env.UPDATE;
 const emptyPNG = new mapnik.Image(1, 1).encodeSync('png');
+
+expect.extend({ toMatchImageSnapshot });
 
 const fixtures = glob
   .sync(path.resolve(path.join(__dirname, '/fixture/svg/*.svg')))
@@ -17,7 +17,14 @@ const fixtures = glob
       svg: fs.readFileSync(im),
       id: path.basename(im).replace('.svg', '')
     };
+  })
+  .sort(() => {
+    return Math.random() - 0.5;
   });
+
+beforeAll(() => {
+  jest.useFakeTimers();
+});
 
 test('generateLayout', () => {
   spritezero.generateLayout(
@@ -52,12 +59,13 @@ test('generateLayout with icon size filter', () => {
 test('generateLayout bench (concurrency=1,x10)', () => {
   const start = +new Date();
   const q = queue(1);
-  for (let i = 0; i < 10; i++)
-    {q.defer(spritezero.generateLayout, {
+  for (let i = 0; i < 10; i++) {
+    q.defer(spritezero.generateLayout, {
       imgs: fixtures,
       pixelRatio: 1,
       format: false
-    });}
+    });
+  }
   q.awaitAll((err) => {
     expect(err).toBeFalsy();
     expect(true, `${new Date() - start}ms`).toBeTruthy();
@@ -67,12 +75,13 @@ test('generateLayout bench (concurrency=1,x10)', () => {
 test('generateLayout bench (concurrency=4,x20)', () => {
   const start = +new Date();
   const q = queue(4);
-  for (let i = 0; i < 20; i++)
-    {q.defer(spritezero.generateLayout, {
+  for (let i = 0; i < 20; i++) {
+    q.defer(spritezero.generateLayout, {
       imgs: fixtures,
       pixelRatio: 1,
       format: false
-    });}
+    });
+  }
   q.awaitAll((err) => {
     expect(err).toBeFalsy();
     expect(true, `${new Date() - start}ms`).toBeTruthy();
@@ -82,12 +91,13 @@ test('generateLayout bench (concurrency=4,x20)', () => {
 test('generateLayoutUnique bench (concurrency=1,x10)', () => {
   const start = +new Date();
   const q = queue(1);
-  for (let i = 0; i < 10; i++)
-    {q.defer(spritezero.generateLayoutUnique, {
+  for (let i = 0; i < 10; i++) {
+    q.defer(spritezero.generateLayoutUnique, {
       imgs: fixtures,
       pixelRatio: 1,
       format: false
-    });}
+    });
+  }
   q.awaitAll((err) => {
     expect(err).toBeFalsy();
     expect(true, `${new Date() - start}ms`).toBeTruthy();
@@ -97,12 +107,13 @@ test('generateLayoutUnique bench (concurrency=1,x10)', () => {
 test('generateLayoutUnique bench (concurrency=4,x20)', () => {
   const start = +new Date();
   const q = queue(4);
-  for (let i = 0; i < 20; i++)
-    {q.defer(spritezero.generateLayoutUnique, {
+  for (let i = 0; i < 20; i++) {
+    q.defer(spritezero.generateLayoutUnique, {
       imgs: fixtures,
       pixelRatio: 1,
       format: false
-    });}
+    });
+  }
   q.awaitAll((err) => {
     expect(err).toBeFalsy();
     expect(true, `${new Date() - start}ms`).toBeTruthy();
@@ -151,13 +162,7 @@ test('generateLayoutUnique', () => {
   );
 });
 
-test.each([1, 2, 4])('generateImage - sprite@%i', (scale) => {
-  const pngPath = path.resolve(
-    path.join(__dirname, 'fixture/sprite@' + scale + '.png')
-  );
-  const jsonPath = path.resolve(
-    path.join(__dirname, 'fixture/sprite@' + scale + '.json')
-  );
+test.each([1, 2, 4])('generateImage - sprite@%i', (scale, done) => {
   spritezero.generateLayout(
     { imgs: fixtures, pixelRatio: scale, format: true },
     (err, formatted) => {
@@ -166,18 +171,11 @@ test.each([1, 2, 4])('generateImage - sprite@%i', (scale) => {
         { imgs: fixtures, pixelRatio: scale, format: false },
         (err, layout) => {
           expect(err).toBeFalsy();
-          if (update)
-            {fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));}
-          expect(formatted).toStrictEqual(
-            JSON.parse(fs.readFileSync(jsonPath))
-          );
+          expect(formatted).toMatchSnapshot();
           spritezero.generateImage(layout, (err, res) => {
-            expect(err).toBeFalsy();
-            expect(res).toBeDefined();
-            if (update) {fs.writeFileSync(pngPath, res);}
-            expect(
-              Math.abs(res.length - fs.readFileSync(pngPath).length)
-            ).toBeLessThan(1000);
+            expect(err).toBeNull();
+            expect(res).toMatchImageSnapshot();
+            done();
           });
         }
       );
@@ -185,64 +183,47 @@ test.each([1, 2, 4])('generateImage - sprite@%i', (scale) => {
   );
 });
 
-test.each([1, 2, 4])('generateImage - unique - sprite-uniq@%i', (scale) => {
-  const pngPath = path.resolve(
-    path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.png')
-  );
-  const jsonPath = path.resolve(
-    path.join(__dirname, 'fixture/sprite-uniq@' + scale + '.json')
-  );
-  spritezero.generateLayoutUnique(
-    { imgs: fixtures, pixelRatio: scale, format: true },
-    (err, formatted) => {
-      expect(err).toBeFalsy();
-      spritezero.generateLayoutUnique(
-        { imgs: fixtures, pixelRatio: scale, format: false },
-        (err, layout) => {
-          expect(err).toBeFalsy();
-          if (update)
-            {fs.writeFileSync(jsonPath, stringify(formatted, { space: '  ' }));}
-          expect(formatted).toStrictEqual(
-            JSON.parse(fs.readFileSync(jsonPath))
-          );
-
-          spritezero.generateImage(layout, (err, res) => {
+test.each([1, 2, 4])(
+  'generateImage - unique - sprite-uniq@%i',
+  (scale, done) => {
+    spritezero.generateLayoutUnique(
+      { imgs: fixtures, pixelRatio: scale, format: true },
+      (err, formatted) => {
+        expect(err).toBeFalsy();
+        spritezero.generateLayoutUnique(
+          { imgs: fixtures, pixelRatio: scale, format: false },
+          (err, layout) => {
             expect(err).toBeFalsy();
-            expect(res).toBeDefined();
-            if (update) {fs.writeFileSync(pngPath, res);}
-            expect(
-              Math.abs(res.length - fs.readFileSync(pngPath).length)
-            ).toBeLessThan(1000);
-          });
-        }
-      );
-    }
-  );
-});
+            expect(formatted).toMatchSnapshot();
+            spritezero.generateImage(layout, (err, res) => {
+              expect(err).toBeFalsy();
+              expect(res).toMatchImageSnapshot();
+              done();
+            });
+          }
+        );
+      }
+    );
+  }
+);
 
 // Generating both a valid layout and image in one pass
 test.each([1, 2, 4])(
   'generateOptimizeImage with format:true - sprite@%i',
-  (scale) => {
-    const optimizedPngPath = path.resolve(
-      path.join(__dirname, 'fixture/sprite@' + scale + '-64colors.png')
-    );
+  (scale, done) => {
     spritezero.generateLayout(
       { imgs: fixtures, pixelRatio: scale, format: true },
       (err, dataLayout, imageLayout) => {
         expect(err).toBeFalsy();
-        expect(dataLayout).toBeDefined();
+        expect(dataLayout).toMatchSnapshot();
         expect(imageLayout).toBeDefined();
         spritezero.generateOptimizedImage(
           imageLayout,
           { quality: 64 },
           (err, res) => {
             expect(err).toBeFalsy();
-            expect(res).toBeDefined();
-            if (update) {fs.writeFileSync(optimizedPngPath, res);}
-            expect(
-              Math.abs(res.length - fs.readFileSync(optimizedPngPath).length)
-            ).toBeLessThan(1000);
+            expect(res).toMatchImageSnapshot();
+            done();
           }
         );
       }
@@ -252,26 +233,20 @@ test.each([1, 2, 4])(
 
 test.each([1, 2, 4])(
   'generateOptimizeImage with format:true - unique - sprite@%i',
-  (scale) => {
-    const optimizedPngPath = path.resolve(
-      path.join(__dirname, 'fixture/sprite-uniq@' + scale + '-64colors.png')
-    );
+  (scale, done) => {
     spritezero.generateLayoutUnique(
       { imgs: fixtures, pixelRatio: scale, format: true },
       (err, dataLayout, imageLayout) => {
         expect(err).toBeFalsy();
-        expect(dataLayout).toBeDefined();
+        expect(dataLayout).toMatchSnapshot();
         expect(imageLayout).toBeDefined();
         spritezero.generateOptimizedImage(
           imageLayout,
           { quality: 64 },
           (err, res) => {
             expect(err).toBeFalsy();
-            expect(res).toBeDefined();
-            if (update) {fs.writeFileSync(optimizedPngPath, res);}
-            expect(
-              Math.abs(res.length - fs.readFileSync(optimizedPngPath).length)
-            ).toBeLessThan(1000);
+            expect(res).toMatchImageSnapshot();
+            done();
           }
         );
       }
