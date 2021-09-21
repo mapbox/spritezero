@@ -12,50 +12,57 @@ rather than on disk. Also, since version 2.0, spritezero generates sprites
 based on SVG graphics alone, therefore making it possible to support @2x
 and higher-dpi sprites from the same source.
 
-
 ### Usage
+
 ```js
 var spritezero = require('@mapbox/spritezero');
 var fs = require('fs');
 var glob = require('glob');
 var path = require('path');
 
-[1, 2, 4].forEach(function(pxRatio) {
-    var svgs = glob.sync(path.resolve(path.join(__dirname, 'input/*.svg')))
-        .map(function(f) {
-            return {
-                svg: fs.readFileSync(f),
-                id: path.basename(f).replace('.svg', '')
-            };
-        });
-    var pngPath = path.resolve(path.join(__dirname, 'output/sprite@' + pxRatio + '.png'));
-    var jsonPath = path.resolve(path.join(__dirname, 'output/sprite@' + pxRatio + '.json'));
+[1, 2, 4].forEach(function (pxRatio) {
+  var svgs = glob
+    .sync(path.resolve(path.join(__dirname, 'input/*.svg')))
+    .map(function (f) {
+      return {
+        svg: fs.readFileSync(f),
+        id: path.basename(f).replace('.svg', ''),
+      };
+    });
+  var pngPath = path.resolve(
+    path.join(__dirname, 'output/sprite@' + pxRatio + '.png')
+  );
+  var jsonPath = path.resolve(
+    path.join(__dirname, 'output/sprite@' + pxRatio + '.json')
+  );
 
-    // Pass `true` in the layout parameter to generate a data layout
-    // suitable for exporting to a JSON sprite manifest file.
-    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: true }, function(err, dataLayout) {
+  // Pass `true` in the layout parameter to generate a data layout
+  // suitable for exporting to a JSON sprite manifest file.
+  spritezero.generateLayout(
+    { imgs: svgs, pixelRatio: pxRatio, format: true },
+    function (err, dataLayout) {
+      if (err) return;
+      fs.writeFileSync(jsonPath, JSON.stringify(dataLayout));
+    }
+  );
+
+  // Pass `false` in the layout parameter to generate an image layout
+  // suitable for exporting to a PNG sprite image file.
+  spritezero.generateLayout(
+    { imgs: svgs, pixelRatio: pxRatio, format: false },
+    function (err, imageLayout) {
+      spritezero.generateImage(imageLayout, function (err, image) {
         if (err) return;
-        fs.writeFileSync(jsonPath, JSON.stringify(dataLayout));
-    });
-
-    // Pass `false` in the layout parameter to generate an image layout
-    // suitable for exporting to a PNG sprite image file.
-    spritezero.generateLayout({ imgs: svgs, pixelRatio: pxRatio, format: false }, function(err, imageLayout) {
-        spritezero.generateImage(imageLayout, function(err, image) {
-            if (err) return;
-            fs.writeFileSync(pngPath, image);
-        });
-    });
-
+        fs.writeFileSync(pngPath, image);
+      });
+    }
+  );
 });
-
 ```
-
 
 ### Documentation
 
-Complete API documentation is here:  http://mapbox.github.io/spritezero/
-
+Complete API documentation is here: http://mapbox.github.io/spritezero/
 
 ### Installation
 
@@ -64,7 +71,6 @@ Requires [nodejs](http://nodejs.org/) v10.0.0 or greater.
 ```bash
 $ npm install @mapbox/spritezero
 ```
-
 
 ### Executable
 
