@@ -252,7 +252,7 @@ test('generateLayout only relative width/height SVG returns empty sprite object'
 
     spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
         t.ifError(err);
-        t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+        t.deepEqual(layout, { width: 0, height: 0, items: []}, 'empty layout');
 
         spritezero.generateImage(layout, function(err, image) {
             t.ifError(err);
@@ -291,7 +291,7 @@ test('generateLayout containing only image with no width or height', function(t)
 
       spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: false }, function(err, layout) {
           t.ifError(err);
-          t.deepEqual(layout, { width: 1, height: 1, items: []}, 'empty layout');
+          t.deepEqual(layout, { width: 0, height: 0, items: []}, 'empty layout');
 
           spritezero.generateImage(layout, function(err, image) {
               t.ifError(err);
