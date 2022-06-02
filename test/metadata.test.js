@@ -9,7 +9,7 @@ test('image without metadata', function(t) {
         svg: fs.readFileSync(`${__dirname}/fixture/svg/aerialway-24.svg`, 'utf-8')
     }, function(err, metadata) {
         t.error(err);
-        t.deepEqual(metadata, {}, 'does not have metadata');
+        t.same(metadata, {}, 'does not have metadata');
         t.end();
     });
 });
@@ -20,7 +20,7 @@ test('image with nested metadata', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             stretchX: [[4, 16]],
             stretchY: [[5, 16]],
             content: [2, 5, 18, 18]
@@ -35,7 +35,7 @@ test('image exported by Illustrator', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             content: [4, 8, 14, 14],
             stretchY: [[8, 14]],
             stretchX: [[4, 14]]
@@ -50,7 +50,7 @@ test('image exported by Illustrator, rotated', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             content: [3.703, 5.806, 12.189, 14.291],
             stretchY: [[10.58, 14.257]],
             stretchX: [[3.73, 9.528]]
@@ -65,7 +65,7 @@ test('image exported by Illustrator, rotated + translated', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             content: [4.242, 7.07, 11.313, 14.142],
             stretchY: [[10.606, 14.142]],
             stretchX: [[4.242, 9.192]]
@@ -80,7 +80,7 @@ test('image exported by Illustrator, rotated + reversed', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             content: [6, 8, 12, 12],
             stretchY: [[8, 12]],
             stretchX: [[6, 12]]
@@ -95,7 +95,7 @@ test('image with one stretch rect', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             stretchX: [[3, 17]],
             stretchY: [[5, 17]],
         });
@@ -109,7 +109,7 @@ test('image with multiple stretch zones', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             stretchX: [[5, 7], [20, 22]],
             content: [3, 7, 23, 18]
         });
@@ -124,7 +124,7 @@ test('image with multiple stretch zones and higher pixelRatio', function(t) {
     }, function(err, metadata) {
         t.error(err);
         t.ok(metadata);
-        t.deepEqual(metadata, {
+        t.same(metadata, {
             stretchX: [[10, 14], [40, 44]],
             content: [6, 14, 46, 36]
         });
@@ -144,7 +144,7 @@ test('invalid images', function(t) {
     t.test('content area without height', function(t) {
         extractMetadata({ svg: '<svg><rect id="mapbox-icon-content" x="0" y="0" width="30"/></svg>' }, function(err, metadata) {
             t.error(err);
-            t.deepEqual(metadata, {});
+            t.same(metadata, {});
             t.end();
         });
     });
@@ -152,7 +152,7 @@ test('invalid images', function(t) {
     t.test('invalid mapbox-icon-* ID', function(t) {
         extractMetadata({ svg: '<svg><rect id="mapbox-icon-none" x="0" width="30" height="20"/></svg>' }, function(err, metadata) {
             t.error(err);
-            t.deepEqual(metadata, {});
+            t.same(metadata, {});
             t.end();
         });
     });
@@ -160,7 +160,7 @@ test('invalid images', function(t) {
     t.test('no path data', function(t) {
         extractMetadata({ svg: '<svg><path id="mapbox-icon-content"/></svg>' }, function(err, metadata) {
             t.error(err);
-            t.deepEqual(metadata, {});
+            t.same(metadata, {});
             t.end();
         });
     });
@@ -169,7 +169,7 @@ test('invalid images', function(t) {
     t.test('invalid path data', function(t) {
         extractMetadata({ svg: '<svg><path id="mapbox-icon-content" d="hello"/></svg>' }, function(err, metadata) {
             t.error(err);
-            t.deepEqual(metadata, {});
+            t.same(metadata, {});
             t.end();
         });
     });

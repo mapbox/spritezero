@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/spritezero",
-  "version": "8.0.0",
+  "version": "9.0.0-alpha",
   "main": "./index.js",
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
@@ -25,15 +25,15 @@
     "documentation": "^13.2.5",
     "eslint": "^3.9.0",
     "glob": "^7.1.0",
-    "tap": "^10.1.0"
+    "tap": "^16.2.0"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "docs": "documentation build lib --lint --github --format html --output docs/",
     "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
-    "test": "npm run lint && tap --cov test/*.test.js"
+    "test": "node --max-old-space-size=8192 ./node_modules/.bin/tap -t 300 --cov --no-check-coverage test/*.test.js"
   }
 }
