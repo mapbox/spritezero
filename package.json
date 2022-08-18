@@ -34,6 +34,6 @@
     "docs": "documentation build lib --lint --github --format html --output docs/",
     "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
-    "test": "npm run lint && tap --cov test/generate.test.js"
+    "test": "npm run lint && tap --cov test/metadata.test.js"
   }
 }
