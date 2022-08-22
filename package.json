@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/spritezero",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "main": "./index.js",
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
@@ -17,6 +17,7 @@
     "@mapbox/shelf-pack": "~3.0.0",
     "json-stable-stringify": "^1.0.1",
     "mapnik": "^4.4.0",
+    "nth-check": "~2.0.1",
     "queue-async": "^1.2.1",
     "svg-boundings": "^2.0.3",
     "svgo": "^1.3.0"

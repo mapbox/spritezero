@@ -1,3 +1,8 @@
+
+## 8.0.1
+#### 2022-08-19
+* Updates `nth-check` dependency to 2.0.1
+
 ## 8.0.0
 #### 2021-08-23
 * Changes the `stretchMetadata` option to `extractMetadata`.
