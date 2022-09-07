@@ -51,9 +51,9 @@ test('image exported by Illustrator, rotated', function(t) {
         t.error(err);
         t.ok(metadata);
         t.deepEqual(metadata, {
-            content: [3.703, 5.806, 12.189, 14.291],
-            stretchY: [[10.58, 14.257]],
-            stretchX: [[3.73, 9.528]]
+        content: [5.7, 6.3, 10.2, 13.8],
+            stretchY: [[12.1, 12.8]],
+            stretchX: [[6.3, 7]]
         });
         t.end();
     });
@@ -66,9 +66,9 @@ test('image exported by Illustrator, rotated + translated', function(t) {
         t.error(err);
         t.ok(metadata);
         t.deepEqual(metadata, {
-            content: [4.242, 7.07, 11.313, 14.142],
-            stretchY: [[10.606, 14.142]],
-            stretchX: [[4.242, 9.192]]
+            content: [6, 8, 12, 12],
+            stretchY: [[8, 12]],
+            stretchX: [[6, 12]]
         });
         t.end();
     });
