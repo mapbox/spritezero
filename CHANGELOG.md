@@ -1,3 +1,7 @@
+## 8.0.3
+#### 2023-05-24
+* Preserve `buffer` in `ImageLayout` if `format: true` is passed
+
 ## 8.0.2
 #### 2022-09-12
 * Updates `svgo` dependency to 2.8.0
