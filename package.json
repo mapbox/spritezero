@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/spritezero",
-  "version": "8.0.3",
+  "version": "8.0.4",
   "main": "./index.js",
   "description": "small opinionated sprites",
   "author": "Tom MacWright",
@@ -35,5 +35,8 @@
     "lint": "eslint lib/ test/",
     "regenerate-fixtures": "node test/regenerate.js",
     "test": "npm run lint && tap --cov test/*.test.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
