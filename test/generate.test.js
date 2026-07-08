@@ -373,3 +373,29 @@ test('generateLayout with both placeholder and stretch zone', function (t) {
         t.end();
     });
 });
+
+test('generateLayout with only content', function (t) {
+    var fixtures = [
+        {
+            id: 'au-national-route-5-only-content',
+            svg: fs.readFileSync('./test/fixture/svg-metadata/au-national-route-5-only-content.svg')
+        }
+    ];
+    spritezero.generateLayout({ imgs: fixtures, pixelRatio: 1, format: true }, function (err, formatted) {
+        t.ifError(err);
+        t.deepEqual(
+            formatted,
+            {
+                'au-national-route-5-only-content': {
+                    width: 38,
+                    height: 20,
+                    x: 0,
+                    y: 0,
+                    pixelRatio: 1,
+                    content: [3, 7, 23, 18],
+                }
+            }
+        );
+        t.end();
+    });
+});
